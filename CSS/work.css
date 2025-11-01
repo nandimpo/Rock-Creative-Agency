@@ -1,0 +1,330 @@
+/* CSS for The Work - Rock Creative Agency */
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Fonts */
+body {
+    font-family: 'Avenir LT Pro', 'Avenir', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #111A18;
+    color: #333;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Conso', serif;
+    font-weight: 300;
+}
+
+/* Color Palette */
+:root {
+    --primary-brown: #A5744E;
+    --primary-blue: #4D7994;
+    --secondary-yellow: #F2D275;
+    --neutral-dark: #111A18;
+    --neutral-light: #E2DCCC;
+}
+
+/* Header */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: rgba(17, 26, 24, 0.95);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(165, 116, 78, 0.2);
+}
+
+header img {
+    width: 50px;
+    height: 50px;
+}
+
+nav a {
+    color: #E2DCCC;
+    text-decoration: none;
+    margin-left: 30px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #A5744E;
+    transition: width 0.3s ease;
+}
+
+nav a:hover {
+    color: #A5744E;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* Hero Section */
+header + section {
+    margin-top: 90px;
+    height: 50vh;
+    background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(165, 116, 78, 0.4)), 
+                url('hero-bg.jpg') center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #E2DCCC;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+header + section h1 {
+    font-size: 72px;
+    margin: 0;
+    letter-spacing: 3px;
+    font-weight: 300;
+    animation: fadeInUp 0.8s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Main Content */
+main {
+    background-color: #E2DCCC;
+    padding: 80px 150px;
+    min-height: calc(100vh - 50vh - 200px);
+}
+
+main > p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 60px;
+    letter-spacing: 0.3px;
+}
+
+/* Project Articles */
+main article {
+    background-color: white;
+    padding: 40px;
+    margin-bottom: 40px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+main article:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+main article div {
+    margin: 0 0 25px 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 150px;
+}
+
+main article img {
+    max-width: 200px;
+    max-height: 200px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+main article:hover img {
+    transform: scale(1.08);
+}
+
+main article h2 {
+    font-size: 28px;
+    margin: 0 0 10px 0;
+    color: #111A18;
+    letter-spacing: 1px;
+}
+
+main article p {
+    font-size: 14px;
+    color: #666;
+    margin: 0 0 20px 0;
+    line-height: 1.6;
+}
+
+main article a {
+    color: #4D7994;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    font-weight: 500;
+}
+
+main article a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #A5744E;
+    transition: width 0.3s ease;
+}
+
+main article a:hover {
+    color: #A5744E;
+}
+
+main article a:hover::after {
+    width: 100%;
+}
+
+/* Divider */
+main hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 40px 0;
+    opacity: 0.6;
+}
+
+/* Footer */
+footer {
+    background-color: #111A18;
+    padding: 40px 100px;
+    color: #E2DCCC;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(165, 116, 78, 0.2);
+}
+
+footer a {
+    color: #E2DCCC;
+    text-decoration: none;
+    margin-right: 20px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+}
+
+footer a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #A5744E;
+    transition: width 0.3s ease;
+}
+
+footer a:hover {
+    color: #A5744E;
+}
+
+footer a:hover::after {
+    width: 100%;
+}
+
+footer nav a {
+    margin-left: 20px;
+    margin-right: 0;
+}
+
+footer p {
+    font-size: 14px;
+    margin: 0;
+}
+
+footer > div {
+    display: flex;
+    gap: 10px;
+}
+
+footer nav {
+    display: flex;
+    gap: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav a {
+        margin-left: 15px;
+        font-size: 12px;
+    }
+
+    header + section h1 {
+        font-size: 42px;
+    }
+
+    main {
+        padding: 60px 30px;
+    }
+
+    main article {
+        padding: 25px;
+    }
+
+    main article div {
+        justify-content: center;
+    }
+
+    main article img {
+        max-width: 150px;
+        max-height: 150px;
+    }
+
+    main article h2 {
+        text-align: center;
+    }
+
+    main article p {
+        text-align: center;
+    }
+
+    main article a {
+        display: block;
+        text-align: center;
+    }
+
+    footer {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 20px;
+        gap: 20px;
+    }
+
+    footer > div,
+    footer nav {
+        justify-content: center;
+    }
+}

@@ -1,0 +1,334 @@
+/* CSS for Our Services - Rock Creative Agency */
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Fonts */
+body {
+    font-family: 'Avenir LT Pro', 'Avenir', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #E2DCCC;
+    color: #333;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Conso', serif;
+    font-weight: 300;
+}
+
+/* Color Palette */
+:root {
+    --primary-brown: #A5744E;
+    --primary-blue: #4D7994;
+    --secondary-yellow: #F2D275;
+    --neutral-dark: #111A18;
+    --neutral-light: #E2DCCC;
+}
+
+/* Header */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: rgba(17, 26, 24, 0.95);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(165, 116, 78, 0.2);
+}
+
+header img {
+    width: 50px;
+    height: 50px;
+}
+
+nav a {
+    color: #E2DCCC;
+    text-decoration: none;
+    margin-left: 30px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #A5744E;
+    transition: width 0.3s ease;
+}
+
+nav a:hover {
+    color: #A5744E;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* Hero Section */
+header + section {
+    margin-top: 90px;
+    min-height: 40vh;
+    background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(80, 60, 40, 0.9)), 
+                url('hero-bg.jpg') center/cover;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #E2DCCC;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    margin: 90px 0 0;
+}
+
+header + section h1 {
+    font-size: 56px;
+    margin: 0;
+    letter-spacing: 2px;
+    font-weight: 300;
+    animation: fadeInUp 0.8s ease;
+    padding: 60px;
+    padding-right: 40%;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Main Content */
+main {
+    background-color: #E2DCCC;
+    padding: 60px 60px;
+    margin: 0;
+    border: none;
+}
+
+main > p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+    margin: 0 0 40px 0;
+    font-weight: 500;
+}
+
+/* Details/Accordion */
+details {
+    border-bottom: 1px solid #ccc;
+    padding: 20px 0;
+    transition: all 0.3s ease;
+}
+
+details:last-of-type {
+    border-bottom: none;
+}
+
+details[open] {
+    background-color: rgba(165, 116, 78, 0.08);
+    padding: 20px;
+    margin: 0 -20px;
+}
+
+summary {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    user-select: none;
+    transition: all 0.3s ease;
+    padding: 10px 0;
+}
+
+summary:hover {
+    color: #A5744E;
+}
+
+details[open] summary {
+    color: #A5744E;
+    margin-bottom: 15px;
+}
+
+/* Expand/Collapse Icon */
+summary::after {
+    content: '+';
+    font-size: 18px;
+    font-weight: 300;
+    color: #A5744E;
+    transition: all 0.3s ease;
+    min-width: 25px;
+    text-align: right;
+}
+
+details[open] summary::after {
+    transform: rotate(45deg);
+}
+
+/* Details Content */
+details div {
+    animation: slideDown 0.3s ease;
+    margin-top: 15px;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+details div p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #666;
+    margin: 0;
+}
+
+/* Service Type Grouping */
+details[data-service-type="communication"] {
+    background-color: rgba(230, 220, 200, 0.5);
+}
+
+details[data-service-type="production"] {
+    background-color: rgba(230, 220, 200, 0.5);
+}
+
+details[data-service-type="communication"]:first-of-type {
+    padding-top: 30px;
+}
+
+/* Footer */
+footer {
+    background-color: #111A18;
+    padding: 40px 60px;
+    color: #E2DCCC;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(165, 116, 78, 0.2);
+    margin-top: 0;
+}
+
+footer a {
+    color: #E2DCCC;
+    text-decoration: none;
+    margin-right: 20px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+}
+
+footer a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #A5744E;
+    transition: width 0.3s ease;
+}
+
+footer a:hover {
+    color: #A5744E;
+}
+
+footer a:hover::after {
+    width: 100%;
+}
+
+footer nav a {
+    margin-left: 20px;
+    margin-right: 0;
+}
+
+footer p {
+    font-size: 12px;
+    margin: 0;
+    text-align: right;
+}
+
+footer > div {
+    display: flex;
+    gap: 10px;
+}
+
+footer nav {
+    display: flex;
+    gap: 0;
+    justify-content: flex-end;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav a {
+        margin-left: 15px;
+        font-size: 12px;
+    }
+
+    header + section {
+        margin: 90px 20px 0;
+    }
+
+    header + section h1 {
+        font-size: 36px;
+        padding: 40px 30px;
+        padding-right: 30px;
+    }
+
+    main {
+        padding: 40px 30px;
+        margin: 0 20px;
+    }
+
+    summary {
+        font-size: 13px;
+    }
+
+    footer {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 20px;
+        gap: 20px;
+    }
+
+    footer > div,
+    footer nav {
+        justify-content: center;
+    }
+
+    footer p {
+        text-align: center;
+    }
+}
