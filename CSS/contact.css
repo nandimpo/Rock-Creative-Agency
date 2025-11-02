@@ -34,50 +34,43 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Header */
 header {
-    position: fixed;
-    top: 0;
-    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 50px;
-    background-color: rgba(17, 26, 24, 0.95);
+    padding: 1.25rem 1.5rem;
+    background-color: #2a2a2a;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     z-index: 1000;
-    border-bottom: 1px solid rgba(165, 116, 78, 0.2);
+    width: 100%;
+    box-sizing: border-box;
 }
 
 header img {
-    width: 50px;
-    height: 50px;
+    width: 3.125rem;
+    height: 3.125rem;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+nav {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
 }
 
 nav a {
-    color: #E2DCCC;
+    color: #e8dcc8;
     text-decoration: none;
-    margin-left: 30px;
-    font-size: 14px;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
-}
-
-nav a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #A5744E;
-    transition: width 0.3s ease;
+    font-size: 0.8125rem;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
 }
 
 nav a:hover {
-    color: #A5744E;
-}
-
-nav a:hover::after {
-    width: 100%;
+    opacity: 0.7;
 }
 
 /* Hero Section */
@@ -138,7 +131,7 @@ main {
 
 /* Contact Section */
 .contact-section {
-    padding: 60px 80px;
+    padding: 5rem 2.5rem;
     background-color: #E2DCCC;
 }
 
@@ -172,10 +165,10 @@ main {
 }
 
 .title-group h2 {
-    font-size: 48px;
+    font-size: 3.5rem;
     margin: 0;
     color: #111A18;
-    letter-spacing: 1px;
+    letter-spacing: 0.0625rem;
     line-height: 1.2;
 }
 
@@ -298,86 +291,84 @@ main {
 
 /* Footer */
 footer {
-    background-color: #111A18;
-    padding: 40px 80px;
-    color: #E2DCCC;
+    background-color: #2a2a2a;
+    padding: 2.5rem;
+    color: #e8dcc8;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 1px solid rgba(165, 116, 78, 0.2);
+    gap: 1.25rem;
 }
 
 footer a {
-    color: #E2DCCC;
+    color: #e8dcc8;
     text-decoration: none;
-    margin-right: 20px;
-    font-size: 14px;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
-}
-
-footer a::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #A5744E;
-    transition: width 0.3s ease;
+    transition: opacity 0.3s ease;
+    font-size: 0.8125rem;
 }
 
 footer a:hover {
-    color: #A5744E;
-}
-
-footer a:hover::after {
-    width: 100%;
-}
-
-footer nav a {
-    margin-left: 20px;
-    margin-right: 0;
-}
-
-footer p {
-    font-size: 12px;
-    margin: 0;
-    text-align: right;
+    opacity: 0.7;
 }
 
 footer > div {
     display: flex;
-    gap: 10px;
+    gap: 1.875rem;
 }
 
 footer nav {
     display: flex;
-    gap: 0;
-    justify-content: flex-end;
+    gap: 1.875rem;
+    justify-content: center;
+    flex: 1;
+}
+
+footer p {
+    font-size: 0.8125rem;
+    margin: 0;
+    text-align: right;
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+    nav {
+        gap: 1rem;
+    }
+    
+    nav a {
+        font-size: 0.75rem;
+    }
+}
+
 @media (max-width: 768px) {
     header {
-        padding: 15px 20px;
+        padding: 1.25rem 1.25rem;
         flex-direction: column;
-        gap: 15px;
+        gap: 1.25rem;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        gap: 1.25rem;
+        justify-content: center;
     }
 
     nav a {
-        margin-left: 15px;
-        font-size: 12px;
+        font-size: 0.8125rem;
     }
 
     header + section h1 {
-        font-size: 42px;
-        padding: 40px 30px;
+        font-size: 2.25rem;
+        padding: 3.75rem 1.25rem;
     }
 
     .contact-section {
-        padding: 40px 30px;
+        padding: 2.5rem 1.25rem;
+    }
+
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 40px;
     }
 
     .title-group {
@@ -386,7 +377,7 @@ footer nav {
     }
 
     .title-group h2 {
-        font-size: 36px;
+        font-size: 2.25rem;
     }
 
     .contact-form {
@@ -402,12 +393,9 @@ footer nav {
     footer {
         flex-direction: column;
         text-align: center;
-        padding: 30px 20px;
-        gap: 20px;
     }
 
-    footer > div,
-    footer nav {
+    footer > div {
         justify-content: center;
     }
 

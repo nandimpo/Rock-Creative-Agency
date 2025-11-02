@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Work - Rock Creative Agency</title>
     <link rel="stylesheet" href="../CSS/work.css">
+    <script defer src="../Javascript/work card.js"></script>
 </head>
 <body>
     <header>
@@ -21,31 +22,228 @@
         </nav>
     </header>
 
-    <section style="background-image: url('../Images/Home/rock.jpg');">
+    <section class="hero">
         <h1>The Work.</h1>
     </section>
 
     <main>
-        <p>One great thing about creative is that the work speaks for itself</p>
+        <p class="intro-text">One great thing about creative is that the work speaks for itself</p>
         
-        <article>
-            <div>
-                <img src="../Images/Work/B logo.jpg" alt="Braam Logo">
-            </div>
-            <h2>Braam</h2>
-            <p>Fashion Week</p>
-            <a href="braam-project.html">See More →</a>
-        </article>
+        <div class="portfolio-wrapper">
+            <div class="portfolio-container" id="portfolioContainer">
+                <!-- Portfolio Card 1 -->
+                <div class="portfolio-card">
+                    <img src="../Images/Work/B logo.jpg" alt="Braam" class="card-image">
+                    <div class="card-content">
+                        <h2>Braam</h2>
+                        <p>Fashion Week</p>
+                        <button class="see-more-btn">See More →</button>
+                    </div>
+                    <div class="card-details hidden">
+                        <div class="details-close">×</div>
+                        <h3>Braam</h3>
+                        <p class="details-category">Fashion Week</p>
+                        <p class="details-description">A premium fashion brand identity and campaign for Braam's Fashion Week showcase. We developed a cohesive visual language combining elegance with contemporary design.</p>
+                        <div class="details-tags">
+                            <span>Brand Identity</span>
+                            <span>Campaign</span>
+                            <span>Fashion</span>
+                        </div>
+                    </div>
+                </div>
 
-        <hr>
+                <!-- Portfolio Card 2 -->
+                <div class="portfolio-card">
+                    <img src="../Images/Work/metro-fm-logo.png" alt="Metro FM" class="card-image">
+                    <div class="card-content">
+                        <h2>Metro FM</h2>
+                        <p>Radio Branding</p>
+                        <button class="see-more-btn">See More →</button>
+                    </div>
+                    <div class="card-details hidden">
+                        <div class="details-close">×</div>
+                        <h3>Metro FM</h3>
+                        <p class="details-category">Radio Branding</p>
+                        <p class="details-description">A complete rebranding initiative for Metro FM, including logo redesign, audio identity, and comprehensive brand guidelines for radio and digital platforms.</p>
+                        <div class="details-tags">
+                            <span>Rebranding</span>
+                            <span>Audio Identity</span>
+                            <span>Radio</span>
+                        </div>
+                    </div>
+                </div>
 
-        <article>
-            <div>
-                <img src="../Images/Work/metro-fm-logo.png" alt="Metro FM Logo">
+                <!-- Portfolio Card 3 -->
+                <div class="portfolio-card">
+                    <img src="../Images/Work/project-3.jpg" alt="Project 3" class="card-image">
+                    <div class="card-content">
+                        <h2>Project Three</h2>
+                        <p>Brand Identity</p>
+                        <button class="see-more-btn">See More →</button>
+                    </div>
+                    <div class="card-details hidden">
+                        <div class="details-close">×</div>
+                        <h3>Project Three</h3>
+                        <p class="details-category">Brand Identity</p>
+                        <p class="details-description">Strategic brand identity development including logo, color palette, typography system, and application guidelines for a forward-thinking creative client.</p>
+                        <div class="details-tags">
+                            <span>Branding</span>
+                            <span>Visual Identity</span>
+                            <span>Design System</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Card 4 -->
+                <div class="portfolio-card">
+                    <img src="../Images/Work/project-4.jpg" alt="Project 4" class="card-image">
+                    <div class="card-content">
+                        <h2>Project Four</h2>
+                        <p>Digital Campaign</p>
+                        <button class="see-more-btn">See More →</button>
+                    </div>
+                    <div class="card-details hidden">
+                        <div class="details-close">×</div>
+                        <h3>Project Four</h3>
+                        <p class="details-category">Digital Campaign</p>
+                        <p class="details-description">Multi-channel digital campaign with responsive design, social media assets, and interactive web components. Achieved 300% engagement increase across platforms.</p>
+                        <div class="details-tags">
+                            <span>Digital</span>
+                            <span>Campaign</span>
+                            <span>Social Media</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Card 5 -->
+                <div class="portfolio-card">
+                    <img src="../Images/Work/project-5.jpg" alt="Project 5" class="card-image">
+                    <div class="card-content">
+                        <h2>Project Five</h2>
+                        <p>Web Design</p>
+                        <button class="see-more-btn">See More →</button>
+                    </div>
+                    <div class="card-details hidden">
+                        <div class="details-close">×</div>
+                        <h3>Project Five</h3>
+                        <p class="details-category">Web Design</p>
+                        <p class="details-description">Custom web design and development featuring interactive animations, optimized performance, and seamless user experience across all devices.</p>
+                        <div class="details-tags">
+                            <span>Web Design</span>
+                            <span>UX/UI</span>
+                            <span>Development</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Card 6 -->
+                <div class="portfolio-card">
+                    <img src="../Images/Work/project-6.jpg" alt="Project 6" class="card-image">
+                    <div class="card-content">
+                        <h2>Project Six</h2>
+                        <p>Creative Direction</p>
+                        <button class="see-more-btn">See More →</button>
+                    </div>
+                    <div class="card-details hidden">
+                        <div class="details-close">×</div>
+                        <h3>Project Six</h3>
+                        <p class="details-category">Creative Direction</p>
+                        <p class="details-description">Full creative direction for integrated marketing campaign including concept development, visual strategy, and production management.</p>
+                        <div class="details-tags">
+                            <span>Creative Direction</span>
+                            <span>Strategy</span>
+                            <span>Production</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Card 7 -->
+                <div class="portfolio-card">
+                    <img src="../Images/Work/project-7.jpg" alt="Project 7" class="card-image">
+                    <div class="card-content">
+                        <h2>Project Seven</h2>
+                        <p>Brand Strategy</p>
+                        <button class="see-more-btn">See More →</button>
+                    </div>
+                    <div class="card-details hidden">
+                        <div class="details-close">×</div>
+                        <h3>Project Seven</h3>
+                        <p class="details-category">Brand Strategy</p>
+                        <p class="details-description">Strategic brand positioning and market analysis, resulting in clear brand messaging, target audience definition, and competitive differentiation.</p>
+                        <div class="details-tags">
+                            <span>Strategy</span>
+                            <span>Positioning</span>
+                            <span>Market Analysis</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Card 8 -->
+                <div class="portfolio-card">
+                    <img src="../Images/Work/project-8.jpg" alt="Project 8" class="card-image">
+                    <div class="card-content">
+                        <h2>Project Eight</h2>
+                        <p>Social Media</p>
+                        <button class="see-more-btn">See More →</button>
+                    </div>
+                    <div class="card-details hidden">
+                        <div class="details-close">×</div>
+                        <h3>Project Eight</h3>
+                        <p class="details-category">Social Media</p>
+                        <p class="details-description">Comprehensive social media strategy with content calendar, visual asset creation, and community management resulting in consistent brand presence.</p>
+                        <div class="details-tags">
+                            <span>Social Media</span>
+                            <span>Content</span>
+                            <span>Community</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Card 9 -->
+                <div class="portfolio-card">
+                    <img src="../Images/Work/project-9.jpg" alt="Project 9" class="card-image">
+                    <div class="card-content">
+                        <h2>Project Nine</h2>
+                        <p>Packaging Design</p>
+                        <button class="see-more-btn">See More →</button>
+                    </div>
+                    <div class="card-details hidden">
+                        <div class="details-close">×</div>
+                        <h3>Project Nine</h3>
+                        <p class="details-category">Packaging Design</p>
+                        <p class="details-description">Premium packaging design that combines functional requirements with striking visual aesthetics, enhancing product shelf appeal and brand recognition.</p>
+                        <div class="details-tags">
+                            <span>Packaging</span>
+                            <span>Product Design</span>
+                            <span>Print</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Card 10 -->
+                <div class="portfolio-card">
+                    <img src="../Images/Work/project-10.jpg" alt="Project 10" class="card-image">
+                    <div class="card-content">
+                        <h2>Project Ten</h2>
+                        <p>Motion Graphics</p>
+                        <button class="see-more-btn">See More →</button>
+                    </div>
+                    <div class="card-details hidden">
+                        <div class="details-close">×</div>
+                        <h3>Project Ten</h3>
+                        <p class="details-category">Motion Graphics</p>
+                        <p class="details-description">Dynamic motion graphics and animation work for promotional videos, social media content, and interactive digital experiences.</p>
+                        <div class="details-tags">
+                            <span>Motion</span>
+                            <span>Animation</span>
+                            <span>Video</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <h2>Metro FM</h2>
-            <a href="metro-fm-project.html">See More →</a>
-        </article>
+        </div>
+        
+        <p class="scroll-hint">← Scroll to explore →</p>
     </main>
 
     <footer>

@@ -1,4 +1,122 @@
-/* CSS for The Work - Rock Creative Agency */
+.card-content button {
+    background: none;
+    border: none;
+    color: #F2D275;
+    text-decoration: none;
+    font-size: 13px;
+    transition: all 0.3s ease;
+    position: relative;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.card-content button::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #F2D275;
+    transition: width 0.3s ease;
+}
+
+.card-content button:hover::after {
+    width: 100%;
+}
+
+/* Card Details Dropdown */
+.card-details {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(77, 121, 148, 0.95), rgba(165, 116, 78, 0.95));
+    padding: 30px;
+    color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto;
+    z-index: 10;
+    animation: slideDown 0.4s ease;
+}
+
+.card-details.hidden {
+    display: none;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.details-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #F2D275;
+    transition: all 0.3s ease;
+}
+
+.details-close:hover {
+    color: #E2DCCC;
+}
+
+.card-details h3 {
+    font-size: 28px;
+    margin: 0 0 8px 0;
+    letter-spacing: 1px;
+    color: white;
+}
+
+.details-category {
+    font-size: 13px;
+    color: #F2D275;
+    margin: 0 0 20px 0;
+    font-weight: 500;
+}
+
+.details-description {
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 0 0 25px 0;
+    color: #E2DCCC;
+}
+
+.details-tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.details-tags span {
+    background: rgba(242, 208, 117, 0.2);
+    border: 1px solid #F2D075;
+    color: #F2D275;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}/* CSS for The Work - Rock Creative Agency */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 html {
     scroll-behavior: smooth;
@@ -7,10 +125,9 @@ html {
 /* Fonts */
 body {
     font-family: 'Avenir LT Pro', 'Avenir', sans-serif;
-    margin: 0;
-    padding: 0;
     background-color: #111A18;
     color: #333;
+    overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -22,9 +139,14 @@ h1, h2, h3, h4, h5, h6 {
 :root {
     --primary-brown: #A5744E;
     --primary-blue: #4D7994;
-    --secondary-yellow: #F2D275;
+    --secondary-yellow: #F2D075;
     --neutral-dark: #111A18;
     --neutral-light: #E2DCCC;
+    --primary-brown-alt: #A5744E;
+    --primary-blue-alt: #4D7994;
+    --secondary-yellow-alt: #F2D075;
+    --neutral-black: #111A18;
+    --neutral-beige: #E2DCCC;
 }
 
 /* Header */
@@ -76,11 +198,12 @@ nav a:hover::after {
 }
 
 /* Hero Section */
-header + section {
+.hero {
     margin-top: 90px;
     height: 50vh;
     background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(165, 116, 78, 0.4)), 
-                url('hero-bg.jpg') center/cover;
+                url('../Images/Home/rock.jpg') center/cover;
+    background-color: #1a3f2f;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -90,7 +213,7 @@ header + section {
     overflow: hidden;
 }
 
-header + section h1 {
+.hero h1 {
     font-size: 72px;
     margin: 0;
     letter-spacing: 3px;
@@ -112,101 +235,140 @@ header + section h1 {
 /* Main Content */
 main {
     background-color: #E2DCCC;
-    padding: 80px 150px;
-    min-height: calc(100vh - 50vh - 200px);
+    padding: 80px 0;
+    min-height: 100vh;
 }
 
-main > p {
+.intro-text {
+    padding: 0 150px 40px 150px;
     font-size: 16px;
     line-height: 1.8;
     color: #333;
-    margin-bottom: 60px;
     letter-spacing: 0.3px;
 }
 
-/* Project Articles */
-main article {
-    background-color: white;
-    padding: 40px;
-    margin-bottom: 40px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+/* Scroll Container */
+.portfolio-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
 }
 
-main article:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-}
-
-main article div {
-    margin: 0 0 25px 0;
+.portfolio-container {
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    min-height: 150px;
+    gap: 30px;
+    padding: 0 150px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    padding-bottom: 40px;
 }
 
-main article img {
-    max-width: 200px;
-    max-height: 200px;
-    object-fit: contain;
+.portfolio-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Card Styles */
+.portfolio-card {
+    flex-shrink: 0;
+    width: 320px;
+    height: 380px;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.portfolio-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     transition: transform 0.3s ease;
 }
 
-main article:hover img {
-    transform: scale(1.08);
+.portfolio-card:hover .card-image {
+    transform: scale(1.05);
 }
 
-main article h2 {
-    font-size: 28px;
-    margin: 0 0 10px 0;
-    color: #111A18;
+.card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    padding: 40px 20px 20px;
+    color: white;
+    text-align: center;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.portfolio-card:hover .card-content {
+    transform: translateY(0);
+}
+
+.card-content h2 {
+    font-size: 24px;
+    margin: 0 0 8px 0;
+    color: white;
     letter-spacing: 1px;
 }
 
-main article p {
-    font-size: 14px;
-    color: #666;
-    margin: 0 0 20px 0;
-    line-height: 1.6;
+.card-content p {
+    font-size: 13px;
+    color: #E2DCCC;
+    margin: 0 0 15px 0;
 }
 
-main article a {
-    color: #4D7994;
+.card-content a {
+    display: inline-block;
+    color: #F2D275;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
     transition: all 0.3s ease;
     position: relative;
-    display: inline-block;
     font-weight: 500;
 }
 
-main article a::after {
+.card-content a::after {
     content: '';
     position: absolute;
     bottom: -3px;
     left: 0;
     width: 0;
     height: 2px;
-    background-color: #A5744E;
+    background-color: #F2D275;
     transition: width 0.3s ease;
 }
 
-main article a:hover {
-    color: #A5744E;
-}
-
-main article a:hover::after {
+.card-content a:hover::after {
     width: 100%;
 }
 
-/* Divider */
-main hr {
-    border: none;
-    border-top: 1px solid #ddd;
-    margin: 40px 0;
-    opacity: 0.6;
+/* Scroll Indicators */
+.scroll-hint {
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    margin-top: 20px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
 }
 
 /* Footer */
@@ -282,38 +444,22 @@ footer nav {
         font-size: 12px;
     }
 
-    header + section h1 {
+    .hero h1 {
         font-size: 42px;
     }
 
-    main {
-        padding: 60px 30px;
+    .intro-text {
+        padding: 0 30px 40px 30px;
     }
 
-    main article {
-        padding: 25px;
+    .portfolio-container {
+        padding: 0 30px;
+        gap: 20px;
     }
 
-    main article div {
-        justify-content: center;
-    }
-
-    main article img {
-        max-width: 150px;
-        max-height: 150px;
-    }
-
-    main article h2 {
-        text-align: center;
-    }
-
-    main article p {
-        text-align: center;
-    }
-
-    main article a {
-        display: block;
-        text-align: center;
+    .portfolio-card {
+        width: 280px;
+        height: 340px;
     }
 
     footer {
