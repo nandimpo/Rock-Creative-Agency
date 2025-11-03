@@ -1,33 +1,8 @@
-/* CSS for The Method - Rock Creative Agency */
+/* =====================================================
+   EXPERTISE.CSS - Expertise Page Specific Styles
+   ===================================================== */
 
-html {
-    scroll-behavior: smooth;
-}
-
-/* Fonts */
-body {
-    font-family: 'Avenir LT Pro', 'Avenir', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #E2DCCC;
-    color: #333;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Conso', serif;
-    font-weight: 300;
-}
-
-/* Color Palette */
-:root {
-    --primary-brown: #A5744E;
-    --primary-blue: #4D7994;
-    --secondary-yellow: #F2D275;
-    --neutral-dark: #111A18;
-    --neutral-light: #E2DCCC;
-}
-
-/* Header */
+/* ==================== HEADER OVERRIDE FOR EXPERTISE ==================== */
 header {
     position: fixed;
     top: 0;
@@ -35,21 +10,44 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 50px;
-    background-color: rgba(17, 26, 24, 0.95);
+    padding: 15px 50px;
+    background-color: rgba(17, 26, 24, 0.98);
     z-index: 1000;
-    border-bottom: 1px solid rgba(165, 116, 78, 0.2);
+    border-bottom: 1px solid rgba(165, 116, 78, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+header div {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
 header img {
-    width: 50px;
-    height: 50px;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid var(--primary-brown);
+    padding: 8px;
+    object-fit: contain;
+    box-sizing: border-box;
+}
+
+nav {
+    display: flex;
+    list-style: none;
+    gap: 0;
+    margin: 0;
+    padding: 0;
 }
 
 nav a {
     color: #E2DCCC;
     text-decoration: none;
-    margin-left: 30px;
+    margin-left: 35px;
     font-size: 14px;
     transition: all 0.3s ease;
     position: relative;
@@ -63,265 +61,212 @@ nav a::after {
     left: 0;
     width: 0;
     height: 2px;
-    background-color: #A5744E;
+    background-color: var(--primary-brown);
     transition: width 0.3s ease;
 }
 
 nav a:hover {
-    color: #A5744E;
+    color: var(--primary-brown);
 }
 
 nav a:hover::after {
     width: 100%;
 }
 
-/* Hero Section */
-header + section {
-    margin-top: 90px;
-    min-height: 40vh;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    color: #E2DCCC;
-    text-align: left;
-    position: relative;
-    overflow: hidden;
-}
-
-header + section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(80, 60, 40, 0.9));
-    z-index: 1;
-}
-
-header + section h1 {
-    font-size: 64px;
-    margin: 0;
-    letter-spacing: 2px;
-    font-weight: 300;
-    animation: fadeInUp 0.8s ease;
-    padding: 60px 80px;
-    position: relative;
-    z-index: 10;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Main Content */
-main {
-    background-color: #E2DCCC;
-    padding: 0;
-    margin: 0;
-}
-
-main > section {
-    padding: 60px 80px;
-}
-
+/* ==================== INTRO SECTION ==================== */
 main > section:first-of-type {
+    padding: 80px;
     background-color: #E2DCCC;
-    padding-bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
 }
 
 main > section:first-of-type > p {
-    font-size: 14px;
-    line-height: 1.6;
-    color: #333;
-    margin: 0 0 40px 0;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #ccc;
-}
-
-/* Featured Project Article */
-main > section:first-of-type > article {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    align-items: start;
-}
-
-main > section:first-of-type > article h2 {
-    grid-column: 1 / -1;
-    font-size: 28px;
-    margin: 0 0 20px 0;
+    font-size: 18px;
+    line-height: 1.8;
     color: #111A18;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    max-width: 600px;
+    text-align: center;
+}
+
+main > section:first-of-type article {
+    width: 100%;
+    max-width: 1000px;
+}
+
+main > section:first-of-type h2 {
+    font-size: 42px;
+    color: #111A18;
+    margin-bottom: 30px;
     letter-spacing: 1px;
 }
 
-main > section:first-of-type > article div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    padding: 20px;
-    border-radius: 6px;
-    min-height: 300px;
+main > section:first-of-type div {
+    width: 100%;
+    margin-bottom: 30px;
 }
 
-main > section:first-of-type > article img {
-    max-width: 100%;
-    max-height: 300px;
+main > section:first-of-type img {
+    width: 100%;
+    height: auto;
     object-fit: contain;
-    transition: transform 0.3s ease;
+    border-radius: 8px;
 }
 
-main > section:first-of-type > article:hover img {
-    transform: scale(1.05);
-}
-
-main > section:first-of-type > article p {
-    font-size: 14px;
-    line-height: 1.8;
+main > section:first-of-type p:last-child {
+    font-size: 15px;
+    line-height: 1.9;
     color: #555;
     margin: 0;
 }
 
-/* Production Phase Section */
-main > section[data-phase="production"] {
-    background-color: #A5744E;
+/* ==================== DIAGRAM SECTION ==================== */
+.diagram-section {
+    background-color: #E2DCCC;
     padding: 60px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.diagram-section h2 {
+    font-size: 24px;
+    color: #111A18;
+    margin: 0 0 40px 0;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.diagram-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #E2DCCC;
+    padding: 40px;
+    border-radius: 6px;
+    min-height: 400px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.diagram-container img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.diagram-container img:hover {
+    transform: scale(1.02);
+}
+
+/* ==================== PHASES SECTIONS ==================== */
+main > section[data-phase] {
+    width: 100%;
+    padding: 100px 80px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    align-items: start;
+}
+
+main > section[data-phase="production"] {
+    background-color: var(--primary-brown);
 }
 
 main > section[data-phase="production"] article {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 40px;
-    align-items: start;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 30px 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 40px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
 }
 
-main > section[data-phase="production"] article:last-child {
-    border-bottom: none;
+main > section[data-phase="production"] article:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-main > section[data-phase="production"] article h3 {
-    font-size: 18px;
-    margin: 0;
+main > section[data-phase="production"] h3 {
+    font-size: 20px;
     color: #E2DCCC;
-    letter-spacing: 0.5px;
+    margin-bottom: 15px;
+    margin-top: 0;
 }
 
-main > section[data-phase="production"] article p {
-    font-size: 13px;
-    line-height: 1.7;
+main > section[data-phase="production"] p {
+    font-size: 14px;
+    line-height: 1.8;
     color: rgba(226, 220, 204, 0.95);
     margin: 0;
 }
 
-/* Support Phase Section */
 main > section[data-phase="support"] {
     background-color: #E2DCCC;
-    padding: 60px 80px;
 }
 
 main > section[data-phase="support"] article {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 40px;
-    align-items: start;
-    border-bottom: 1px solid #ddd;
-    padding: 30px 0;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
 }
 
-main > section[data-phase="support"] article:last-child {
-    border-bottom: none;
+main > section[data-phase="support"] article:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
-main > section[data-phase="support"] article h3 {
-    font-size: 18px;
-    margin: 0;
+main > section[data-phase="support"] h3 {
+    font-size: 20px;
     color: #111A18;
-    letter-spacing: 0.5px;
+    margin-bottom: 15px;
+    margin-top: 0;
 }
 
-main > section[data-phase="support"] article p {
-    font-size: 13px;
-    line-height: 1.7;
+main > section[data-phase="support"] p {
+    font-size: 14px;
+    line-height: 1.8;
     color: #666;
     margin: 0;
 }
 
-/* Footer */
-footer {
-    background-color: #111A18;
-    padding: 40px 80px;
-    color: #E2DCCC;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid rgba(165, 116, 78, 0.2);
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 1024px) {
+    header {
+        padding: 15px 30px;
+    }
+
+    nav a {
+        margin-left: 20px;
+        font-size: 13px;
+    }
+
+    main > section:first-of-type {
+        padding: 60px 50px;
+    }
+
+    main > section[data-phase] {
+        padding: 60px 50px;
+    }
+
+    .diagram-section {
+        padding: 60px 50px;
+    }
+
+    .diagram-section h2 {
+        font-size: 20px;
+    }
 }
 
-footer a {
-    color: #E2DCCC;
-    text-decoration: none;
-    margin-right: 20px;
-    font-size: 14px;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
-}
-
-footer a::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #A5744E;
-    transition: width 0.3s ease;
-}
-
-footer a:hover {
-    color: #A5744E;
-}
-
-footer a:hover::after {
-    width: 100%;
-}
-
-footer nav a {
-    margin-left: 20px;
-    margin-right: 0;
-}
-
-footer p {
-    font-size: 12px;
-    margin: 0;
-    text-align: right;
-}
-
-footer > div {
-    display: flex;
-    gap: 10px;
-}
-
-footer nav {
-    display: flex;
-    gap: 0;
-    justify-content: flex-end;
-}
-
-/* Responsive Design */
 @media (max-width: 768px) {
     header {
         padding: 15px 20px;
@@ -329,42 +274,117 @@ footer nav {
         gap: 15px;
     }
 
-    nav a {
-        margin-left: 15px;
-        font-size: 12px;
-    }
-
-    header + section h1 {
-        font-size: 42px;
-        padding: 40px 30px;
-    }
-
-    main > section {
-        padding: 40px 30px;
-    }
-
-    main > section:first-of-type > article {
-        grid-template-columns: 1fr;
-    }
-
-    main > section[data-phase="production"] article,
-    main > section[data-phase="support"] article {
-        grid-template-columns: 1fr;
-    }
-
-    footer {
-        flex-direction: column;
-        text-align: center;
-        padding: 30px 20px;
-        gap: 20px;
-    }
-
-    footer > div,
-    footer nav {
+    nav {
+        flex-wrap: wrap;
+        gap: 1.25rem;
         justify-content: center;
     }
 
-    footer p {
-        text-align: center;
+    nav a {
+        margin-left: 0;
+        font-size: 12px;
+    }
+
+    main > section:first-of-type {
+        padding: 50px 30px;
+    }
+
+    main > section:first-of-type > p {
+        font-size: 16px;
+    }
+
+    main > section:first-of-type h2 {
+        font-size: 28px;
+    }
+
+    .diagram-section {
+        padding: 50px 30px;
+    }
+
+    .diagram-section h2 {
+        font-size: 22px;
+        margin-bottom: 30px;
+    }
+
+    .diagram-container {
+        padding: 20px;
+        min-height: 300px;
+    }
+
+    main > section[data-phase] {
+        padding: 50px 30px;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    main > section[data-phase] article {
+        padding: 25px;
+    }
+
+    main > section[data-phase] h3 {
+        font-size: 18px;
+    }
+
+    main > section[data-phase] p {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 12px 15px;
+    }
+
+    nav a {
+        margin-left: 0;
+        font-size: 11px;
+    }
+
+    main > section:first-of-type {
+        padding: 30px 20px;
+    }
+
+    main > section:first-of-type > p {
+        font-size: 14px;
+    }
+
+    main > section:first-of-type h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    main > section:first-of-type div {
+        margin-bottom: 20px;
+    }
+
+    .diagram-section {
+        padding: 30px 20px;
+    }
+
+    .diagram-section h2 {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+
+    .diagram-container {
+        padding: 15px;
+        min-height: 250px;
+    }
+
+    main > section[data-phase] {
+        padding: 30px 20px;
+        gap: 15px;
+    }
+
+    main > section[data-phase] article {
+        padding: 20px;
+    }
+
+    main > section[data-phase] h3 {
+        font-size: 16px;
+    }
+
+    main > section[data-phase] p {
+        font-size: 12px;
     }
 }

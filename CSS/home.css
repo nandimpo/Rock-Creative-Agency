@@ -1,188 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+/* =====================================================
+   HOME.CSS - Home Page Specific Styles
+   ===================================================== */
 
-:root {
-    font-size: 18px;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Avenir LT Pro', 'Avenir', sans-serif;
-    background-color: #f5f0e8;
-    color: #333;
-}
-
-html, body {
-    height: 100%;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Conso', serif;
-    font-weight: 400;
-}
-
-/* Navigation */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.25rem 2.5rem;
-    background-color: #2a2a2a;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    width: 100%;
-}
-
-.logo {
-    width: 3.125rem;
-    height: 3.125rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 2.5rem;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-links li {
-    list-style: none;
-}
-
-.nav-links a {
-    color: #e8dcc8;
-    text-decoration: none;
-    font-size: 0.8125rem;
-    transition: opacity 0.3s ease;
-}
-
-.nav-links a:hover {
-    opacity: 0.7;
-}
-
-/* Hero Section */
-.hero {
-    background-size: cover;
-    background-position: center;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #e8dcc8;
-    text-align: center;
-    padding: 3.75rem 2.5rem;
-    position: relative;
-    overflow: hidden;
-    margin-top: 5.625rem;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-}
-
-.hero h1 {
-    font-size: 3.5rem;
-    letter-spacing: 0.1875rem;
-    margin-bottom: 2.5rem;
-    position: relative;
-    z-index: 10;
-}
-
-.hero::after {
-    content: '';
-    position: absolute;
-    width: 18.75rem;
-    height: 0.0625rem;
-    background: linear-gradient(to right, transparent, #a0826d, transparent);
-    top: 48%;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
-}
-
-/* Buttons */
-.btn {
-    padding: 0.75rem 2rem;
-    border: none;
-    border-radius: 1.5625rem;
-    cursor: pointer;
-    font-family: 'Avenir LT Pro', 'Avenir', sans-serif;
-    font-size: 0.8125rem;
-    transition: all 0.3s ease;
-    margin-top: 1.25rem;
-    position: relative;
-    z-index: 10;
-    background-color: #4a7c8f;
-    color: #e8dcc8;
-}
-
-.btn:hover {
-    opacity: 0.85;
-}
-
-/* Sections */
-section {
-    padding: 5rem 2.5rem;
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.content-wrapper {
-    max-width: 75rem;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3.75rem;
-    align-items: center;
-    width: 100%;
-}
-
-.image-placeholder {
-    background-size: cover;
-    background-position: center;
-    min-height: 25rem;
-    border-radius: 0.75rem;
-    border: 0.1875rem solid #4a7c8f;
-}
-
-/* Who We Are */
+/* ==================== WHO WE ARE SECTION ==================== */
 .who-we-are {
-    background-color: #f5f0e8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5rem 2.5rem;
-    flex-direction: column;
+    padding: 80px 60px;
+    text-align: center;
 }
 
 .who-we-are-box {
@@ -194,7 +17,7 @@ section {
 .who-we-are-box h2 {
     font-size: 3.5rem;
     margin-bottom: 1.25rem;
-    border-bottom: 0.125rem solid #a0826d;
+    border-bottom: 0.125rem solid var(--primary-brown);
     padding-bottom: 0.9375rem;
     text-transform: uppercase;
     letter-spacing: 0.0625rem;
@@ -238,19 +61,33 @@ section {
     font-family: 'Conso', serif;
 }
 
-/* What We Do */
+/* ==================== WHAT WE DO SECTION ==================== */
 .what-we-do {
-    background-color: #f5f0e8;
+    padding: 5rem 2.5rem;
 }
 
-.what-we-do .content-wrapper {
+.content-wrapper {
+    max-width: 75rem;
+    margin: 0 auto;
+    display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 3.75rem;
+    align-items: center;
+    width: 100%;
+}
+
+.image-placeholder {
+    background-size: cover;
+    background-position: center;
+    min-height: 25rem;
+    border-radius: 0.75rem;
+    border: 0.1875rem solid var(--primary-blue);
 }
 
 .text-content h2 {
     font-size: 3.5rem;
     margin-bottom: 1.25rem;
-    border-bottom: 0.125rem solid #a0826d;
+    border-bottom: 0.125rem solid var(--primary-brown);
     padding-bottom: 0.9375rem;
     text-transform: uppercase;
     letter-spacing: 0.0625rem;
@@ -264,19 +101,15 @@ section {
     color: #666;
 }
 
-/* Our Work */
+/* ==================== OUR WORK SECTION ==================== */
 .our-work {
-    background-color: #f5f0e8;
-}
-
-.our-work .content-wrapper {
-    grid-template-columns: 1fr 1fr;
+    padding: 5rem 2.5rem;
 }
 
 .work-content h2 {
     font-size: 3.5rem;
     margin-bottom: 1.875rem;
-    border-bottom: 0.125rem solid #a0826d;
+    border-bottom: 0.125rem solid var(--primary-brown);
     padding-bottom: 0.9375rem;
     text-transform: uppercase;
     letter-spacing: 0.0625rem;
@@ -300,11 +133,11 @@ section {
     content: '→';
     position: absolute;
     left: 0;
-    color: #a0826d;
+    color: var(--primary-brown);
 }
 
 .work-list li a {
-    color: #a0826d;
+    color: var(--primary-brown);
     text-decoration: none;
     transition: opacity 0.3s ease;
 }
@@ -314,19 +147,15 @@ section {
     text-decoration: underline;
 }
 
-/* Our Services */
+/* ==================== OUR SERVICES SECTION ==================== */
 .our-services {
-    background-color: #f5f0e8;
-}
-
-.our-services .content-wrapper {
-    grid-template-columns: 1fr 1fr;
+    padding: 5rem 2.5rem;
 }
 
 .services-content h2 {
     font-size: 3.5rem;
     margin-bottom: 1.875rem;
-    border-bottom: 0.125rem solid #a0826d;
+    border-bottom: 0.125rem solid var(--primary-brown);
     padding-bottom: 0.9375rem;
     text-transform: uppercase;
     letter-spacing: 0.0625rem;
@@ -341,16 +170,17 @@ section {
 }
 
 .service-tag {
-    border: 0.125rem solid #a0826d;
-    color: #a0826d;
+    border: 0.125rem solid var(--primary-brown);
+    color: var(--primary-brown);
     padding: 0.875rem 1.5rem;
     border-radius: 0.3125rem;
     font-size: 1rem;
     display: inline-block;
+    transition: all 0.3s ease;
 }
 
 .service-tag a {
-    color: #a0826d;
+    color: var(--primary-brown);
     text-decoration: none;
     transition: all 0.3s ease;
 }
@@ -360,18 +190,15 @@ section {
 }
 
 .service-tag:has(a:hover) {
-    background-color: #a0826d;
+    background-color: var(--primary-brown);
 }
 
 .service-tag:has(a:hover) a {
-    color: #e8dcc8;
+    color: #E2DCCC;
 }
 
-/* Contact Section */
+/* ==================== CONTACT SECTION ==================== */
 .contact {
-    background-color: #f5f0e8;
-    max-width: 100%;
-    margin: 0;
     padding: 5rem 2.5rem;
     width: 100%;
     position: relative;
@@ -387,7 +214,7 @@ section {
     letter-spacing: 0.0625rem;
     color: #333;
     line-height: 1.2;
-    border-bottom: 0.125rem solid #a0826d;
+    border-bottom: 0.125rem solid var(--primary-brown);
     padding-bottom: 0.9375rem;
     text-align: center;
     width: 100%;
@@ -400,11 +227,6 @@ section {
     line-height: 1.8;
     text-align: center;
     max-width: 50rem;
-}
-
-.contact > p::before,
-.contact > p::after {
-    display: none;
 }
 
 .contact-form {
@@ -442,90 +264,29 @@ section {
     width: fit-content;
 }
 
-/* Footer */
-.footer {
-    background-color: #2a2a2a;
-    color: #e8dcc8;
-    padding: 2.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.8125rem;
-    gap: 1.25rem;
-}
-
-.footer-social {
-    display: flex;
-    gap: 1.875rem;
-}
-
-.footer-social a {
-    color: #e8dcc8;
-    text-decoration: none;
-    transition: opacity 0.3s ease;
-}
-
-.footer-social a:hover {
-    opacity: 0.7;
-}
-
-.footer-nav {
-    display: flex;
-    gap: 1.875rem;
-    flex: 1;
-    justify-content: center;
-}
-
-.footer-nav a {
-    color: #e8dcc8;
-    text-decoration: none;
-    transition: opacity 0.3s ease;
-}
-
-.footer-nav a:hover {
-    opacity: 0.7;
-}
-
-.footer-info {
-    margin: 0;
-    text-align: right;
-}
-
-/* Responsive */
-@media (max-width: 48rem) {
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 768px) {
     .content-wrapper {
         grid-template-columns: 1fr;
     }
 
-    .navbar {
-        flex-direction: column;
-        gap: 1.25rem;
-    }
-
-    .nav-links {
-        flex-wrap: wrap;
-        gap: 1.25rem;
-        justify-content: center;
+    .who-we-are-cards {
+        grid-template-columns: 1fr;
     }
 
     .services-grid {
         grid-template-columns: 1fr;
     }
 
-    .hero h1 {
-        font-size: 2.25rem;
+    .contact-form {
+        grid-template-columns: 1fr;
     }
 
-    .footer {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .footer-social {
-        justify-content: center;
-    }
-
-    .footer-info {
-        text-align: center;
+    .who-we-are-box h2,
+    .text-content h2,
+    .work-content h2,
+    .services-content h2,
+    .contact h2 {
+        font-size: 2rem;
     }
 }

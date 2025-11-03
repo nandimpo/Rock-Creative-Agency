@@ -1,155 +1,8 @@
-.card-content button {
-    background: none;
-    border: none;
-    color: #F2D275;
-    text-decoration: none;
-    font-size: 13px;
-    transition: all 0.3s ease;
-    position: relative;
-    font-weight: 500;
-    cursor: pointer;
-    font-family: inherit;
-}
+/* =====================================================
+   WORK.CSS - Work Page Specific Styles
+   ===================================================== */
 
-.card-content button::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #F2D275;
-    transition: width 0.3s ease;
-}
-
-.card-content button:hover::after {
-    width: 100%;
-}
-
-/* Card Details Dropdown */
-.card-details {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(77, 121, 148, 0.95), rgba(165, 116, 78, 0.95));
-    padding: 30px;
-    color: white;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    overflow-y: auto;
-    z-index: 10;
-    animation: slideDown 0.4s ease;
-}
-
-.card-details.hidden {
-    display: none;
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.details-close {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 28px;
-    cursor: pointer;
-    color: #F2D275;
-    transition: all 0.3s ease;
-}
-
-.details-close:hover {
-    color: #E2DCCC;
-}
-
-.card-details h3 {
-    font-size: 28px;
-    margin: 0 0 8px 0;
-    letter-spacing: 1px;
-    color: white;
-}
-
-.details-category {
-    font-size: 13px;
-    color: #F2D275;
-    margin: 0 0 20px 0;
-    font-weight: 500;
-}
-
-.details-description {
-    font-size: 14px;
-    line-height: 1.7;
-    margin: 0 0 25px 0;
-    color: #E2DCCC;
-}
-
-.details-tags {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 20px;
-}
-
-.details-tags span {
-    background: rgba(242, 208, 117, 0.2);
-    border: 1px solid #F2D075;
-    color: #F2D275;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 500;
-}/* CSS for The Work - Rock Creative Agency */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-/* Fonts */
-body {
-    font-family: 'Avenir LT Pro', 'Avenir', sans-serif;
-    background-color: #111A18;
-    color: #333;
-    overflow-x: hidden;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Conso', serif;
-    font-weight: 300;
-}
-
-/* Color Palette */
-:root {
-    --primary-brown: #A5744E;
-    --primary-blue: #4D7994;
-    --secondary-yellow: #F2D075;
-    --neutral-dark: #111A18;
-    --neutral-light: #E2DCCC;
-    --primary-brown-alt: #A5744E;
-    --primary-blue-alt: #4D7994;
-    --secondary-yellow-alt: #F2D075;
-    --neutral-black: #111A18;
-    --neutral-beige: #E2DCCC;
-}
-
-/* Header */
+/* ==================== HEADER OVERRIDE FOR WORK ==================== */
 header {
     position: fixed;
     top: 0;
@@ -157,21 +10,44 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 50px;
-    background-color: rgba(17, 26, 24, 0.95);
+    padding: 15px 50px;
+    background-color: rgba(17, 26, 24, 0.98);
     z-index: 1000;
-    border-bottom: 1px solid rgba(165, 116, 78, 0.2);
+    border-bottom: 1px solid rgba(165, 116, 78, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+header div {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
 header img {
-    width: 50px;
-    height: 50px;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid var(--primary-brown);
+    padding: 8px;
+    object-fit: contain;
+    box-sizing: border-box;
+}
+
+nav {
+    display: flex;
+    list-style: none;
+    gap: 0;
+    margin: 0;
+    padding: 0;
 }
 
 nav a {
     color: #E2DCCC;
     text-decoration: none;
-    margin-left: 30px;
+    margin-left: 35px;
     font-size: 14px;
     transition: all 0.3s ease;
     position: relative;
@@ -185,19 +61,19 @@ nav a::after {
     left: 0;
     width: 0;
     height: 2px;
-    background-color: #A5744E;
+    background-color: var(--primary-brown);
     transition: width 0.3s ease;
 }
 
 nav a:hover {
-    color: #A5744E;
+    color: var(--primary-brown);
 }
 
 nav a:hover::after {
     width: 100%;
 }
 
-/* Hero Section */
+/* ==================== HERO SECTION ==================== */
 .hero {
     margin-top: 90px;
     height: 50vh;
@@ -219,20 +95,11 @@ nav a:hover::after {
     letter-spacing: 3px;
     font-weight: 300;
     animation: fadeInUp 0.8s ease;
+    position: relative;
+    z-index: 10;
 }
 
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Main Content */
+/* ==================== MAIN CONTENT ==================== */
 main {
     background-color: #E2DCCC;
     padding: 80px 0;
@@ -247,7 +114,7 @@ main {
     letter-spacing: 0.3px;
 }
 
-/* Scroll Container */
+/* ==================== PORTFOLIO SCROLL CONTAINER ==================== */
 .portfolio-wrapper {
     position: relative;
     width: 100%;
@@ -268,7 +135,7 @@ main {
     display: none;
 }
 
-/* Card Styles */
+/* ==================== PORTFOLIO CARD STYLES ==================== */
 .portfolio-card {
     flex-shrink: 0;
     width: 320px;
@@ -332,7 +199,8 @@ main {
     margin: 0 0 15px 0;
 }
 
-.card-content a {
+.card-content a,
+.card-content button {
     display: inline-block;
     color: #F2D275;
     text-decoration: none;
@@ -340,9 +208,14 @@ main {
     transition: all 0.3s ease;
     position: relative;
     font-weight: 500;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
 }
 
-.card-content a::after {
+.card-content a::after,
+.card-content button::after {
     content: '';
     position: absolute;
     bottom: -3px;
@@ -353,11 +226,100 @@ main {
     transition: width 0.3s ease;
 }
 
-.card-content a:hover::after {
+.card-content a:hover::after,
+.card-content button:hover::after {
     width: 100%;
 }
 
-/* Scroll Indicators */
+/* ==================== CARD DETAILS DROPDOWN ==================== */
+.card-details {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(77, 121, 148, 0.95), rgba(165, 116, 78, 0.95));
+    padding: 30px;
+    color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto;
+    z-index: 10;
+    animation: slideDown 0.4s ease;
+}
+
+.card-details.hidden {
+    display: none;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.details-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #F2D275;
+    transition: all 0.3s ease;
+    background: none;
+    border: none;
+}
+
+.details-close:hover {
+    color: #E2DCCC;
+}
+
+.card-details h3 {
+    font-size: 28px;
+    margin: 0 0 8px 0;
+    letter-spacing: 1px;
+    color: white;
+}
+
+.details-category {
+    font-size: 13px;
+    color: #F2D275;
+    margin: 0 0 20px 0;
+    font-weight: 500;
+}
+
+.details-description {
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 0 0 25px 0;
+    color: #E2DCCC;
+}
+
+.details-tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.details-tags span {
+    background: rgba(242, 208, 117, 0.2);
+    border: 1px solid #F2D075;
+    color: #F2D275;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* ==================== SCROLL HINT ==================== */
 .scroll-hint {
     text-align: center;
     color: #666;
@@ -371,67 +333,30 @@ main {
     50% { opacity: 1; }
 }
 
-/* Footer */
-footer {
-    background-color: #111A18;
-    padding: 40px 100px;
-    color: #E2DCCC;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid rgba(165, 116, 78, 0.2);
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 1024px) {
+    header {
+        padding: 15px 30px;
+    }
+
+    nav a {
+        margin-left: 20px;
+        font-size: 13px;
+    }
+
+    main {
+        padding: 60px 50px;
+    }
+
+    .intro-text {
+        padding: 0 50px 40px 50px;
+    }
+
+    .portfolio-container {
+        padding: 0 50px;
+    }
 }
 
-footer a {
-    color: #E2DCCC;
-    text-decoration: none;
-    margin-right: 20px;
-    font-size: 14px;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
-}
-
-footer a::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #A5744E;
-    transition: width 0.3s ease;
-}
-
-footer a:hover {
-    color: #A5744E;
-}
-
-footer a:hover::after {
-    width: 100%;
-}
-
-footer nav a {
-    margin-left: 20px;
-    margin-right: 0;
-}
-
-footer p {
-    font-size: 14px;
-    margin: 0;
-}
-
-footer > div {
-    display: flex;
-    gap: 10px;
-}
-
-footer nav {
-    display: flex;
-    gap: 0;
-}
-
-/* Responsive Design */
 @media (max-width: 768px) {
     header {
         padding: 15px 20px;
@@ -439,13 +364,19 @@ footer nav {
         gap: 15px;
     }
 
+    nav {
+        flex-wrap: wrap;
+        gap: 1.25rem;
+        justify-content: center;
+    }
+
     nav a {
-        margin-left: 15px;
+        margin-left: 0;
         font-size: 12px;
     }
 
-    .hero h1 {
-        font-size: 42px;
+    main {
+        padding: 40px 30px;
     }
 
     .intro-text {
@@ -462,15 +393,66 @@ footer nav {
         height: 340px;
     }
 
-    footer {
-        flex-direction: column;
-        text-align: center;
-        padding: 30px 20px;
-        gap: 20px;
+    .card-content h2 {
+        font-size: 20px;
     }
 
-    footer > div,
-    footer nav {
-        justify-content: center;
+    .card-content p {
+        font-size: 12px;
+    }
+
+    .card-details h3 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 12px 15px;
+    }
+
+    nav a {
+        margin-left: 0;
+        font-size: 11px;
+    }
+
+    main {
+        padding: 30px 20px;
+    }
+
+    .intro-text {
+        padding: 0 20px 40px 20px;
+        font-size: 14px;
+    }
+
+    .portfolio-container {
+        padding: 0 20px;
+        gap: 15px;
+    }
+
+    .portfolio-card {
+        width: 250px;
+        height: 300px;
+    }
+
+    .card-content h2 {
+        font-size: 18px;
+    }
+
+    .card-content p {
+        font-size: 11px;
+    }
+
+    .card-details h3 {
+        font-size: 20px;
+    }
+
+    .details-description {
+        font-size: 12px;
+    }
+
+    .details-tags span {
+        font-size: 11px;
+        padding: 5px 10px;
     }
 }
