@@ -1,0 +1,249 @@
+/* =====================================================
+   ABOUT.CSS - Specific Styles for About Page
+   ===================================================== */
+
+/* ==================== INTRO SECTION ==================== */
+.intro-section {
+    margin: 60px auto;
+    max-width: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+}
+
+.intro-content {
+    text-align: center;
+}
+
+.intro-content p {
+    font-family: 'Avenir LT Pro', 'Avenir', sans-serif;
+    font-size: 18px;
+    line-height: 1.8;
+    color: #333;
+    margin: 0;
+}
+
+/* ==================== TEAM SECTION ==================== */
+.team-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 60px 0;
+}
+
+.team-section h2 {
+    font-size: 48px;
+    font-family: 'Conso', serif;
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-bottom: 60px;
+    color: #333;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 60px 80px;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* ==================== TEAM MEMBER CARD ==================== */
+.team-member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+}
+
+.team-card {
+    width: 150px;
+    height: 150px;
+    border: 2px solid #A5744E;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    background-color: #E2DCCC;
+    overflow: hidden;
+}
+
+.team-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.team-card.special-card {
+    border: 2px solid #F2D275;
+    background: linear-gradient(135deg, rgba(242, 210, 117, 0.1) 0%, rgba(242, 210, 117, 0.05) 100%);
+}
+
+.team-initial {
+    font-size: 80px;
+    font-family: 'Conso', serif;
+    font-weight: 300;
+    color: #111A18;
+    letter-spacing: 2px;
+    line-height: 1;
+}
+
+.team-initial.special {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    color: #333;
+    width: 110px;
+    height: 110px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.team-member h3 {
+    font-family: 'Avenir LT Pro', 'Avenir', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 15px 0 8px 0;
+    color: #333;
+}
+
+.team-member .role {
+    font-family: 'Avenir LT Pro', 'Avenir', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #666;
+    margin: 0 0 8px 0;
+}
+
+.team-member .bio {
+    font-family: 'Avenir LT Pro', 'Avenir', sans-serif;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #666;
+    margin: 0;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 1024px) {
+    .team-section h2 {
+        font-size: 40px;
+        margin-bottom: 50px;
+    }
+
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 50px 60px;
+        max-width: 700px;
+    }
+
+    .intro-content p {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .intro-section {
+        margin: 40px auto;
+        padding: 0 30px;
+    }
+
+    .intro-content p {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    .team-section {
+        margin: 40px 0;
+    }
+
+    .team-section h2 {
+        font-size: 32px;
+        margin-bottom: 40px;
+    }
+
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px 30px;
+        max-width: 100%;
+        padding: 0 20px;
+    }
+
+    .team-card {
+        width: 120px;
+        height: 120px;
+        margin-bottom: 20px;
+    }
+
+    .team-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .team-member h3 {
+        font-size: 16px;
+        margin: 12px 0 6px 0;
+    }
+
+    .team-member .role {
+        font-size: 12px;
+    }
+
+    .team-member .bio {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .intro-section {
+        margin: 30px auto;
+        padding: 0 20px;
+    }
+
+    .intro-content p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .team-section h2 {
+        font-size: 24px;
+        margin-bottom: 30px;
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr;
+        gap: 40px 0;
+        padding: 0 20px;
+    }
+
+    .team-card {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 15px;
+    }
+
+    .team-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .team-member h3 {
+        font-size: 15px;
+        margin: 10px 0 5px 0;
+    }
+
+    .team-member .role {
+        font-size: 11px;
+    }
+
+    .team-member .bio {
+        font-size: 11px;
+    }
+}

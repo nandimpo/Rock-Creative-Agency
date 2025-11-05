@@ -306,6 +306,18 @@ canvas {
     color: #E2DCCC;
 }
 
+/* ==================== FILTER SYSTEM SECTION ==================== */
+/* Hide the empty filter system section to remove gap */
+.filter-system-section {
+    padding: 0 !important;
+    margin: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    background-color: transparent !important;
+    border: none !important;
+    display: block !important;
+}
+
 /* ==================== CONTACT SECTION ==================== */
 .contact {
     padding: 5rem 2.5rem;
