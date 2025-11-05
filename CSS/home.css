@@ -2,10 +2,80 @@
    HOME.CSS - Home Page Specific Styles
    ===================================================== */
 
+/* ==================== HEADING WORD DISPLAY ==================== */
+.heading-word {
+    display: inline-block;
+    margin-right: 0.25rem;
+}
+
+/* ==================== HERO SECTION Z-INDEX & VISIBILITY ==================== */
+/* SVG mountains visible */
+.hero svg {
+    z-index: 3 !important;
+}
+
+/* Ensure hero content is above SVG */
+.hero h1,
+.hero h2,
+.hero .btn,
+.hero a {
+    position: relative;
+    z-index: 10;
+}
+
+/* Hero text and button always visible */
+.hero h1 {
+    font-size: 4.5rem;
+    color: #E2DCCC;
+    margin: 0;
+    font-weight: 300;
+    letter-spacing: 3px;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.hero h1 svg {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.hero h2 {
+    font-size: 2rem;
+    color: #E2DCCC;
+    margin: 0;
+    font-weight: 300;
+    letter-spacing: 2px;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.hero .btn {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Ensure all section content is above canvas during reveal */
+.who-we-are-box,
+.content-wrapper,
+.work-content,
+.services-content,
+.contact {
+    position: relative;
+    z-index: 9;
+}
+
+/* Canvas should be in front of content during reveal */
+canvas {
+    z-index: 100 !important;
+    pointer-events: none;
+}
+
 /* ==================== WHO WE ARE SECTION ==================== */
 .who-we-are {
     padding: 80px 60px;
     text-align: center;
+    background-color: #E2DCCC;
 }
 
 .who-we-are-box {
@@ -288,5 +358,13 @@
     .services-content h2,
     .contact h2 {
         font-size: 2rem;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero h2 {
+        font-size: 1.25rem;
     }
 }
