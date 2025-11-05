@@ -201,6 +201,85 @@ section {
     align-items: center;
 }
 
+/* ==================== FORM VALIDATION STYLES ==================== */
+
+/* Valid field (correct info) - Green outline */
+.contact-form input.valid,
+.contact-form textarea.valid {
+    border-color: #4CAF50 !important;
+    background-color: #f1f8f4 !important;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1) !important;
+}
+
+/* Invalid field (incorrect info) - Red outline */
+.contact-form input.invalid,
+.contact-form textarea.invalid {
+    border-color: #f44336 !important;
+    background-color: #fef5f5 !important;
+    box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.1) !important;
+}
+
+/* Email field wrapper for checkmark positioning */
+.email-wrapper {
+    position: relative;
+}
+
+.email-wrapper input[type="email"] {
+    padding-right: 45px;
+}
+
+.email-wrapper .email-tick {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #4CAF50;
+    font-weight: bold;
+    font-size: 20px;
+    display: none;
+    pointer-events: none;
+}
+
+.email-wrapper input[type="email"].valid ~ .email-tick {
+    display: block;
+}
+
+/* Success message */
+.success-message {
+    display: none;
+    grid-column: 1 / -1;
+    padding: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    animation: slideIn 0.4s ease;
+}
+
+.success-message.show {
+    display: block;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Submit button disabled state */
+.contact-form button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 /* ==================== FOOTER ==================== */
 footer {
     background-color: #111A18;
