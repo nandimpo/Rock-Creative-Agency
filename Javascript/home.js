@@ -90,26 +90,7 @@ function createHeroSVG() {
         }, i * 0.3);
     }
 
-    // Animated mist/clouds
-    for (let i = 0; i < 4; i++) {
-        const ellipse = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
-        const cx = Math.random() * 1920;
-        const cy = 200 + Math.random() * 300;
-        ellipse.setAttribute('cx', cx);
-        ellipse.setAttribute('cy', cy);
-        ellipse.setAttribute('rx', '200');
-        ellipse.setAttribute('ry', '80');
-        ellipse.setAttribute('fill', 'rgba(242, 217, 117, 0.05)');
-        svg.appendChild(ellipse);
-
-        heroTimeline.to(ellipse, {
-            attr: { cx: cx + 200 },
-            opacity: 0,
-            duration: 8 + Math.random() * 4,
-            repeat: -1,
-            ease: 'sine.inOut'
-        }, i * 2);
-    }
+    // Animated mist/clouds - REMOVED
 
     // Animated water ripples with SVG
     for (let i = 0; i < 3; i++) {
@@ -486,7 +467,7 @@ createSectionTimeline('.what-we-do', '.text-content h2', '.text-content p', null
 // Our Work Section Timeline
 createSectionTimeline('.our-work', '.work-content h2', null, '.work-list li');
 
-// Our Services Section Timeline - FIXED: DON'T animate service tags, only heading
+// Our Services Section Timeline
 const servicesTimeline = gsap.timeline({
     scrollTrigger: {
         trigger: '.our-services',
@@ -506,7 +487,7 @@ if (servicesHeadingWords.length > 0) {
     }, 0);
 }
 
-// Contact Section Timeline - FIXED: DON'T animate form inputs
+// Contact Section Timeline
 const contactTimeline = gsap.timeline({
     scrollTrigger: {
         trigger: '.contact',
@@ -730,78 +711,6 @@ createCanvasReveal('.our-services', '#4D7994', 'diagonal');
 createCanvasReveal('.contact', '#A5744E', 'circle');
 
 // ===================================================
-// MOUNTAIN REVEAL ANIMATIONS WITH TIMELINE
-// ===================================================
-
-function createMountainReveal(sectionSelector, mountainColor, strokeMultiplier = 1) {
-    ScrollTrigger.create({
-        trigger: sectionSelector,
-        start: 'top 80%',
-        onEnter: () => {
-            const section = document.querySelector(sectionSelector);
-            if (!section) return;
-
-            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-            svg.setAttribute('width', '100%');
-            svg.setAttribute('height', '100%');
-            svg.setAttribute('viewBox', '0 0 1920 1080');
-            svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
-            svg.style.position = 'absolute';
-            svg.style.top = '0';
-            svg.style.left = '0';
-            svg.style.zIndex = '1';
-            svg.style.pointerEvents = 'none';
-
-            // Mountain Timeline
-            const mountainTimeline = gsap.timeline();
-
-            const mountains = [
-                { points: '0,900 400,400 800,700 1200,350 1600,600 1920,400 1920,1080 0,1080', opacity: 0.9, delay: 0, strokeWidth: 4 * strokeMultiplier },
-                { points: '0,950 300,500 700,800 1100,450 1500,650 1920,500 1920,1080 0,1080', opacity: 0.7, delay: 0.2, strokeWidth: 3 * strokeMultiplier },
-                { points: '0,800 250,600 600,850 950,550 1350,700 1700,400 1920,600 1920,1080 0,1080', opacity: 0.5, delay: 0.4, strokeWidth: 2 * strokeMultiplier }
-            ];
-
-            mountains.forEach((mountain, index) => {
-                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-                path.setAttribute('d', `M${mountain.points}`);
-                path.setAttribute('stroke', mountainColor);
-                path.setAttribute('stroke-width', mountain.strokeWidth);
-                path.setAttribute('fill', 'none');
-                path.setAttribute('stroke-linecap', 'round');
-                path.setAttribute('stroke-linejoin', 'round');
-                path.setAttribute('opacity', '0');
-                svg.appendChild(path);
-
-                const pathLength = path.getTotalLength();
-                path.style.strokeDasharray = pathLength;
-                path.style.strokeDashoffset = pathLength;
-
-                // Add SVG stroke animation to timeline
-                mountainTimeline.to(path, {
-                    strokeDashoffset: 0,
-                    opacity: mountain.opacity,
-                    duration: 0.8,
-                    ease: 'power2.out'
-                }, mountain.delay);
-
-                mountainTimeline.to(path, {
-                    y: -200,
-                    opacity: 0,
-                    duration: 1.2,
-                    ease: 'power2.in'
-                }, mountain.delay + 1.2);
-            });
-
-            section.appendChild(svg);
-        },
-        once: true
-    });
-}
-
-createMountainReveal('.what-we-do', '#111A18', 0.8);
-createMountainReveal('.our-services', '#111A18', 0.6);
-
-// ===================================================
 // MOUSE BLUR EFFECT ON IMAGES
 // ===================================================
 
@@ -877,4 +786,4 @@ createParticles('.our-work');
 createParticles('.our-services');
 createParticles('.contact');
 
-console.log('✓ All Timelines, ScrollTriggers, SVG, and MotionPath animations initialized');
+console.log('✓ All Timelines, ScrollTriggers, SVG, Canvas, MotionPath and Particle animations initialized (Mountain reveal SVGs removed)');
