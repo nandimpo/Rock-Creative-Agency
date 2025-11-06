@@ -10,7 +10,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 50px;
+    padding: 20px 60px;
     background-color: rgba(17, 26, 24, 0.98);
     z-index: 1000;
     border-bottom: 1px solid rgba(165, 116, 78, 0.3);
@@ -18,8 +18,8 @@ header {
 }
 
 header div {
-    width: 60px;
-    height: 60px;
+    width: 75px;
+    height: 75px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -47,8 +47,8 @@ nav {
 nav a {
     color: #E2DCCC;
     text-decoration: none;
-    margin-left: 35px;
-    font-size: 14px;
+    margin-left: 45px;
+    font-size: 16px;
     transition: all 0.3s ease;
     position: relative;
     display: inline-block;
@@ -75,7 +75,7 @@ nav a:hover::after {
 
 /* ==================== HERO SECTION ==================== */
 header + section {
-    margin-top: 90px;
+    margin-top: 110px;
     height: 100vh;
     background-size: cover;
     background-position: center;
@@ -103,7 +103,7 @@ header + section::before {
 }
 
 header + section h1 {
-    font-size: 72px;
+    font-size: 90px;
     margin: 0;
     letter-spacing: 3px;
     font-weight: 300;
@@ -115,14 +115,14 @@ header + section h1 {
 
 /* ==================== CONTACT SECTION ==================== */
 .contact-section {
-    padding: 5rem 2.5rem;
+    padding: 7rem 3rem;
     background-color: #E2DCCC;
 }
 
 .contact-wrapper {
     display: grid;
     grid-template-columns: 1fr 1.5fr;
-    gap: 80px;
+    gap: 100px;
     align-items: start;
     max-width: 1200px;
     margin: 0 auto;
@@ -132,11 +132,11 @@ header + section h1 {
 .contact-left {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 50px;
 }
 
 .contact-label {
-    font-size: 12px;
+    font-size: 22px;
     color: #111A18;
     margin: 0;
     font-weight: 500;
@@ -146,12 +146,12 @@ header + section h1 {
 .title-group {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 30px;
     flex-wrap: wrap;
 }
 
 .title-group h2 {
-    font-size: 3.5rem;
+    font-size: 4.5rem;
     margin: 0;
     color: #111A18;
     letter-spacing: 0.0625rem;
@@ -161,33 +161,34 @@ header + section h1 {
 .decorative-elements {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 18px; /* slightly more spacing for balance */
     flex-shrink: 0;
 }
 
 .circle {
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
+    width: 75px;   /* increased from 50px */
+    height: 75px;  /* increased from 50px */
+    min-width: 75px;
     border-radius: 50%;
     background-color: #111A18;
 }
 
 .logo-image {
-    width: 60px;
-    height: 60px;
+    width: 110px;  /* increased from 75px */
+    height: 110px; /* increased from 75px */
     object-fit: contain;
     border-radius: 8px;
 }
 
+
 .contact-info {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 25px;
 }
 
 .contact-info p {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.8;
     color: #555;
     margin: 0;
@@ -206,23 +207,23 @@ header + section h1 {
 
 .contact-form {
     background-color: white;
-    padding: 40px;
+    padding: 50px;
     border-radius: 6px;
     width: 100%;
     max-width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 25px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 .contact-form input,
 .contact-form textarea {
-    padding: 12px 16px;
+    padding: 16px 20px;
     border: 1px solid var(--primary-brown);
     border-radius: 4px;
     font-family: 'Avenir LT Pro', 'Avenir', sans-serif;
-    font-size: 13px;
+    font-size: 15px;
     color: #333;
     background-color: #F9F7F3;
     transition: all 0.3s ease;
@@ -243,7 +244,7 @@ header + section h1 {
 
 .contact-form textarea {
     grid-column: 1 / -1;
-    min-height: 120px;
+    min-height: 150px;
     resize: vertical;
 }
 
@@ -252,10 +253,98 @@ header + section h1 {
     width: 100%;
 }
 
+/* =====================================================
+   CONTACT.CSS - Updated for GSAP + Canvas Animations
+   ===================================================== */
+
+/* ========== HERO SECTION ENHANCEMENTS ========== */
+.mountain-section {
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.mountain-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.6) 10%, rgba(17,26,24,0.95) 100%);
+    z-index: 1;
+}
+
+.mountain-container {
+    z-index: 2;
+}
+
+/* Canvas for floating particles / dust */
+.hero-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    mix-blend-mode: soft-light;
+}
+
+/* Hero text subtle animation states */
+.mountain-section h1, 
+.mountain-section h2 {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Scroll-triggered section transitions */
+.contact-section {
+    position: relative;
+    background-color: #E2DCCC;
+    padding: 7rem 3rem;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.6s ease;
+}
+
+.contact-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Left column motion preparation */
+.contact-left {
+    transform: translateX(-50px);
+    opacity: 0;
+}
+
+/* Right column motion preparation */
+.contact-right {
+    transform: translateX(50px);
+    opacity: 0;
+}
+
+/* Earthy animation color glow effect */
+.decorative-elements .circle {
+    box-shadow: 0 0 20px rgba(165, 116, 78, 0.4);
+}
+
+/* Footer fade-in trigger */
+footer {
+    opacity: 0;
+    transform: translateY(60px);
+}
+
+
 /* ==================== FOOTER ==================== */
 footer {
     background-color: #111A18;
-    padding: 40px 60px;
+    padding: 50px 70px;
     color: #E2DCCC;
     display: flex;
     justify-content: space-between;
@@ -267,8 +356,8 @@ footer {
 footer a {
     color: #E2DCCC;
     text-decoration: none;
-    margin-right: 20px;
-    font-size: 14px;
+    margin-right: 25px;
+    font-size: 16px;
     transition: all 0.3s ease;
     position: relative;
     display: inline-block;
@@ -294,12 +383,12 @@ footer a:hover::after {
 }
 
 footer nav a {
-    margin-left: 20px;
+    margin-left: 25px;
     margin-right: 0;
 }
 
 footer p {
-    font-size: 12px;
+    font-size: 14px;
     margin: 0;
     text-align: right;
 }
@@ -318,30 +407,30 @@ footer nav {
 /* ==================== RESPONSIVE DESIGN ==================== */
 @media (max-width: 1024px) {
     header {
-        padding: 15px 30px;
+        padding: 18px 40px;
     }
 
     nav a {
-        margin-left: 20px;
-        font-size: 13px;
+        margin-left: 30px;
+        font-size: 15px;
     }
 
     .contact-wrapper {
-        gap: 60px;
+        gap: 80px;
     }
 
     .title-group h2 {
-        font-size: 2.5rem;
+        font-size: 3.5rem;
     }
 
     .contact-form {
-        padding: 30px;
+        padding: 40px;
     }
 }
 
 @media (max-width: 768px) {
     header {
-        padding: 15px 20px;
+        padding: 18px 25px;
         flex-direction: column;
         gap: 15px;
     }
@@ -354,27 +443,27 @@ footer nav {
 
     nav a {
         margin-left: 0;
-        font-size: 12px;
+        font-size: 14px;
     }
 
     header + section {
-        margin-top: 120px;
+        margin-top: 150px;
         height: 100vh;
     }
 
     header + section h1 {
-        font-size: 36px;
+        font-size: 48px;
         padding: 0 30px;
         letter-spacing: 2px;
     }
 
     .contact-section {
-        padding: 2.5rem 1.25rem;
+        padding: 3.5rem 1.5rem;
     }
 
     .contact-wrapper {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 50px;
     }
 
     .title-group {
@@ -383,7 +472,7 @@ footer nav {
     }
 
     .title-group h2 {
-        font-size: 2rem;
+        font-size: 2.5rem;
     }
 
     .decorative-elements {
@@ -392,7 +481,7 @@ footer nav {
     }
 
     .contact-form {
-        padding: 25px;
+        padding: 35px;
         grid-template-columns: 1fr;
     }
 
@@ -408,7 +497,7 @@ footer nav {
     footer {
         flex-direction: column;
         text-align: center;
-        padding: 30px 20px;
+        padding: 40px 25px;
         gap: 20px;
     }
 
@@ -424,46 +513,104 @@ footer nav {
 
 @media (max-width: 480px) {
     header {
-        padding: 12px 15px;
+        padding: 14px 18px;
     }
 
     nav a {
         margin-left: 0;
-        font-size: 11px;
+        font-size: 12px;
     }
 
     header + section h1 {
-        font-size: 24px;
+        font-size: 32px;
         padding: 30px 20px;
     }
 
     .contact-section {
-        padding: 2rem 1rem;
+        padding: 2.5rem 1.25rem;
     }
 
     .contact-left {
-        gap: 30px;
+        gap: 35px;
     }
 
     .title-group h2 {
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
 
     .logo-image {
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
     }
 
     .circle {
-        width: 30px;
-        height: 30px;
+        width: 35px;
+        height: 35px;
     }
 
     .contact-form {
-        padding: 20px;
+        padding: 25px;
     }
 
     .contact-info p {
-        font-size: 13px;
+        font-size: 15px;
     }
+}
+
+/* ==================== FIX: Remove space beneath footer ==================== */
+
+/* Prevent layout overflow from GSAP and fixed canvases */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+    background-color: #E2DCCC;
+}
+
+/* Use flex layout to lock footer to bottom */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Main grows naturally but doesn’t push footer */
+main {
+    flex: 1;
+    margin: 0;
+    padding: 0;
+}
+
+/* Contact section ends flush with footer */
+.contact-section {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* Footer sits naturally at the bottom */
+footer {
+    margin: 0 !important;
+    position: relative;
+    bottom: 0;
+}
+
+/* Fix GSAP canvases (so they don’t add to scroll height) */
+.hero-canvas,
+.reveal-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Prevent hidden GSAP transforms from expanding layout */
+body::after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
 }
