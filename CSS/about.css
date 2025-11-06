@@ -1,15 +1,191 @@
 /* =====================================================
    ABOUT.CSS - Specific Styles for About Page
+   GSAP Animations, ScrollTrigger & Canvas Reveal
    ===================================================== */
+
+/* ==================== HIDE FILTER CONTAINER ==================== */
+/* Make the container invisible but keep it functional */
+[data-filter-container-sidebar-results] {
+    display: block !important;
+    width: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    background: none !important;
+    overflow: visible !important;
+    background-color: transparent !important;
+}
+
+/* ==================== DYNAMIC ALIVE BACKGROUND ANIMATIONS ==================== */
+
+/* Breathing effect - main overlay pulsing with depth */
+@keyframes breathingPulse {
+    0% {
+        background: linear-gradient(135deg, rgba(0,0,0,0.75), rgba(80, 60, 40, 0.85));
+        opacity: 1;
+    }
+    25% {
+        background: linear-gradient(135deg, rgba(0,0,0,0.65), rgba(100, 75, 50, 0.8));
+        opacity: 0.95;
+    }
+    50% {
+        background: linear-gradient(135deg, rgba(0,0,0,0.55), rgba(120, 85, 60, 0.75));
+        opacity: 0.9;
+    }
+    75% {
+        background: linear-gradient(135deg, rgba(0,0,0,0.65), rgba(100, 75, 50, 0.8));
+        opacity: 0.95;
+    }
+    100% {
+        background: linear-gradient(135deg, rgba(0,0,0,0.75), rgba(80, 60, 40, 0.85));
+        opacity: 1;
+    }
+}
+
+/* Gradient shift - creates color depth variation */
+@keyframes gradientShift {
+    0% {
+        background: linear-gradient(45deg, rgba(0,0,0,0.75), rgba(80, 60, 40, 0.85));
+    }
+    50% {
+        background: linear-gradient(225deg, rgba(0,0,0,0.7), rgba(100, 70, 50, 0.8));
+    }
+    100% {
+        background: linear-gradient(45deg, rgba(0,0,0,0.75), rgba(80, 60, 40, 0.85));
+    }
+}
+
+/* Subtle glow pulse - adds energy to text */
+@keyframes glowPulse {
+    0% {
+        text-shadow: 0 0 20px rgba(165, 116, 78, 0), 
+                     0 0 40px rgba(242, 210, 117, 0);
+    }
+    50% {
+        text-shadow: 0 0 30px rgba(165, 116, 78, 0.3), 
+                     0 0 60px rgba(242, 210, 117, 0.15);
+    }
+    100% {
+        text-shadow: 0 0 20px rgba(165, 116, 78, 0), 
+                     0 0 40px rgba(242, 210, 117, 0);
+    }
+}
+
+/* Light flicker - creates dynamic lighting feel */
+@keyframes lightFlicker {
+    0%, 100% {
+        background: linear-gradient(135deg, rgba(0,0,0,0.75), rgba(80, 60, 40, 0.85));
+    }
+    5% {
+        background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(85, 65, 45, 0.8));
+    }
+    10% {
+        background: linear-gradient(135deg, rgba(0,0,0,0.76), rgba(80, 60, 40, 0.86));
+    }
+    15% {
+        background: linear-gradient(135deg, rgba(0,0,0,0.72), rgba(90, 70, 50, 0.82));
+    }
+    20% {
+        background: linear-gradient(135deg, rgba(0,0,0,0.75), rgba(80, 60, 40, 0.85));
+    }
+}
+
+/* Pulsing Background Overlay */
+@keyframes pulseOverlay {
+    0% {
+        background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(80, 60, 40, 0.9));
+    }
+    50% {
+        background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(80, 60, 40, 0.7));
+    }
+    100% {
+        background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(80, 60, 40, 0.9));
+    }
+}
+
+/* Nature flow animation */
+@keyframes natureFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Floating effect for cards */
+@keyframes floatCard {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* Apply animations to mountain section hero */
+.mountain-section::before {
+    animation: breathingPulse 6s ease-in-out infinite;
+}
+
+.mountain-section h1 {
+    animation: glowPulse 4s ease-in-out infinite;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.mountain-section h2 {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.mountain-svg {
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+/* ==================== GSAP ANIMATION STATES ==================== */
+
+/* Initial states for GSAP animations */
+.intro-content p {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.team-member {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+}
+
+.team-card {
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
 
 /* ==================== INTRO SECTION ==================== */
 .intro-section {
-    margin: 80px auto;
+    margin: 60px auto 40px auto;
     max-width: 900px;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0 40px;
+    position: relative;
+    padding-bottom: 40px;
+}
+
+.intro-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #A5744E, transparent);
+    width: 0%;
 }
 
 .intro-content {
@@ -22,6 +198,7 @@
     line-height: 1.9;
     color: #333;
     margin: 0;
+    transition: color 0.4s ease;
 }
 
 /* ==================== TEAM SECTION ==================== */
@@ -30,7 +207,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 120px 0;
+    margin: 80px 0 40px 0;
+    position: relative;
 }
 
 .team-section h2 {
@@ -42,16 +220,21 @@
     color: #333;
     border-bottom: 3px solid var(--primary-brown);
     padding-bottom: 30px;
-    display: inline-block;
+    display: block;
+    white-space: normal;
+    word-spacing: normal;
+    max-width: 100%;
+    text-align: center;
 }
 
 .team-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 120px 160px;
+    gap: 80px 120px;
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
+    padding: 0 40px;
 }
 
 /* ==================== TEAM MEMBER CARD ==================== */
@@ -61,6 +244,8 @@
     align-items: center;
     text-align: center;
     padding: 0;
+    cursor: pointer;
+    transform-style: preserve-3d;
 }
 
 .team-card {
@@ -73,7 +258,9 @@
     justify-content: center;
     margin-bottom: 50px;
     background-color: #E2DCCC;
-    overflow: hidden;
+    overflow: visible;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(165, 116, 78, 0.1);
 }
 
 .team-card img {
@@ -114,6 +301,11 @@
     font-weight: 600;
     margin: 30px 0 15px 0;
     color: #333;
+    transition: color 0.3s ease;
+}
+
+.team-member:hover h3 {
+    color: #A5744E;
 }
 
 .team-member .role {
@@ -122,6 +314,9 @@
     font-weight: 400;
     color: #666;
     margin: 0 0 18px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 13px;
 }
 
 .team-member .bio {
@@ -132,17 +327,64 @@
     margin: 0;
 }
 
+/* ==================== SVG ANIMATIONS ==================== */
+.mountain-peak {
+    stroke-dasharray: 500;
+    stroke-dashoffset: 500;
+    stroke: #A5744E;
+    stroke-width: 3;
+    fill: none;
+    opacity: 0.6;
+}
+
+.mountain-peak-1 {
+    animation: mountainDraw 2s ease-out forwards;
+    animation-delay: 0.5s;
+}
+
+.mountain-peak-2 {
+    animation: mountainDraw 2.2s ease-out forwards;
+    animation-delay: 0.7s;
+}
+
+.mountain-peak-3 {
+    animation: mountainDraw 2s ease-out forwards;
+    animation-delay: 0.9s;
+}
+
+@keyframes mountainDraw {
+    from {
+        stroke-dashoffset: 500;
+        opacity: 0;
+    }
+    to {
+        stroke-dashoffset: 0;
+        opacity: 0.6;
+    }
+}
+
+/* ==================== CANVAS REVEAL STYLES ==================== */
+canvas {
+    mix-blend-mode: screen;
+}
+
 /* ==================== RESPONSIVE DESIGN ==================== */
 @media (max-width: 1024px) {
     .team-section h2 {
         font-size: 64px;
-        margin-bottom: 100px;
+        margin-bottom: 80px;
     }
 
     .team-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 100px 130px;
+        gap: 80px 100px;
         max-width: 1100px;
+        padding: 0 30px;
+    }
+
+    .intro-section {
+        padding: 0 30px 30px 30px;
+        margin: 50px auto 30px auto;
     }
 
     .intro-content p {
@@ -153,16 +395,16 @@
         width: 240px;
         height: 240px;
         border: 4px solid #A5744E;
-        margin-bottom: 45px;
+        margin-bottom: 35px;
     }
 
     .team-member h3 {
         font-size: 28px;
-        margin: 28px 0 12px 0;
+        margin: 24px 0 10px 0;
     }
 
     .team-member .role {
-        font-size: 19px;
+        font-size: 16px;
     }
 
     .team-member .bio {
@@ -173,7 +415,7 @@
 @media (max-width: 768px) {
     .intro-section {
         margin: 50px auto;
-        padding: 0 30px;
+        padding: 0 30px 30px 30px;
     }
 
     .intro-content p {
@@ -218,7 +460,7 @@
     }
 
     .team-member .role {
-        font-size: 16px;
+        font-size: 14px;
     }
 
     .team-member .bio {
@@ -229,7 +471,7 @@
 @media (max-width: 480px) {
     .intro-section {
         margin: 30px auto;
-        padding: 0 20px;
+        padding: 0 20px 20px 20px;
     }
 
     .intro-content p {
@@ -269,10 +511,21 @@
     }
 
     .team-member .role {
-        font-size: 15px;
+        font-size: 13px;
     }
 
     .team-member .bio {
         font-size: 14px;
+    }
+}
+
+/* ==================== ACCESSIBILITY ==================== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }

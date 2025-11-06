@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../CSS/main.css">
     <link rel="stylesheet" href="../CSS/about.css">
     <link rel="stylesheet" href="../CSS/filter system.css">
-    <link rel="stylesheet" href="../CSS/mountain svg text.css">
+    <link rel="stylesheet" href="../CSS/mountain.css">
 
 </head>
 <body>
@@ -28,10 +28,30 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" style="background-image: url('../Images/Home/rock.jpg');">
-        <h1>About.</h1>
-        <h2>Scroll down if you want to find out more about The Rock Creative Team</h2>
+    <!-- Filter System Container -->
+    <section data-filter-container-sidebar-results></section>
+
+    <!-- Mountain Animation Hero Section WITH BACKGROUND IMAGE -->
+    <section class="mountain-section" style="background-image: url('../Images/Home/rock.jpg');">
+        <div class="mountain-container">
+            <div class="mountain-content">
+                <h1>About.</h1>
+                <h2>Meet The Rock Creative Team</h2>
+            </div>
+            <svg class="mountain-svg" viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid meet">
+                <!-- Left Peak -->
+                <polyline class="mountain-peak mountain-peak-1" 
+                    points="100,300 250,100 350,200"/>
+                
+                <!-- Center Peak (Tallest) -->
+                <polyline class="mountain-peak mountain-peak-2" 
+                    points="320,220 500,50 680,220"/>
+                
+                <!-- Right Peak -->
+                <polyline class="mountain-peak mountain-peak-3" 
+                    points="650,200 800,120 900,300"/>
+            </svg>
+        </div>
     </section>
 
     <!-- Main Content -->
@@ -132,10 +152,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
 
-    <!-- ========== CUSTOM SCRIPTS ========== -->
+    <!-- ========== MOUNTAIN ANIMATION ========== -->
+    <script src="../Javascript/mountain.js"></script>
 
+    <!-- ========== CUSTOM SCRIPTS ========== -->
     <script src="../Javascript/filter system.js"></script>
-    <script src="../Javascript/mountain svg text.js"></script>
+
+    <!-- ========== NEW GSAP ANIMATION SCRIPT ========== -->
+    <script src="../Javascript/about.js"></script>
    
 </body>
 </html>
