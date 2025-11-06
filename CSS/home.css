@@ -8,6 +8,26 @@
     margin-right: 0.25rem;
 }
 
+/* ==================== BUTTON STYLES ==================== */
+.btn {
+    background-color: #3d6178 ;
+    color:#3d6178 ;
+    padding: 0.875rem 2rem;
+    border: none;
+    border-radius: 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    font-family: 'Avenir LT Pro', 'Avenir', sans-serif;
+}
+
+.btn:hover {
+    background-color:#3d6178 ;
+    transform: translateY(-2px);
+}
+
 /* ==================== HERO SECTION Z-INDEX & VISIBILITY ==================== */
 /* SVG mountains visible */
 .hero svg {
