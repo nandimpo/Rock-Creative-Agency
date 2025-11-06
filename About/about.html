@@ -6,6 +6,9 @@
     <title>About - Rock Creative Agency</title>
     <link rel="stylesheet" href="../CSS/main.css">
     <link rel="stylesheet" href="../CSS/about.css">
+    <link rel="stylesheet" href="../CSS/filter system.css">
+    <link rel="stylesheet" href="../CSS/mountain svg text.css">
+
 </head>
 <body>
     <!-- Navigation Header -->
@@ -15,12 +18,12 @@
                 <img src="../Images/Logo.png" alt="Rock Creative Agency">
             </div>
             <ul class="nav-links">
-            <a href="../Home/index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="expertise.html">Expertise</a>
-            <a href="work.html">Work</a>
-            <a href="services.html">Services</a>
-            <a href="contact.html">Contact</a>
+                <a href="../index.html">Home</a>
+                <a href="../About/about.html">About</a>
+                <a href="../Expertise/expertise.html">Expertise</a>
+                <a href="../Work/work.html">Work</a>
+                <a href="../Services/services.html">Services</a>
+                <a href="../Contact/contact.html">Contact</a>
             </ul>
         </nav>
     </header>
@@ -28,6 +31,7 @@
     <!-- Hero Section -->
     <section class="hero" style="background-image: url('../Images/Home/rock.jpg');">
         <h1>About.</h1>
+        <h2>Scroll down if you want to find out more about The Rock Creative Team</h2>
     </section>
 
     <!-- Main Content -->
@@ -90,7 +94,7 @@
                     </div>
                     <h3>Cia Tite</h3>
                     <p class="role">Manager</p>
-                    <p class="bio">3 years of experience<br>Planning, Production,<br>Event, Production</p>
+                    <p class="bio">3 years of experience<br>Planning, Production,<br>Event</p>
                 </div>
 
                 <!-- Team Member 6 -->
@@ -109,18 +113,29 @@
     <!-- Footer -->
     <footer>
         <div>
-            <a href="#">instagram</a>
-            <a href="#">linkedin</a>
+            <a href="https://www.instagram.com/">instagram</a>
+            <a href="https://www.linkedin.com/feed/">linkedin</a>
         </div>
         <nav>
-            <a href="../Home/index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="expertise.html">Expertise</a>
-            <a href="work.html">Work</a>
-            <a href="services.html">Services</a>
-            <a href="contact.html">Contact</a>
+            <a href="../index.html">Home</a>
+            <a href="../About/about.html">About</a>
+            <a href="../Expertise/expertise.html">Expertise</a>
+            <a href="../Work/work.html">Work</a>
+            <a href="../Services/services.html">Services</a>
+            <a href="../Contact/contact.html">Contact</a>
         </nav>
         <p>&copy; 2024 rock agency. all rights reserved.</p>
     </footer>
+
+    <!-- ========== GSAP LIBRARIES (REQUIRED FOR ANIMATIONS) ========== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
+
+    <!-- ========== CUSTOM SCRIPTS ========== -->
+
+    <script src="../Javascript/filter system.js"></script>
+    <script src="../Javascript/mountain svg text.js"></script>
+   
 </body>
 </html>
