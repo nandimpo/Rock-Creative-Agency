@@ -2,77 +2,6 @@
    SERVICES.CSS - Services Page Specific Styles
    ===================================================== */
 
-/* ==================== HEADER OVERRIDE FOR SERVICES ==================== */
-header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 50px;
-    background-color: rgba(17, 26, 24, 0.98);
-    z-index: 1000;
-    border-bottom: 1px solid rgba(165, 116, 78, 0.3);
-    backdrop-filter: blur(10px);
-}
-
-header div {
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-header img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 2px solid var(--primary-brown);
-    padding: 8px;
-    object-fit: contain;
-    box-sizing: border-box;
-}
-
-nav {
-    display: flex;
-    list-style: none;
-    gap: 0;
-    margin: 0;
-    padding: 0;
-}
-
-nav a {
-    color: #E2DCCC;
-    text-decoration: none;
-    margin-left: 35px;
-    font-size: 14px;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
-}
-
-nav a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--primary-brown);
-    transition: width 0.3s ease;
-}
-
-nav a:hover {
-    color: var(--primary-brown);
-}
-
-nav a:hover::after {
-    width: 100%;
-}
-
 /* ==================== SERVICES GRID ==================== */
 main {
     display: flex;
@@ -158,15 +87,6 @@ main {
 
 /* ==================== RESPONSIVE DESIGN ==================== */
 @media (max-width: 1024px) {
-    header {
-        padding: 15px 30px;
-    }
-
-    nav a {
-        margin-left: 20px;
-        font-size: 13px;
-    }
-
     main {
         padding: 60px 50px;
     }
@@ -182,23 +102,6 @@ main {
 }
 
 @media (max-width: 768px) {
-    header {
-        padding: 15px 20px;
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    nav {
-        flex-wrap: wrap;
-        gap: 1.25rem;
-        justify-content: center;
-    }
-
-    nav a {
-        margin-left: 0;
-        font-size: 12px;
-    }
-
     main {
         padding: 40px 30px;
     }
@@ -223,15 +126,6 @@ main {
 }
 
 @media (max-width: 480px) {
-    header {
-        padding: 12px 15px;
-    }
-
-    nav a {
-        margin-left: 0;
-        font-size: 11px;
-    }
-
     main {
         padding: 30px 20px;
     }

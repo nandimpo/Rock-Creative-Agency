@@ -437,3 +437,21 @@ footer nav {
         padding: 30px 20px;
     }
 }
+/* CRITICAL FIX */
+.nav-links {
+    position: relative;
+    z-index: 1 !important;
+}
+
+.nav-filter-container {
+    z-index: 9999 !important;
+}
+
+.filter-dropdown-btn {
+    z-index: 9999 !important;
+    pointer-events: auto !important;
+}
+
+.filter-dropdown-menu {
+    z-index: 10000 !important;
+}

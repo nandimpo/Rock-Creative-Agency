@@ -6,20 +6,24 @@
     <title>The Work - Rock Creative Agency</title>
     <link rel="stylesheet" href="../CSS/main.css">
     <link rel="stylesheet" href="../CSS/work.css">
+    <!-- FILTER DROPDOWN CSS -->
+    <link rel="stylesheet" href="../CSS/filter-dropdown.css">
     <script defer src="../Javascript/work card.js"></script>
 </head>
 <body>
     <header>
-        <div>
-            <img src="../Images/Logo.png" alt="R Logo">
-        </div>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="expertise.html">Expertise</a>
-            <a href="work.html">Work</a>
-            <a href="services.html">Services</a>
-            <a href="contact.html">Contact</a>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="../Images/Logo.png" alt="R Logo">
+            </div>
+            <ul class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="../About/about.html">About</a>
+                <a href="../Expertise/expertise.html">Expertise</a>
+                <a href="../Work/work.html">Work</a>
+                <a href="../Services/services.html">Services</a>
+                <a href="../Contact/contact.html">Contact</a>
+            </ul>
         </nav>
     </header>
 
@@ -33,7 +37,7 @@
         <div class="portfolio-wrapper">
             <div class="portfolio-container" id="portfolioContainer">
                 <!-- Portfolio Card 1 -->
-                <div class="portfolio-card">
+                <div class="portfolio-card" data-filter-project="braam" data-filter-service="branding creative-direction">
                     <img src="../Images/Work/B logo.jpg" alt="Braam" class="card-image">
                     <div class="card-content">
                         <h2>Braam</h2>
@@ -54,7 +58,7 @@
                 </div>
 
                 <!-- Portfolio Card 2 -->
-                <div class="portfolio-card">
+                <div class="portfolio-card" data-filter-project="metro-fm" data-filter-service="branding public-relations audio-visual">
                     <img src="../Images/Work/metro-fm-logo.png" alt="Metro FM" class="card-image">
                     <div class="card-content">
                         <h2>Metro FM</h2>
@@ -75,16 +79,16 @@
                 </div>
 
                 <!-- Portfolio Card 3 -->
-                <div class="portfolio-card">
+                <div class="portfolio-card" data-filter-project="loeries" data-filter-service="branding creative-direction">
                     <img src="../Images/Work/project-3.jpg" alt="Project 3" class="card-image">
                     <div class="card-content">
-                        <h2>Project Three</h2>
+                        <h2>Loeries</h2>
                         <p>Brand Identity</p>
                         <button class="see-more-btn">See More →</button>
                     </div>
                     <div class="card-details hidden">
                         <div class="details-close">×</div>
-                        <h3>Project Three</h3>
+                        <h3>Loeries</h3>
                         <p class="details-category">Brand Identity</p>
                         <p class="details-description">Strategic brand identity development including logo, color palette, typography system, and application guidelines for a forward-thinking creative client.</p>
                         <div class="details-tags">
@@ -96,7 +100,7 @@
                 </div>
 
                 <!-- Portfolio Card 4 -->
-                <div class="portfolio-card">
+                <div class="portfolio-card" data-filter-service="social-media branding">
                     <img src="../Images/Work/project-4.jpg" alt="Project 4" class="card-image">
                     <div class="card-content">
                         <h2>Project Four</h2>
@@ -117,7 +121,7 @@
                 </div>
 
                 <!-- Portfolio Card 5 -->
-                <div class="portfolio-card">
+                <div class="portfolio-card" data-filter-service="branding creative-direction">
                     <img src="../Images/Work/project-5.jpg" alt="Project 5" class="card-image">
                     <div class="card-content">
                         <h2>Project Five</h2>
@@ -138,7 +142,7 @@
                 </div>
 
                 <!-- Portfolio Card 6 -->
-                <div class="portfolio-card">
+                <div class="portfolio-card" data-filter-service="creative-direction production">
                     <img src="../Images/Work/project-6.jpg" alt="Project 6" class="card-image">
                     <div class="card-content">
                         <h2>Project Six</h2>
@@ -159,7 +163,7 @@
                 </div>
 
                 <!-- Portfolio Card 7 -->
-                <div class="portfolio-card">
+                <div class="portfolio-card" data-filter-service="branding creative-direction">
                     <img src="../Images/Work/project-7.jpg" alt="Project 7" class="card-image">
                     <div class="card-content">
                         <h2>Project Seven</h2>
@@ -180,7 +184,7 @@
                 </div>
 
                 <!-- Portfolio Card 8 -->
-                <div class="portfolio-card">
+                <div class="portfolio-card" data-filter-service="social-media branding">
                     <img src="../Images/Work/project-8.jpg" alt="Project 8" class="card-image">
                     <div class="card-content">
                         <h2>Project Eight</h2>
@@ -201,7 +205,7 @@
                 </div>
 
                 <!-- Portfolio Card 9 -->
-                <div class="portfolio-card">
+                <div class="portfolio-card" data-filter-service="branding">
                     <img src="../Images/Work/project-9.jpg" alt="Project 9" class="card-image">
                     <div class="card-content">
                         <h2>Project Nine</h2>
@@ -222,7 +226,7 @@
                 </div>
 
                 <!-- Portfolio Card 10 -->
-                <div class="portfolio-card">
+                <div class="portfolio-card" data-filter-service="audio-visual post-production">
                     <img src="../Images/Work/project-10.jpg" alt="Project 10" class="card-image">
                     <div class="card-content">
                         <h2>Project Ten</h2>
@@ -253,14 +257,17 @@
             <a href="https://instagram.com" target="_blank">ig</a>
         </div>
         <nav>
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="expertise.html">Expertise</a>
-            <a href="work.html">Work</a>
-            <a href="services.html">Services</a>
-            <a href="contact.html">Contact</a>
+            <a href="../index.html">Home</a>
+            <a href="../About/about.html">About</a>
+            <a href="../Expertise/expertise.html">Expertise</a>
+            <a href="../Work/work.html">Work</a>
+            <a href="../Services/services.html">Services</a>
+            <a href="../Contact/contact.html">Contact</a>
         </nav>
         <p>rockcreativeagency.co.za</p>
     </footer>
+
+    <!-- ========== FILTER DROPDOWN SYSTEM ========== -->
+    <script src="../Javascript/filter-dropdown.js"></script>
 </body>
 </html>

@@ -4,22 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Method - Rock Creative Agency</title>
-    <link rel="stylesheet" href="..">
     <link rel="stylesheet" href="../CSS/main.css">
     <link rel="stylesheet" href="../CSS/expertise.css">
+    <!-- FILTER DROPDOWN CSS -->
+    <link rel="stylesheet" href="../CSS/filter-dropdown.css">
 </head>
 <body>
     <header>
-        <div>
-            <img src="../Images/Logo.png" alt="R Logo">
-        </div>
-        <nav>
-            <a href="../Home/index.html">Home</a>
-            <a href="../About/about.html">About</a>
-            <a href="../Expertise/expertise.html">Expertise</a>
-            <a href="../Work/work.html">Work</a>
-            <a href="../Services/services.html">Services</a>
-            <a href="../Contact/contact.html">Contact</a>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="../Images/Logo.png" alt="R Logo">
+            </div>
+            <ul class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="../About/about.html">About</a>
+                <a href="../Expertise/expertise.html">Expertise</a>
+                <a href="../Work/work.html">Work</a>
+                <a href="../Services/services.html">Services</a>
+                <a href="../Contact/contact.html">Contact</a>
+            </ul>
         </nav>
     </header>
 
@@ -31,7 +34,7 @@
         <section>
             <p>To truly understand what we do you need to understand our flagship project</p>
 
-            <article>
+            <article data-filter-project="fashion-faceoff" data-filter-service="production pre-production post-production creative-direction">
                 <h2>Fashion Face-Off</h2>
                 <div>
                     <img src="../Images/Method/Production gif.gif" alt="Fashion Face-Off runway show">
@@ -40,7 +43,7 @@
             </article>
         </section>
 
-        <section class="diagram-section">
+        <section class="diagram-section" data-filter-project="fashion-faceoff" data-filter-service="production pre-production post-production">
             <h2>The Production Flow</h2>
             <div class="diagram-container">
                 <img src="../Images/Method/Method.png" alt="Production flow diagram">
@@ -48,39 +51,39 @@
         </section>
 
         <section data-phase="production">
-            <article>
+            <article data-filter-service="pre-production" data-filter-project="fashion-faceoff">
                 <h3>Pre Production</h3>
                 <p>The pre production process miligoes designing and production schedueling, executing the wardrobe that is planned. This process includes designer searches and model auditions</p>
             </article>
 
-            <article>
+            <article data-filter-service="production" data-filter-project="fashion-faceoff">
                 <h3>Production</h3>
                 <p>This process inlcued shooting and direction like production</p>
             </article>
 
-            <article>
+            <article data-filter-service="post-production" data-filter-project="fashion-faceoff">
                 <h3>Post Production</h3>
                 <p>This process involves editing footage, adding music arrangement and rendering in footage</p>
             </article>
         </section>
 
         <section data-phase="support">
-            <article>
+            <article data-filter-service="audio-visual" data-filter-project="fashion-faceoff">
                 <h3>Audio/ Visual</h3>
                 <p>Our teams creates and urates all the audio and visuals for the show using the best technology</p>
             </article>
 
-            <article>
+            <article data-filter-service="social-media" data-filter-project="fashion-faceoff">
                 <h3>Social Media</h3>
                 <p>We begin marketing on social media a year to six months before the show to generate engagement</p>
             </article>
 
-            <article>
+            <article data-filter-service="public-relations" data-filter-project="fashion-faceoff">
                 <h3>Public Relation</h3>
                 <p>We work with local and national radio and television outlets to promote the show</p>
             </article>
 
-            <article>
+            <article data-filter-service="creative-direction" data-filter-project="fashion-faceoff">
                 <h3>Creative Direction</h3>
                 <p>We begin the vision creation almost a year before the show. We also a year later edit brand the show</p>
             </article>
@@ -93,7 +96,7 @@
             <a href="https://instagram.com" target="_blank">ig</a>
         </div>
         <nav>
-            <a href="../Home/index.html">Home</a>
+            <a href="../index.html">Home</a>
             <a href="../About/about.html">About</a>
             <a href="../Expertise/expertise.html">Expertise</a>
             <a href="../Work/work.html">Work</a>
@@ -102,5 +105,8 @@
         </nav>
         <p>rockcreativeagency.co.za</p>
     </footer>
+
+    <!-- ========== FILTER DROPDOWN SYSTEM ========== -->
+    <script src="../Javascript/filter-dropdown.js"></script>
 </body>
 </html>

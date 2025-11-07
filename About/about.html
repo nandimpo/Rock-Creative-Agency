@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="../CSS/about.css">
     <link rel="stylesheet" href="../CSS/filter system.css">
     <link rel="stylesheet" href="../CSS/mountain.css">
-
+    <!-- FILTER DROPDOWN CSS -->
+    <link rel="stylesheet" href="../CSS/filter dropdown.css">
 </head>
 <body>
     <!-- Navigation Header -->
@@ -68,7 +69,7 @@
             <h2>Meet our team.</h2>
             <div class="team-grid">
                 <!-- Team Member 1 -->
-                <div class="team-member">
+                <div class="team-member" data-filter-team="creative-director" data-filter-service="branding creative-direction">
                     <div class="team-card">
                         <img src="../Images/About/B.png" alt="Bosa Mali">
                     </div>
@@ -78,7 +79,7 @@
                 </div>
 
                 <!-- Team Member 2 -->
-                <div class="team-member">
+                <div class="team-member" data-filter-team="producer" data-filter-service="production">
                     <div class="team-card">
                         <img src="../Images/About/M.png" alt="Mandsa Sepeng">
                     </div>
@@ -88,7 +89,7 @@
                 </div>
 
                 <!-- Team Member 3 -->
-                <div class="team-member">
+                <div class="team-member" data-filter-team="designer" data-filter-service="branding">
                     <div class="team-card">
                         <img src="../Images/About/R.png" alt="Ryanda Ariyeng">
                     </div>
@@ -98,7 +99,7 @@
                 </div>
 
                 <!-- Team Member 4 -->
-                <div class="team-member">
+                <div class="team-member" data-filter-team="developer">
                     <div class="team-card special-card">
                         <img src="../Images/About/E.png" alt="Erin May">
                     </div>
@@ -108,7 +109,7 @@
                 </div>
 
                 <!-- Team Member 5 -->
-                <div class="team-member">
+                <div class="team-member" data-filter-team="manager" data-filter-service="production pre-production">
                     <div class="team-card">
                         <img src="../Images/About/O.png" alt="Cia Tite">
                     </div>
@@ -118,7 +119,7 @@
                 </div>
 
                 <!-- Team Member 6 -->
-                <div class="team-member">
+                <div class="team-member" data-filter-team="strategist" data-filter-service="branding creative-direction">
                     <div class="team-card">
                         <img src="../Images/About/D.png" alt="Daurie Child">
                     </div>
@@ -160,6 +161,9 @@
 
     <!-- ========== NEW GSAP ANIMATION SCRIPT ========== -->
     <script src="../Javascript/about.js"></script>
+
+    <!-- ========== FILTER DROPDOWN SYSTEM ========== -->
+    <script src="../Javascript/filter dropdown.js"></script>
    
 </body>
 </html>

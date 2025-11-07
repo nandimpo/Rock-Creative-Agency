@@ -6,19 +6,23 @@
     <title>Our Services - Rock Creative Agency</title>
     <link rel="stylesheet" href="../CSS/main.css">
     <link rel="stylesheet" href="../CSS/services.css">
+    <!-- FILTER DROPDOWN CSS -->
+    <link rel="stylesheet" href="../CSS/filter dropdown.css">
 </head>
 <body>
     <header>
-        <div>
-            <img src="../Images/Logo.png" alt="R Logo">
-        </div>
-        <nav>
-            <a href="../Home/index.html">Home</a>
-            <a href="../About/about.html">About</a>
-            <a href="../Expertise/expertise.html">Expertise</a>
-            <a href="../Work/work.html">Work</a>
-            <a href="../Services/services.html">Services</a>
-            <a href="../Contact/contact.html">Contact</a>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="../Images/Logo.png" alt="R Logo">
+            </div>
+            <ul class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="../About/about.html">About</a>
+                <a href="../Expertise/expertise.html">Expertise</a>
+                <a href="../Work/work.html">Work</a>
+                <a href="../Services/services.html">Services</a>
+                <a href="../Contact/contact.html">Contact</a>
+            </ul>
         </nav>
     </header>
 
@@ -28,91 +32,91 @@
 
     <main>
         <div class="services-grid">
-            <div class="service-item">
+            <div class="service-item" data-filter-service="branding">
                 <div class="service-content">
                     <span class="service-number">01 /</span>
                     <h2 class="service-title">Branding</h2>
                     <p class="service-description">We blend real brands with each other</p>
                 </div>
                 <div class="service-image-container">
-                    <img src="../Images/Services/branding.jpg" alt="Branding" class="service-image">
+                    <img src="../Images/Services/Branding.gif" alt="Branding" class="service-image">
                 </div>
             </div>
 
-            <div class="service-item">
+            <div class="service-item" data-filter-service="public-relations">
                 <div class="service-content">
                     <span class="service-number">02 /</span>
                     <h2 class="service-title">Public Relations</h2>
                     <p class="service-description">Content about public relations services</p>
                 </div>
                 <div class="service-image-container">
-                    <img src="../Images/Services/pr.jpg" alt="Public Relations" class="service-image">
+                    <img src="../Images/Services/Public Relations.gif" alt="Public Relations" class="service-image">
                 </div>
             </div>
 
-            <div class="service-item">
+            <div class="service-item" data-filter-service="social-media">
                 <div class="service-content">
                     <span class="service-number">03 /</span>
                     <h2 class="service-title">Social Media</h2>
                     <p class="service-description">Content about social media services</p>
                 </div>
                 <div class="service-image-container">
-                    <img src="../Images/Services/social-media.jpg" alt="Social Media" class="service-image">
+                    <img src="../Images/Services/Social Media.gif" alt="Social Media" class="service-image">
                 </div>
             </div>
 
-            <div class="service-item">
+            <div class="service-item" data-filter-service="creative-direction">
                 <div class="service-content">
                     <span class="service-number">04 /</span>
                     <h2 class="service-title">Creative Direction</h2>
                     <p class="service-description">Our process is led by ideas</p>
                 </div>
                 <div class="service-image-container">
-                    <img src="../Images/Services/creative-direction.jpg" alt="Creative Direction" class="service-image">
+                    <img src="../Images/Services/Creative Direction.gif" alt="Creative Direction" class="service-image">
                 </div>
             </div>
 
-            <div class="service-item">
+            <div class="service-item" data-filter-service="pre-production">
                 <div class="service-content">
                     <span class="service-number">05 /</span>
                     <h2 class="service-title">Pre Production</h2>
                     <p class="service-description">Content about pre production services</p>
                 </div>
                 <div class="service-image-container">
-                    <img src="../Images/Services/pre-production.jpg" alt="Pre Production" class="service-image">
+                    <img src="../Images/Services/Pre Production.gif" alt="Pre Production" class="service-image">
                 </div>
             </div>
 
-            <div class="service-item">
+            <div class="service-item" data-filter-service="production">
                 <div class="service-content">
                     <span class="service-number">06 /</span>
                     <h2 class="service-title">Production</h2>
                     <p class="service-description">Content about production services</p>
                 </div>
                 <div class="service-image-container">
-                    <img src="../Images/Services/production.jpg" alt="Production" class="service-image">
+                    <img src="../Images/Services/Production.gif" alt="Production" class="service-image">
                 </div>
             </div>
 
-            <div class="service-item">
+            <div class="service-item" data-filter-service="post-production">
                 <div class="service-content">
                     <span class="service-number">07 /</span>
                     <h2 class="service-title">Post-Production</h2>
                     <p class="service-description">Content about post-production services</p>
                 </div>
                 <div class="service-image-container">
-                    <img src="../Images/Services/post-production.jpg" alt="Post-Production" class="service-image">
+                    <img src="../Images/Services/Post Production.gif" alt="Post-Production" class="service-image">
                 </div>
             </div>
 
-            <div class="service-item">
+            <div class="service-item" data-filter-service="audio-visual">
                 <div class="service-content">
                     <span class="service-number">08 /</span>
                     <h2 class="service-title">Audio-Visual</h2>
                     <p class="service-description">Content about audio-visual services</p>
                 </div>
                 <div class="service-image-container">
-                    <img src="../Images/Services/audio-visual.jpg" alt="Audio-Visual" class="service-image">
+                    <img src="../Images/Services/Audio-Visual.gif" alt="Audio-Visual" class="service-image">
                 </div>
             </div>
         </div>
@@ -124,7 +128,7 @@
             <a href="https://instagram.com" target="_blank">ig</a>
         </div>
         <nav>
-            <a href="../Home/index.html">Home</a>
+            <a href="../index.html">Home</a>
             <a href="../About/about.html">About</a>
             <a href="../Expertise/expertise.html">Expertise</a>
             <a href="../Work/work.html">Work</a>
@@ -133,5 +137,8 @@
         </nav>
         <p>rockcreativeagency.co.za</p>
     </footer>
+
+    <!-- ========== FILTER DROPDOWN SYSTEM ========== -->
+    <script src="../Javascript/filter dropdown.js"></script>
 </body>
 </html>
