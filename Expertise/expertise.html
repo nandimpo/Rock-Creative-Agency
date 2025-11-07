@@ -1,112 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Method - Rock Creative Agency</title>
-    <link rel="stylesheet" href="../CSS/main.css">
-    <link rel="stylesheet" href="../CSS/expertise.css">
-    <!-- FILTER DROPDOWN CSS -->
-    <link rel="stylesheet" href="../CSS/filter-dropdown.css">
-</head>
-<body>
-    <header>
-        <nav class="navbar">
-            <div class="logo">
-                <img src="../Images/Logo.png" alt="R Logo">
-            </div>
-            <ul class="nav-links">
-                <a href="../index.html">Home</a>
-                <a href="../About/about.html">About</a>
-                <a href="../Expertise/expertise.html" class="active">Expertise/a> 
-                <a href="../Work/work.html">Work</a>
-                <a href="../Services/services.html">Services</a>
-                <a href="../Contact/contact.html">Contact</a>
-            </ul>
-        </nav>
-    </header>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Method - Rock Creative Agency</title>
 
-    <section style="background-image: url('../Images/Home/rock.jpg');">
-        <h1>The Method.</h1>
+  <!-- ======== STYLES ======== -->
+  <link rel="stylesheet" href="../CSS/main.css" />
+  <link rel="stylesheet" href="../CSS/expertise.css" />
+  <link rel="stylesheet" href="../CSS/filter dropdown.css" />
+  <link rel="stylesheet" href="../CSS/mountain.css" />
+
+  <!-- ======== FONTS ======== -->
+  <style>
+    @font-face {
+      font-family: "Avenir LT Pro";
+      src: url("../Fonts/AvenirLTPro-Regular.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Conso";
+      src: url("../Fonts/Conso-Regular.woff2") format("woff2");
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ================= HEADER ================= -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="../Images/Logo.png" alt="R Logo" />
+      </div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../About/about.html">About</a></li>
+        <li><a href="../Expertise/expertise.html" class="active">Expertise</a></li>
+        <li><a href="../Work/work.html">Work</a></li>
+        <li><a href="../Services/services.html">Services</a></li>
+        <li><a href="../Contact/contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ================= HERO SECTION ================= -->
+  <section class="mountain-section" style="background-image: url('../Images/Home/rock.jpg');">
+    <!-- Fog Layers -->
+    <div class="fog-layer fog-layer-1"></div>
+    <div class="fog-layer fog-layer-2"></div>
+    <div class="fog-layer fog-layer-3"></div>
+
+    <!-- Headings -->
+    <h1>The Method.</h1>
+    <h2>This is where you truly see our process</h2>
+
+    <!-- Mountain Lines -->
+    <svg class="mountain-svg" viewBox="0 0 1600 320" preserveAspectRatio="xMidYMid meet">
+      <!-- Back subtle ridge -->
+      <path class="mountain-peak mountain-peak-2"
+        d="M200,160 L600,70 L1000,160 L1300,100 L1500,160"
+        fill="none" stroke="rgba(226,220,204,0.35)" stroke-width="1"
+        stroke-linecap="round" stroke-linejoin="round" />
+
+      <!-- Front ridge -->
+      <path class="mountain-peak mountain-peak-1"
+        d="M100,180 L550,40 L1000,180 L1350,70 L1550,180"
+        fill="none" stroke="#A5744E" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </section>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="journey-main">
+
+    <!-- INTRODUCTION -->
+    <section class="journey-intro fade-in">
+      <p class="intro-lead">
+        To truly understand what we do, you need to experience our flagship project.
+      </p>
+      <h2>Fashion Face-Off</h2>
+      <div class="intro-grid">
+        <div class="intro-text">
+          <p>
+            Our Fashion Face-Off showcases what we do best — producing an annual creative event that brings together models, designers, make-up artists, and stylists. This two-day production celebrates emerging African fashion and creative direction.
+          </p>
+        </div>
+        <div class="intro-image">
+          <img src="../Images/Method/Production gif.gif" alt="Fashion Face-Off runway show" />
+        </div>
+      </div>
     </section>
 
-    <main>
-        <section>
-            <p>To truly understand what we do you need to understand our flagship project</p>
+    <!-- PARALLAX QUOTE -->
+    <section class="journey-parallax" style="background-image: url('../Images/Home/rock.jpg');">
+      <div class="overlay"></div>
+      <div class="journey-quote fade-in-up">
+        <h2>“Every frame tells a story, every moment reveals our method.”</h2>
+      </div>
+    </section>
 
-            <article data-filter-project="fashion-faceoff" data-filter-service="production pre-production post-production creative-direction">
-                <h2>Fashion Face-Off</h2>
-                <div>
-                    <img src="../Images/Method/Production gif.gif" alt="Fashion Face-Off runway show">
-                </div>
-                <p>Our fashion Face off that we host annually showcases what we do best. If you want to truly know what our capabilities look at our Fashion show case this is a production that oscure over a period of a few months for our summer production. It includes models, designers, make-up artists and hair stylists. This is a two day production that showcases young emerging African fashion and designers.</p>
-            </article>
-        </section>
+    <!-- PRODUCTION FLOW -->
+    <section class="journey-flow fade-in-up">
+      <h2>The Production Flow</h2>
+      <div class="flow-frame">
+        <img src="../Images/Method/Method.png" alt="Production flow diagram" />
+      </div>
+    </section>
 
-        <section class="diagram-section" data-filter-project="fashion-faceoff" data-filter-service="production pre-production post-production">
-            <h2>The Production Flow</h2>
-            <div class="diagram-container">
-                <img src="../Images/Method/Method.png" alt="Production flow diagram">
-            </div>
-        </section>
+    <!-- PRODUCTION PHASES (ROOT GROWTH SECTION) -->
+    <section class="journey-stages" id="production">
+      <div class="section-heading">
+        <h2>1. Production Phases</h2>
+        <p>From raw ideas to full realization — our process is grounded, bold, and alive with motion.</p>
+      </div>
 
-        <section data-phase="production">
-            <article data-filter-service="pre-production" data-filter-project="fashion-faceoff">
-                <h3>Pre Production</h3>
-                <p>The pre production process miligoes designing and production schedueling, executing the wardrobe that is planned. This process includes designer searches and model auditions</p>
-            </article>
+      <div class="earth-layer"></div>
 
-            <article data-filter-service="production" data-filter-project="fashion-faceoff">
-                <h3>Production</h3>
-                <p>This process inlcued shooting and direction like production</p>
-            </article>
+      <div class="stages-grid fade-in-up">
+        <article class="stage-card">
+          <h3>Pre Production</h3>
+          <p>The pre-production process involves designing, scheduling, and executing the wardrobe plan. This includes designer searches and model auditions.</p>
+        </article>
+        <article class="stage-card">
+          <h3>Production</h3>
+          <p>This process includes shooting, direction, and overall creative coordination.</p>
+        </article>
+        <article class="stage-card">
+          <h3>Post Production</h3>
+          <p>This stage involves editing footage, adding music, arranging visuals, and rendering final outputs.</p>
+        </article>
+      </div>
 
-            <article data-filter-service="post-production" data-filter-project="fashion-faceoff">
-                <h3>Post Production</h3>
-                <p>This process involves editing footage, adding music arrangement and rendering in footage</p>
-            </article>
-        </section>
+      <!-- EARTH ROOT GROWTH ANIMATION -->
+      <svg class="earth-roots" viewBox="0 0 800 300" preserveAspectRatio="xMidYMid meet">
+        <path class="root-path"
+          d="M100,250 
+             C150,200 200,230 250,180 
+             S350,120 400,160 
+             S500,230 550,180 
+             S650,100 700,140" />
+      </svg>
+    </section>
 
-        <section data-phase="support">
-            <article data-filter-service="audio-visual" data-filter-project="fashion-faceoff">
-                <h3>Audio/ Visual</h3>
-                <p>Our teams creates and urates all the audio and visuals for the show using the best technology</p>
-            </article>
+    <!-- SUPPORTING THE VISION (VINE EXTENSION) -->
+    <section class="journey-support fade-in-up">
+      <div class="support-heading">
+        <h2>2. Supporting the Vision</h2>
+        <p>From the earth to expression — every element grows from our foundation of creativity.</p>
+      </div>
 
-            <article data-filter-service="social-media" data-filter-project="fashion-faceoff">
-                <h3>Social Media</h3>
-                <p>We begin marketing on social media a year to six months before the show to generate engagement</p>
-            </article>
+      <!-- Vine Growth SVG -->
+      <svg class="vine-growth" viewBox="0 0 800 300" preserveAspectRatio="xMidYMid meet">
+        <path class="vine-path"
+          d="M100,280 
+             C200,220 300,200 400,160 
+             S600,100 700,120 
+             S750,180 780,80" />
+      </svg>
 
-            <article data-filter-service="public-relations" data-filter-project="fashion-faceoff">
-                <h3>Public Relation</h3>
-                <p>We work with local and national radio and television outlets to promote the show</p>
-            </article>
+      <div class="support-grid fade-in-up">
+        <article>
+          <h3>Audio / Visual</h3>
+          <p>We create and curate the audio and visuals using cutting-edge production technology.</p>
+        </article>
+        <article>
+          <h3>Social Media</h3>
+          <p>Marketing begins six months prior to generate anticipation and engagement.</p>
+        </article>
+        <article>
+          <h3>Public Relations</h3>
+          <p>We partner with radio and television outlets to build reach and storytelling depth.</p>
+        </article>
+        <article>
+          <h3>Creative Direction</h3>
+          <p>From ideation to execution, our creative direction ensures every detail aligns with the vision.</p>
+        </article>
+      </div>
+    </section>
+  </main>
 
-            <article data-filter-service="creative-direction" data-filter-project="fashion-faceoff">
-                <h3>Creative Direction</h3>
-                <p>We begin the vision creation almost a year before the show. We also a year later edit brand the show</p>
-            </article>
-        </section>
-    </main>
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <div>
+      <a href="https://linkedin.com" target="_blank">in</a>
+      <a href="https://instagram.com" target="_blank">ig</a>
+    </div>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../About/about.html">About</a>
+      <a href="../Expertise/expertise.html" class="active">Expertise</a>
+      <a href="../Work/work.html">Work</a>
+      <a href="../Services/services.html">Services</a>
+      <a href="../Contact/contact.html">Contact</a>
+    </nav>
+    <p>rockcreativeagency.co.za</p>
+  </footer>
 
-    <footer>
-        <div>
-            <a href="https://linkedin.com" target="_blank">in</a>
-            <a href="https://instagram.com" target="_blank">ig</a>
-        </div>
-        <nav>
-            <a href="../index.html">Home</a>
-            <a href="../About/about.html">About</a>
-            <a href="../Expertise/expertise.html" class="active">Expertise/a> 
-            <a href="../Work/work.html">Work</a>
-            <a href="../Services/services.html">Services</a>
-            <a href="../Contact/contact.html">Contact</a>
-        </nav>
-        <p>rockcreativeagency.co.za</p>
-    </footer>
-
-    <!-- ========== FILTER DROPDOWN SYSTEM ========== -->
-    <script src="../Javascript/filter-dropdown.js"></script>
+  <!-- ================= SCRIPTS ================= -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
+  <script src="../Javascript/filter dropdown.js"></script>
+  <script src="../Javascript/mountain.js"></script>
+  <script src="../Javascript/expertise.js"></script>
 </body>
 </html>
