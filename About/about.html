@@ -14,21 +14,22 @@
 <body>
     <!-- Navigation Header -->
     <header>
-        <nav class="navbar">
-            <div class="logo">
-                <img src="../Images/Logo.png" alt="Rock Creative Agency">
-            </div>
-            <ul class="nav-links">
-                <a href="../index.html">Home</a>
-                <a href="../About/about.html">About</a>
-                <a href="../Expertise/expertise.html">Expertise</a>
-                <a href="../Work/work.html">Work</a>
-                <a href="../Services/services.html">Services</a>
-                <a href="../Contact/contact.html">Contact</a>
-            </ul>
-        </nav>
-    </header>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="../Images/Logo.png" alt="Rock Creative Agency">
+        </div>
 
+        <!-- FIXED: use <li><a> instead of <a> directly -->
+        <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../About/about.html">About</a></li>
+            <li><a href="../Expertise/expertise.html">Expertise</a></li>
+            <li><a href="../Work/work.html">Work</a></li>
+            <li><a href="../Services/services.html">Services</a></li>
+            <li><a href="../Contact/contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</header>
     <!-- Filter System Container -->
     <section data-filter-container-sidebar-results></section>
 

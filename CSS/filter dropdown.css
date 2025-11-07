@@ -1,556 +1,382 @@
-/* ========================================
-   NAVIGATION FILTER DROPDOWN SYSTEM
-   ======================================== */
-
-.nav-filter-container {
+/* =====================================================
+   NAVBAR FILTER DROPDOWNS - With Apply + Unsplash
+   ===================================================== */
+/* =====================================================
+   FILTER ARROW - ENLARGED CLICKABLE AREA
+   ===================================================== */
+.filter-arrow-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
-    display: inline-block;
-    z-index: 9999;
-    overflow: visible;
+    margin-left: 6px;
+    width: 22px;  /* Larger clickable width */
+    height: 22px; /* Larger clickable height */
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background 0.3s ease;
 }
 
-.filter-dropdown-btn {
+.filter-arrow-wrapper:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Make the triangle larger & more readable */
+.filter-arrow {
+    font-size: 14px; /* increased from 10px */
+    color: #E2DCCC;
+    transition: transform 0.3s ease, color 0.3s ease;
+    user-select: none;
+    pointer-events: none; /* ensures wrapper handles click */
+}
+
+.filter-arrow.rotated {
+    transform: rotate(180deg);
+    color: #b68957; /* bronze tone when active */
+}
+
+
+/* Dropdown Box */
+.filter-dropdown {
+    position: absolute;
     background: #E2DCCC;
-    border: 2px solid #E2DCCC;
     color: #111A18;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 4px;
+    border-radius: 6px;
+    padding: 16px 20px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    display: none;
+    min-width: 200px;
+    z-index: 9999;
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.filter-dropdown.active {
+    display: block;
+}
+
+/* Dropdown Title */
+.filter-title {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Checkbox list */
+.filter-options {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.filter-options label {
+    font-size: 14px;
     display: flex;
     align-items: center;
     gap: 8px;
-    transition: all 0.3s ease;
-    font-weight: 500;
-    position: relative;
-    overflow: visible;
-    z-index: 9999;
+    cursor: pointer;
+    color: #222;
 }
 
-.filter-dropdown-btn:hover {
-    background: #d4cebf;
-    border-color: #d4cebf;
-    color: #111A18;
+.filter-options label:hover {
+    color: #555;
 }
 
-.filter-dropdown-btn::after {
-    content: '▼';
-    font-size: 12px;
-    color: #111A18;
-    transition: transform 0.3s ease;
+.filter-options input[type="checkbox"] {
+    accent-color: #111A18;
 }
 
-.filter-dropdown-btn.active::after {
-    transform: rotate(180deg);
+/* Apply button */
+.filter-actions {
+    margin-top: 10px;
+    text-align: center;
 }
 
-.filter-dropdown-menu {
-    position: absolute;
-    top: calc(100% + 10px);
-    left: 0;
-    background: white;
-    border: 2px solid #111A18;
-    border-radius: 4px;
-    min-width: 280px;
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    z-index: 10000;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+.filter-apply-btn {
+    background: #b68957;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.3s ease;
 }
 
-.filter-dropdown-menu.active {
-    max-height: 600px;
-    opacity: 1;
-    visibility: visible;
-    overflow-y: auto;
+.filter-apply-btn:hover {
+    background: #d6a770;
 }
 
-.filter-category {
-    border-bottom: 1px solid #e0e0e0;
-    padding: 15px;
-}
-
-.filter-category:last-child {
-    border-bottom: none;
+/* Unsplash Section */
+.filter-api-section {
+    border-top: 1px solid rgba(0,0,0,0.2);
+    margin-top: 10px;
+    padding-top: 10px;
+    text-align: center;
 }
 
 .filter-category-title {
     font-weight: 700;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
-    color: #111A18;
-}
-
-.filter-options {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.filter-option {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    padding: 5px;
-    border-radius: 3px;
-    transition: background 0.2s ease;
-}
-
-.filter-option:hover {
-    background: #E2DCCC;
-}
-
-.filter-option input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
-    accent-color: #111A18;
-}
-
-.filter-option label {
-    cursor: pointer;
-    font-size: 14px;
-    color: #555;
-    user-select: none;
-}
-
-.filter-actions {
-    padding: 15px;
-    border-top: 2px solid #e0e0e0;
-    display: flex;
-    gap: 10px;
-}
-
-.filter-apply-btn,
-.filter-clear-btn {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.filter-apply-btn {
-    background: #111A18;
-    color: #E2DCCC;
-}
-
-.filter-apply-btn:hover {
-    background: #000;
-    color: #E2DCCC;
-}
-
-.filter-clear-btn {
-    background: #E2DCCC;
-    color: #111A18;
-    border: 2px solid #111A18;
-}
-
-.filter-clear-btn:hover {
-    background: #d4cebf;
-    color: #111A18;
-}
-
-/* Active filter indicator */
-.filter-active-badge {
-    background: #E2DCCC;
-    color: #111A18;
-    border: 2px solid #111A18;
-    border-radius: 50%;
-    width: 26px;
-    height: 26px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     font-size: 13px;
-    font-weight: 700;
-    line-height: 1;
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    z-index: 10001;
-    box-shadow: 0 2px 8px rgba(17, 26, 24, 0.4);
-    pointer-events: none;
+    color: #b22222;
+    margin-bottom: 5px;
 }
 
-/* Filtered content styling */
+.filter-api-subtext {
+    font-size: 11px;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.filter-api-btn {
+    background: #b68957;
+    color: #fff;
+    border: none;
+    padding: 7px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.filter-api-btn:hover {
+    background: #d6a770;
+}
+
+/* Unsplash Gallery */
+.unsplash-gallery {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 8px;
+    background: rgba(255,255,255,0.9);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 99999;
+}
+
+.unsplash-gallery img {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* Hide filtered items */
 .filtered-hidden {
     display: none !important;
 }
 
-.filter-no-results {
-    padding: 40px 20px;
-    text-align: center;
-    color: #999;
-    font-style: italic;
-}
-
-/* Mobile responsive */
-@media (max-width: 768px) {
-    .filter-dropdown-menu {
-        right: 0;
-        left: auto;
-        min-width: 260px;
-    }
-    
-    .filter-dropdown-btn {
-        padding: 8px 16px;
-        font-size: 14px;
-    }
-}
-
-/* ========================================
-   API INTEGRATION STYLES
-   ======================================== */
-
-/* API Fetch Button */
-.filter-api-fetch-btn {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid #111A18;
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-    color: white;
-    margin-top: 10px;
-}
-
-.filter-api-fetch-btn:hover {
-    background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
-}
-
-/* API Loading Overlay */
-.api-loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(17, 26, 24, 0.9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10000;
-    animation: fadeIn 0.3s ease;
-}
-
-.api-loading-spinner {
-    text-align: center;
-    color: #E2DCCC;
-}
-
-.api-loading-spinner .spinner {
-    width: 60px;
-    height: 60px;
-    border: 4px solid rgba(226, 220, 204, 0.3);
-    border-top-color: #E2DCCC;
-    border-radius: 50%;
-    margin: 0 auto 20px;
-    animation: spin 1s linear infinite;
-}
-
-.api-loading-spinner p {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
-.api-loading-spinner small {
-    font-size: 14px;
-    opacity: 0.8;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
+/* Fade animation */
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
-
-/* API Results Container */
-.api-results-container {
-    background: #f5f1eb;
-    padding: 40px 20px;
-    margin: 40px 0;
-    border-radius: 8px;
-    animation: slideDown 0.5s ease;
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.api-results-header {
+/* =====================================================
+   UNSPLASH GALLERY ABOVE NAVBAR
+   ===================================================== */
+.unsplash-gallery {
+    position: relative;
+    width: 100%;
+    background: #E2DCCC;
+    color: #111A18;
+    padding: 40px 0 20px;
     text-align: center;
-    margin-bottom: 30px;
+    border-bottom: 2px solid #b68957;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    z-index: 9999;
+}
+
+.unsplash-heading {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    color: #111A18;
+}
+
+.unsplash-images {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    padding: 0 20px;
+}
+
+.unsplash-images img {
+    width: 180px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+    transition: transform 0.3s ease;
+}
+
+.unsplash-images img:hover {
+    transform: scale(1.05);
+}
+/* =====================================================
+   UNSPLASH GALLERY ABOVE NAVBAR (with Close Button)
+   ===================================================== */
+.unsplash-gallery {
+    position: relative;
+    width: 100%;
+    background: #E2DCCC;
+    color: #111A18;
+    padding: 40px 0 30px;
+    text-align: center;
+    border-bottom: 2px solid #b68957;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    z-index: 9999;
+}
+
+.unsplash-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
 }
 
-.api-results-header h2 {
-    font-size: 32px;
+.unsplash-heading {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin: 0;
     color: #111A18;
-    margin-bottom: 10px;
 }
 
-.api-results-header p {
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 20px;
-}
-
-.api-close-btn {
+.unsplash-close-btn {
     position: absolute;
-    top: 0;
-    right: 0;
-    background: #111A18;
-    color: #E2DCCC;
+    right: 30px;
+    top: -5px;
+    background: transparent;
     border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
+    font-size: 30px;
+    color: #b22222;
     cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s ease;
+    transition: transform 0.2s ease, color 0.3s ease;
 }
 
-.api-close-btn:hover {
-    background: #000;
-    transform: scale(1.05);
-}
-
-/* API Results Grid */
-.api-results-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 24px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.api-result-card {
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    animation: cardFadeIn 0.5s ease backwards;
-}
-
-.api-result-card:nth-child(1) { animation-delay: 0.1s; }
-.api-result-card:nth-child(2) { animation-delay: 0.2s; }
-.api-result-card:nth-child(3) { animation-delay: 0.3s; }
-.api-result-card:nth-child(4) { animation-delay: 0.4s; }
-.api-result-card:nth-child(5) { animation-delay: 0.5s; }
-.api-result-card:nth-child(6) { animation-delay: 0.6s; }
-.api-result-card:nth-child(7) { animation-delay: 0.7s; }
-.api-result-card:nth-child(8) { animation-delay: 0.8s; }
-.api-result-card:nth-child(9) { animation-delay: 0.9s; }
-.api-result-card:nth-child(10) { animation-delay: 1s; }
-
-@keyframes cardFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.api-result-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-}
-
-.api-card-image {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-    background: #f0f0f0;
-}
-
-.api-card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.api-result-card:hover .api-card-image img {
+.unsplash-close-btn:hover {
     transform: scale(1.1);
+    color: #000;
 }
 
-.api-card-content {
+.unsplash-images {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
     padding: 20px;
 }
 
-.api-card-content h3 {
-    font-size: 18px;
+.unsplash-images img {
+    width: 180px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+    transition: transform 0.3s ease;
+}
+
+.unsplash-images img:hover {
+    transform: scale(1.05);
+}
+/* =====================================================
+   FINAL UNSPLASH GALLERY (BOTTOM OF PAGE)
+   ===================================================== */
+.unsplash-gallery {
+    position: relative;
+    width: 100%;
+    background: #E2DCCC;
     color: #111A18;
-    margin-bottom: 10px;
-    line-height: 1.4;
+    padding: 50px 0 40px;
+    text-align: center;
+    border-top: 2px solid #b68957;
+    border-bottom: 2px solid #b68957;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    z-index: 50;
 }
 
-.api-card-photographer {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 8px;
-}
-
-.api-card-likes {
-    font-size: 14px;
-    color: #e74c3c;
-    margin-bottom: 15px;
-    font-weight: 600;
-}
-
-.api-card-link {
-    display: inline-block;
+/* Gallery heading */
+.unsplash-heading {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
     color: #111A18;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 14px;
-    padding: 8px 16px;
-    border: 2px solid #111A18;
-    border-radius: 4px;
+}
+
+/* Image grid */
+.unsplash-images {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    padding: 0 20px;
+}
+
+.unsplash-images img {
+    width: 180px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+    transition: transform 0.3s ease;
+}
+
+/* Reset Filters Button */
+.filter-reset-btn {
+    background: #111A18;
+    color: #E2DCCC;
+    border: none;
+    padding: 7px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    margin-top: 8px;
     transition: all 0.3s ease;
 }
 
-.api-card-link:hover {
-    background: #111A18;
-    color: #E2DCCC;
+.filter-reset-btn:hover {
+    background: #b68957;
+    color: #fff;
+    transform: scale(1.05);
 }
 
-/* API Messages */
-.api-message {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: white;
-    padding: 16px 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    z-index: 10001;
-    max-width: 400px;
-    animation: slideInRight 0.3s ease;
+
+.unsplash-images img:hover {
+    transform: scale(1.05);
 }
 
-@keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(100px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-.api-message-fadeout {
-    animation: slideOutRight 0.3s ease forwards;
-}
-
-@keyframes slideOutRight {
-    to {
-        opacity: 0;
-        transform: translateX(100px);
-    }
-}
-
-.api-message-icon {
-    font-size: 24px;
-    flex-shrink: 0;
-}
-
-.api-message-success {
-    border-left: 4px solid #4CAF50;
-}
-
-.api-message-success .api-message-icon {
-    color: #4CAF50;
-}
-
-.api-message-error {
-    border-left: 4px solid #e74c3c;
-}
-
-.api-message-error .api-message-icon {
-    color: #e74c3c;
-}
-
-.api-message-info {
-    border-left: 4px solid #3498db;
-}
-
-.api-message-info .api-message-icon {
-    color: #3498db;
-}
-
-.api-message-text {
+/* =====================================================
+   NEW CLOSE BUTTON BELOW IMAGE GALLERY
+   ===================================================== */
+.unsplash-close-btn {
+    display: block;
+    margin: 35px auto 0 auto; /* centers below images */
+    background: #111A18; /* dark brand color */
+    color: #E2DCCC; /* light beige text */
+    border: none;
+    border-radius: 25px;
+    padding: 10px 28px;
     font-size: 14px;
-    color: #333;
-    line-height: 1.5;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .api-results-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-
-    .api-results-header h2 {
-        font-size: 24px;
-    }
-
-    .api-close-btn {
-        position: static;
-        display: block;
-        margin: 20px auto 0;
-        width: 100%;
-    }
-
-    .api-message {
-        right: 10px;
-        left: 10px;
-        max-width: none;
-    }
-
-    .api-results-container {
-        padding: 20px 10px;
-        margin: 20px 0;
-    }
-}
-
-/* Tablet */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .api-results-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+.unsplash-close-btn:hover {
+    background: #b68957; /* bronze hover */
+    color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.35);
 }

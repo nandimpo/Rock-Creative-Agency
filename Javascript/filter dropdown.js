@@ -1,636 +1,335 @@
-// ========================================
-// UNIFIED FILTER SYSTEM - ONE BUTTON, SEAMLESS API INTEGRATION
-// ========================================
+// =====================================================
+// ROCK CREATIVE AGENCY - NAVBAR FILTER DROPDOWNS
+// With APPLY + RESET + UNSPLASH AT PAGE BOTTOM ABOVE FOOTER
+// =====================================================
 
 class NavigationFilter {
     constructor() {
-        this.filters = {
-            team: [],
-            projects: [],
-            services: []
+        this.filters = { team: [], projects: [], services: [] };
+        this.categories = {
+            team: [
+                "Creative Director",
+                "Producer",
+                "Designer",
+                "Developer",
+                "Manager",
+                "Strategist"
+            ],
+            projects: [
+                "Braam Fashion Week",
+                "Metro FM",
+                "Loeries",
+                "Cannes",
+                "Riot Agency",
+                "Busy Beverages",
+                "Mkunda Productions",
+                "Luyanda Game Lodge",
+                "M & M Firm"
+            ],
+            services: [
+                "Public Relations",
+                "Audio / Visual",
+                "Branding",
+                "Social Media",
+                "Production",
+                "Pre Production",
+                "Post Production"
+            ]
         };
-        
-        // API Configuration (JSONPlaceholder - no key needed)
+
         this.apiConfig = {
-            baseUrl: 'https://jsonplaceholder.typicode.com'
+            baseUrl: "https://api.unsplash.com",
+            accessKey: "0t9oSz1rrQysyS9sOIvyKAcT9Q3NzQmAetBVKqS_CaY"
         };
-        
-        this.apiCache = new Map();
+
         this.init();
     }
 
+    // ---------- INIT ----------
     init() {
-        this.loadActiveFilters();
-        this.createFilterDropdown();
-        this.applyAllFilters(); // Apply on page load
-        this.setupEventListeners();
+        this.loadFilters();
+        this.addArrows();
+        this.createDropdowns();
+        this.setupListeners();
     }
 
-    createFilterDropdown() {
-        if (document.querySelector('.nav-filter-container')) return;
+    // ---------- Add arrows beside About, Work, Services ----------
+    addArrows() {
+        const navMap = { About: "team", Work: "projects", Services: "services" };
+        const navLinks = document.querySelectorAll(".nav-links a");
 
-        const navbar = document.querySelector('.navbar') || document.querySelector('nav');
-        if (!navbar) return;
+        navLinks.forEach((link) => {
+            const text = link.textContent.trim();
+            const category = navMap[text];
+            if (!category) return;
 
-        const navLinks = navbar.querySelector('.nav-links') || navbar.querySelector('ul');
-        if (!navLinks) return;
+            const wrapper = document.createElement("span");
+            wrapper.className = "filter-arrow-wrapper";
 
-        const filterContainer = document.createElement('div');
-        filterContainer.className = 'nav-filter-container';
-        
-        const activeCount = this.getActiveFilterCount();
-        const badgeHTML = activeCount > 0 ? `<span class="filter-active-badge">${activeCount}</span>` : '';
+            const arrow = document.createElement("span");
+            arrow.className = "filter-arrow";
+            arrow.innerHTML = "&#9662;";
+            arrow.dataset.category = category;
 
-        filterContainer.innerHTML = `
-            ${badgeHTML}
-            <button class="filter-dropdown-btn">
-                <span>Filter</span>
-            </button>
-            <div class="filter-dropdown-menu">
-                <!-- Team Category -->
-                <div class="filter-category">
-                    <div class="filter-category-title">Team Roles</div>
-                    <div class="filter-options">
-                        <div class="filter-option">
-                            <input type="checkbox" id="filter-creative-director" value="creative-director" data-category="team">
-                            <label for="filter-creative-director">Creative Director</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="filter-producer" value="producer" data-category="team">
-                            <label for="filter-producer">Producer</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="filter-designer" value="designer" data-category="team">
-                            <label for="filter-designer">Designer</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="filter-developer" value="developer" data-category="team">
-                            <label for="filter-developer">Developer</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="filter-manager" value="manager" data-category="team">
-                            <label for="filter-manager">Manager</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="filter-strategist" value="strategist" data-category="team">
-                            <label for="filter-strategist">Strategist</label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Projects Category -->
-                <div class="filter-category">
-                    <div class="filter-category-title">Projects</div>
-                    <div class="filter-options">
-                        <div class="filter-option">
-                            <input type="checkbox" id="filter-braam" value="braam" data-category="projects">
-                            <label for="filter-braam">Braam Fashion Week</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="filter-metro-fm" value="metro-fm" data-category="projects">
-                            <label for="filter-metro-fm">Metro FM</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="filter-loeries" value="loeries" data-category="projects">
-                            <label for="filter-loeries">Loeries</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="filter-fashion-faceoff" value="fashion-faceoff" data-category="projects">
-                            <label for="filter-fashion-faceoff">Fashion Face-Off</label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Services Category -->
-                <div class="filter-category">
-                    <div class="filter-category-title">Services</div>
-                    <div class="filter-options">
-                        <div class="filter-option">
-                            <input type="checkbox" id="filter-branding" value="branding" data-category="services">
-                            <label for="filter-branding">Branding</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="filter-public-relations" value="public-relations" data-category="services">
-                            <label for="filter-public-relations">Public Relations</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="filter-social-media" value="social-media" data-category="services">
-                            <label for="filter-social-media">Social Media</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="filter-creative-direction" value="creative-direction" data-category="services">
-                            <label for="filter-creative-direction">Creative Direction</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="filter-pre-production" value="pre-production" data-category="services">
-                            <label for="filter-pre-production">Pre Production</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="filter-production" value="production" data-category="services">
-                            <label for="filter-production">Production</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="filter-post-production" value="post-production" data-category="services">
-                            <label for="filter-post-production">Post Production</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="filter-audio-visual" value="audio-visual" data-category="services">
-                            <label for="filter-audio-visual">Audio/Visual</label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Action Buttons - ONLY TWO NOW -->
-                <div class="filter-actions">
-                    <button class="filter-apply-btn">Apply Filters</button>
-                    <button class="filter-clear-btn">Clear All</button>
-                </div>
-            </div>
-        `;
-
-        if (navLinks.firstChild) {
-            navLinks.insertBefore(filterContainer, navLinks.firstChild);
-        } else {
-            navLinks.appendChild(filterContainer);
-        }
-    }
-
-    setupEventListeners() {
-        const dropdownBtn = document.querySelector('.filter-dropdown-btn');
-        const dropdownMenu = document.querySelector('.filter-dropdown-menu');
-        const applyBtn = document.querySelector('.filter-apply-btn');
-        const clearBtn = document.querySelector('.filter-clear-btn');
-
-        if (!dropdownBtn || !dropdownMenu) return;
-
-        dropdownBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            dropdownBtn.classList.toggle('active');
-            dropdownMenu.classList.toggle('active');
+            link.after(wrapper);
+            wrapper.appendChild(arrow);
         });
+    }
 
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.nav-filter-container')) {
-                dropdownBtn.classList.remove('active');
-                dropdownMenu.classList.remove('active');
+    // ---------- Create dropdowns dynamically ----------
+    createDropdowns() {
+        Object.entries(this.categories).forEach(([key, items]) => {
+            const dropdown = document.createElement("div");
+            dropdown.className = "filter-dropdown";
+            dropdown.dataset.category = key;
+
+            const title = document.createElement("div");
+            title.className = "filter-title";
+            title.textContent = key.toUpperCase();
+
+            const options = document.createElement("div");
+            options.className = "filter-options";
+
+            items.forEach((item) => {
+                const label = document.createElement("label");
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.dataset.category = key;
+                checkbox.value = item.toLowerCase().replace(/ /g, "-");
+                label.appendChild(checkbox);
+                label.append(" " + item);
+                options.appendChild(label);
+            });
+
+            // ---------- Action Buttons ----------
+            const actions = document.createElement("div");
+            actions.className = "filter-actions";
+
+            const applyBtn = document.createElement("button");
+            applyBtn.textContent = "Apply Filters";
+            applyBtn.className = "filter-apply-btn";
+
+            const resetBtn = document.createElement("button");
+            resetBtn.textContent = "Reset Filters";
+            resetBtn.className = "filter-reset-btn";
+
+            actions.append(applyBtn, resetBtn);
+
+            // ---------- Unsplash API Section ----------
+            const apiSection = document.createElement("div");
+            apiSection.className = "filter-api-section";
+            apiSection.innerHTML = `
+                <div class="filter-category-title">🔴 Live Industry Inspiration</div>
+                <p class="filter-api-subtext">Fetch real creative industry photos from Unsplash</p>
+                <button class="filter-api-btn">🌐 Load Creative Inspiration</button>
+            `;
+
+            dropdown.append(title, options, actions, apiSection);
+            document.querySelector(".navbar").appendChild(dropdown);
+        });
+    }
+
+    // ---------- Event Listeners ----------
+    setupListeners() {
+        // Toggle dropdown
+        document.addEventListener("click", (e) => {
+            const arrow = e.target.closest(".filter-arrow");
+            if (arrow) {
+                const cat = arrow.dataset.category;
+                this.toggleDropdown(cat);
+            } else if (!e.target.closest(".filter-dropdown")) {
+                this.closeAll();
             }
         });
 
-        // ONE BUTTON DOES EVERYTHING
-        if (applyBtn) {
-            applyBtn.addEventListener('click', async () => {
+        // Apply Filters
+        document.addEventListener("click", (e) => {
+            if (e.target.classList.contains("filter-apply-btn")) {
                 this.collectFilters();
                 this.saveFilters();
-                
-                // Apply filters to both HTML content AND API data
-                await this.applyAllFilters();
-                
-                dropdownBtn.classList.remove('active');
-                dropdownMenu.classList.remove('active');
-                this.updateBadge();
-            });
-        }
+                this.applyFilters();
+                this.closeAll();
+            }
+        });
 
-        if (clearBtn) {
-            clearBtn.addEventListener('click', () => {
-                this.clearFilters();
-                dropdownBtn.classList.remove('active');
-                dropdownMenu.classList.remove('active');
-                this.updateBadge();
-            });
-        }
-    }
+        // Reset Filters
+        document.addEventListener("click", (e) => {
+            if (e.target.classList.contains("filter-reset-btn")) {
+                this.resetFilters();
+            }
+        });
 
-    // ========================================
-    // UNIFIED FILTER APPLICATION
-    // ========================================
-
-    async applyAllFilters() {
-        const hasActiveFilters = this.getActiveFilterCount() > 0;
-
-        // Check for homepage redirect
-        const isHomepage = window.location.pathname.endsWith('index.html') || 
-                          window.location.pathname === '/' ||
-                          window.location.pathname.endsWith('/');
-        
-        if (isHomepage && hasActiveFilters) {
-            this.redirectToFilteredPage();
-            return;
-        }
-
-        // Show subtle loading
-        this.showSubtleLoading();
-
-        try {
-            // 1. Filter existing HTML content
-            this.filterHTMLContent();
-
-            // 2. Fetch and filter API data (in background)
-            if (hasActiveFilters) {
-                await this.fetchAndIntegrateAPIData();
-            } else {
-                // No filters: show all HTML, remove API results
-                this.removeAPIResults();
+        // Unsplash API button
+        document.addEventListener("click", (e) => {
+            if (e.target.classList.contains("filter-api-btn")) {
+                const category = e.target.closest(".filter-dropdown")?.dataset.category;
+                this.fetchUnsplashImages(category || "creative agency");
             }
 
-            this.hideSubtleLoading();
-
-        } catch (error) {
-            console.error('Filter error:', error);
-            this.hideSubtleLoading();
-        }
-    }
-
-    filterHTMLContent() {
-        const hasActiveFilters = this.getActiveFilterCount() > 0;
-
-        if (!hasActiveFilters) {
-            // Show all HTML content
-            document.querySelectorAll('[data-filter-team], [data-filter-project], [data-filter-service]').forEach(el => {
-                el.classList.remove('filtered-hidden');
-            });
-            this.removeNoResultsMessage();
-            return;
-        }
-
-        // Hide all filterable content first
-        document.querySelectorAll('[data-filter-team], [data-filter-project], [data-filter-service]').forEach(el => {
-            el.classList.add('filtered-hidden');
-        });
-
-        let hasVisibleContent = false;
-
-        // Apply team filters
-        if (this.filters.team.length > 0) {
-            this.filters.team.forEach(role => {
-                document.querySelectorAll(`[data-filter-team*="${role}"]`).forEach(el => {
-                    el.classList.remove('filtered-hidden');
-                    hasVisibleContent = true;
-                });
-            });
-        }
-
-        // Apply project filters
-        if (this.filters.projects.length > 0) {
-            this.filters.projects.forEach(project => {
-                document.querySelectorAll(`[data-filter-project*="${project}"]`).forEach(el => {
-                    el.classList.remove('filtered-hidden');
-                    hasVisibleContent = true;
-                });
-            });
-        }
-
-        // Apply service filters
-        if (this.filters.services.length > 0) {
-            this.filters.services.forEach(service => {
-                document.querySelectorAll(`[data-filter-service*="${service}"]`).forEach(el => {
-                    el.classList.remove('filtered-hidden');
-                    hasVisibleContent = true;
-                });
-            });
-        }
-
-        if (!hasVisibleContent) {
-            this.showNoResultsMessage();
-        } else {
-            this.removeNoResultsMessage();
-        }
-    }
-
-    async fetchAndIntegrateAPIData() {
-        try {
-            // Fetch from API
-            const data = await this.fetchFromAPI();
-            
-            // Filter the API data
-            const filteredData = this.filterAPIData(data);
-            
-            // Integrate with existing content
-            this.integrateAPIResults(filteredData);
-            
-        } catch (error) {
-            console.error('API Error:', error);
-            // Silently fail - user doesn't need to know
-        }
-    }
-
-    async fetchFromAPI() {
-        const cacheKey = 'api_full_dataset';
-        if (this.apiCache.has(cacheKey)) {
-            return this.apiCache.get(cacheKey);
-        }
-
-        const response = await fetch(`${this.apiConfig.baseUrl}/users`);
-        
-        if (!response.ok) {
-            throw new Error(`API Error: ${response.status}`);
-        }
-        
-        const users = await response.json();
-        const transformedData = this.transformAPIData(users);
-        
-        this.apiCache.set(cacheKey, transformedData);
-        return transformedData;
-    }
-
-    transformAPIData(apiUsers) {
-        const roles = ['creative-director', 'producer', 'designer', 'developer', 'manager', 'strategist'];
-        const projects = ['braam', 'metro-fm', 'loeries', 'fashion-faceoff'];
-        const services = ['branding', 'public-relations', 'social-media', 'creative-direction', 
-                         'pre-production', 'production', 'post-production', 'audio-visual'];
-        
-        return apiUsers.map((user, index) => {
-            const role = roles[index % roles.length];
-            const project = projects[index % projects.length];
-            const service = services[index % services.length];
-            
-            return {
-                id: user.id,
-                name: user.name,
-                email: user.email,
-                company: user.company.name,
-                role: role,
-                project: project,
-                service: service,
-                phone: user.phone,
-                website: user.website,
-                image: `https://i.pravatar.cc/300?img=${user.id}`,
-                source: 'api' // Mark as API data
-            };
+            // Close gallery
+            if (e.target.classList.contains("unsplash-close-btn")) {
+                const gallery = e.target.closest(".unsplash-gallery");
+                if (gallery) {
+                    gallery.style.opacity = "0";
+                    gallery.style.transform = "translateY(40px)";
+                    setTimeout(() => gallery.remove(), 600);
+                }
+            }
         });
     }
 
-    filterAPIData(data) {
-        let filtered = data;
+    // ---------- Dropdown Toggle ----------
+    toggleDropdown(category) {
+        const dropdown = document.querySelector(`.filter-dropdown[data-category='${category}']`);
+        const arrow = document.querySelector(`.filter-arrow[data-category='${category}']`);
+        const isOpen = dropdown.classList.contains("active");
 
-        if (this.filters.team.length > 0) {
-            filtered = filtered.filter(item => 
-                this.filters.team.includes(item.role)
-            );
-        }
+        this.closeAll();
 
-        if (this.filters.projects.length > 0) {
-            filtered = filtered.filter(item => 
-                this.filters.projects.includes(item.project)
-            );
-        }
+        if (!isOpen) {
+            dropdown.classList.add("active");
+            arrow.classList.add("rotated");
 
-        if (this.filters.services.length > 0) {
-            filtered = filtered.filter(item => 
-                this.filters.services.includes(item.service)
-            );
-        }
-
-        return filtered;
-    }
-
-    integrateAPIResults(apiData) {
-        // Remove old API results
-        this.removeAPIResults();
-
-        if (apiData.length === 0) return;
-
-        // Find the main content container where we'll add results
-        const mainContainer = document.querySelector('.team-grid') || 
-                            document.querySelector('.project-grid') ||
-                            document.querySelector('main .container') ||
-                            document.querySelector('main');
-
-        if (!mainContainer) return;
-
-        // Create API results that blend in with existing content
-        apiData.forEach(item => {
-            const card = this.createSeamlessCard(item);
-            mainContainer.appendChild(card);
-        });
-    }
-
-    createSeamlessCard(item) {
-        // Create a card that matches your site's existing style
-        const card = document.createElement('div');
-        card.className = 'team-member-card api-enhanced-result'; // Matches your existing cards
-        card.setAttribute('data-api-result', 'true');
-        card.setAttribute('data-filter-team', item.role);
-        card.setAttribute('data-filter-project', item.project);
-        card.setAttribute('data-filter-service', item.service);
-        
-        card.innerHTML = `
-            <div class="member-image">
-                <img src="${item.image}" alt="${item.name}">
-                <div class="api-badge">Live Data</div>
-            </div>
-            <div class="member-info">
-                <h3>${item.name}</h3>
-                <p class="member-role">${this.formatLabel(item.role)}</p>
-                <p class="member-project"><strong>Project:</strong> ${this.formatLabel(item.project)}</p>
-                <p class="member-service"><strong>Service:</strong> ${this.formatLabel(item.service)}</p>
-                <p class="member-company">${item.company}</p>
-                <p class="member-email">${item.email}</p>
-            </div>
-        `;
-        
-        return card;
-    }
-
-    removeAPIResults() {
-        document.querySelectorAll('[data-api-result="true"]').forEach(el => el.remove());
-    }
-
-    formatLabel(value) {
-        return value.split('-').map(word => 
-            word.charAt(0).toUpperCase() + word.slice(1)
-        ).join(' ');
-    }
-
-    // ========================================
-    // UI HELPERS
-    // ========================================
-
-    showSubtleLoading() {
-        const filterBtn = document.querySelector('.filter-dropdown-btn');
-        if (filterBtn) {
-            filterBtn.style.opacity = '0.6';
-            filterBtn.style.cursor = 'wait';
+            const rect = arrow.getBoundingClientRect();
+            dropdown.style.top = `${rect.bottom + window.scrollY + 5}px`;
+            dropdown.style.left = `${rect.left + rect.width / 2 - dropdown.offsetWidth / 2}px`;
         }
     }
 
-    hideSubtleLoading() {
-        const filterBtn = document.querySelector('.filter-dropdown-btn');
-        if (filterBtn) {
-            filterBtn.style.opacity = '1';
-            filterBtn.style.cursor = 'pointer';
-        }
+    closeAll() {
+        document.querySelectorAll(".filter-dropdown").forEach(d => d.classList.remove("active"));
+        document.querySelectorAll(".filter-arrow").forEach(a => a.classList.remove("rotated"));
     }
 
-    // ========================================
-    // STANDARD FILTER METHODS
-    // ========================================
-
+    // ---------- Filter Logic ----------
     collectFilters() {
-        this.filters = {
-            team: [],
-            projects: [],
-            services: []
-        };
-
-        document.querySelectorAll('.filter-dropdown-menu input[type="checkbox"]:checked').forEach(checkbox => {
-            const category = checkbox.dataset.category;
-            const value = checkbox.value;
-            if (this.filters[category]) {
-                this.filters[category].push(value);
-            }
+        this.filters = { team: [], projects: [], services: [] };
+        document.querySelectorAll(".filter-dropdown input:checked").forEach((cb) => {
+            const cat = cb.dataset.category;
+            this.filters[cat].push(cb.value);
         });
     }
 
     saveFilters() {
-        localStorage.setItem('navigationFilters', JSON.stringify(this.filters));
-        
-        const params = new URLSearchParams();
-        Object.keys(this.filters).forEach(category => {
-            if (this.filters[category].length > 0) {
-                params.set(category, this.filters[category].join(','));
-            }
-        });
-        
-        const newUrl = params.toString() ? 
-            `${window.location.pathname}?${params.toString()}` : 
-            window.location.pathname;
-        
-        window.history.replaceState({}, '', newUrl);
+        localStorage.setItem("navFilters", JSON.stringify(this.filters));
     }
 
-    loadActiveFilters() {
-        const urlParams = new URLSearchParams(window.location.search);
-        let filtersLoaded = false;
+    loadFilters() {
+        const saved = localStorage.getItem("navFilters");
+        if (saved) this.filters = JSON.parse(saved);
+    }
 
-        ['team', 'projects', 'services'].forEach(category => {
-            const paramValue = urlParams.get(category);
-            if (paramValue) {
-                this.filters[category] = paramValue.split(',');
-                filtersLoaded = true;
-            }
-        });
+    applyFilters() {
+        const els = document.querySelectorAll(
+            "[data-filter-team], [data-filter-projects], [data-filter-services]"
+        );
+        els.forEach((el) => el.classList.add("filtered-hidden"));
 
-        if (!filtersLoaded) {
-            const savedFilters = localStorage.getItem('navigationFilters');
-            if (savedFilters) {
-                this.filters = JSON.parse(savedFilters);
-            }
-        }
-
-        setTimeout(() => {
-            Object.keys(this.filters).forEach(category => {
-                this.filters[category].forEach(value => {
-                    const checkbox = document.querySelector(`input[value="${value}"][data-category="${category}"]`);
-                    if (checkbox) {
-                        checkbox.checked = true;
-                    }
-                });
+        Object.entries(this.filters).forEach(([cat, values]) => {
+            values.forEach((v) => {
+                document
+                    .querySelectorAll(`[data-filter-${cat}*="${v}"]`)
+                    .forEach((el) => el.classList.remove("filtered-hidden"));
             });
-        }, 100);
-    }
+        });
 
-    redirectToFilteredPage() {
-        let targetPage = '';
-
-        if (this.filters.team.length > 0) {
-            targetPage = './About/about.html';
-        } else if (this.filters.projects.length > 0) {
-            targetPage = './Work/work.html';
-        } else if (this.filters.services.length > 0) {
-            targetPage = './Services/services.html';
-        } else {
-            targetPage = './Work/work.html';
+        if (this.getFilterCount() === 0) {
+            els.forEach((el) => el.classList.remove("filtered-hidden"));
         }
 
-        const message = document.createElement('div');
-        message.style.cssText = `
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #111A18;
-            color: #E2DCCC;
-            padding: 20px 40px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            z-index: 10000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        `;
-        message.textContent = 'Loading filtered results...';
-        document.body.appendChild(message);
-
+        // Scroll to first visible filtered section
         setTimeout(() => {
-            window.location.href = targetPage;
-        }, 500);
-    }
-
-    clearFilters() {
-        this.filters = {
-            team: [],
-            projects: [],
-            services: []
-        };
-
-        document.querySelectorAll('.filter-dropdown-menu input[type="checkbox"]').forEach(checkbox => {
-            checkbox.checked = false;
-        });
-
-        localStorage.removeItem('navigationFilters');
-        window.history.replaceState({}, '', window.location.pathname);
-        
-        // Show all content
-        document.querySelectorAll('[data-filter-team], [data-filter-project], [data-filter-service]').forEach(el => {
-            el.classList.remove('filtered-hidden');
-        });
-        
-        this.removeAPIResults();
-        this.removeNoResultsMessage();
-    }
-
-    getActiveFilterCount() {
-        return this.filters.team.length + this.filters.projects.length + this.filters.services.length;
-    }
-
-    updateBadge() {
-        const count = this.getActiveFilterCount();
-        let badge = document.querySelector('.filter-active-badge');
-        
-        if (count > 0) {
-            if (!badge) {
-                badge = document.createElement('span');
-                badge.className = 'filter-active-badge';
-                document.querySelector('.nav-filter-container').insertBefore(badge, document.querySelector('.filter-dropdown-btn'));
+            const firstVisible = Array.from(els).find(el => !el.classList.contains("filtered-hidden"));
+            if (firstVisible) {
+                firstVisible.scrollIntoView({ behavior: "smooth", block: "start" });
             }
-            badge.textContent = count;
-        } else {
-            if (badge) {
-                badge.remove();
+        }, 200);
+    }
+
+    // ---------- Reset Filters ----------
+    resetFilters() {
+        document.querySelectorAll(".filter-dropdown input[type='checkbox']").forEach(cb => cb.checked = false);
+        this.filters = { team: [], projects: [], services: [] };
+        localStorage.removeItem("navFilters");
+        document.querySelectorAll("[data-filter-team], [data-filter-projects], [data-filter-services]")
+            .forEach(el => el.classList.remove("filtered-hidden"));
+    }
+
+    getFilterCount() {
+        return (
+            this.filters.team.length +
+            this.filters.projects.length +
+            this.filters.services.length
+        );
+    }
+
+    // ---------- UNSPLASH API ----------
+    async fetchUnsplashImages(query) {
+        try {
+            const url = `${this.apiConfig.baseUrl}/search/photos?query=${encodeURIComponent(
+                query
+            )}&client_id=${this.apiConfig.accessKey}&per_page=6`;
+
+            const res = await fetch(url);
+            const data = await res.json();
+
+            // Remove any existing gallery
+            const existing = document.querySelector(".unsplash-gallery");
+            if (existing) existing.remove();
+
+            // Create the gallery section
+            const gallerySection = document.createElement("section");
+            gallerySection.className = "unsplash-gallery";
+
+            // Header
+            const header = document.createElement("div");
+            header.className = "unsplash-header";
+            header.innerHTML = `<h2 class="unsplash-heading">${query.toUpperCase()} INSPIRATION</h2>`;
+
+            // Images container
+            const imageContainer = document.createElement("div");
+            imageContainer.className = "unsplash-images";
+
+            data.results.forEach((img) => {
+                const image = document.createElement("img");
+                image.src = img.urls.regular;
+                image.alt = img.alt_description || "Creative inspiration";
+                imageContainer.appendChild(image);
+            });
+
+            // Close button BELOW images
+            const closeBtn = document.createElement("button");
+            closeBtn.className = "unsplash-close-btn";
+            closeBtn.textContent = "Close Inspiration";
+
+            gallerySection.appendChild(header);
+            gallerySection.appendChild(imageContainer);
+            gallerySection.appendChild(closeBtn);
+
+            // Insert BEFORE the footer
+            const footer = document.querySelector("footer");
+            if (footer) {
+                footer.parentNode.insertBefore(gallerySection, footer);
+            } else {
+                document.body.appendChild(gallerySection);
             }
+
+            // Smooth fade + slide-in animation
+            gallerySection.style.opacity = "0";
+            gallerySection.style.transform = "translateY(50px)";
+            setTimeout(() => {
+                gallerySection.style.transition = "all 0.8s ease";
+                gallerySection.style.opacity = "1";
+                gallerySection.style.transform = "translateY(0)";
+            }, 50);
+
+            // Smooth scroll to the gallery
+            gallerySection.scrollIntoView({ behavior: "smooth", block: "center" });
+
+        } catch (err) {
+            console.error("Unsplash API Error:", err);
         }
     }
-
-    showNoResultsMessage() {
-        this.removeNoResultsMessage();
-        const main = document.querySelector('main') || document.querySelector('body');
-        const noResults = document.createElement('div');
-        noResults.className = 'filter-no-results';
-        noResults.innerHTML = '<p>No results match your selected filters. Try adjusting your selection.</p>';
-        main.insertBefore(noResults, main.firstChild);
-    }
-
-    removeNoResultsMessage() {
-        const existing = document.querySelector('.filter-no-results');
-        if (existing) existing.remove();
-    }
 }
 
-// Initialize
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        new NavigationFilter();
-    });
-} else {
-    new NavigationFilter();
-}
+document.addEventListener("DOMContentLoaded", () => new NavigationFilter());
