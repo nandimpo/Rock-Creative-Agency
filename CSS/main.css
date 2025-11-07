@@ -1,6 +1,23 @@
-/* =====================================================
-   MAIN.CSS - Shared Styles for Rock Creative Agency
-   ===================================================== */
+:root{
+  --primary-brown: #A5744E;
+  --primary-blue:  #4D7994;
+  --secondary-yellow: #F2D275;
+  --neutral-dark: #111A18;
+  --neutral-light: #E2DCCC;
+  --accent-ink: rgba(0,0,0,0.6);
+  --glass: rgba(255,255,255,0.06);
+}
+body{ font-family: "Avenir LT Pro", Avenir, sans-serif; color:var(--neutral-dark); }
+h1,h2,h3{ font-family: "Conso", serif; font-weight:300; color:var(--neutral-light); }
+
+.nav-links a.active {
+    color: var(--primary-brown);
+}
+
+.nav-links a.active::after {
+    width: 100%;
+    background-color: var(--primary-brown);
+}
 
 /* Reset & Base Styles */
 * {
@@ -49,6 +66,7 @@ h1, h2, h3, h4, h5, h6 {
     border-bottom: 1px solid rgba(165, 116, 78, 0.3);
     backdrop-filter: blur(10px);
 }
+
 
 .logo {
     width: 60px;
@@ -447,11 +465,122 @@ footer nav {
     z-index: 9999 !important;
 }
 
-.filter-dropdown-btn {
-    z-index: 9999 !important;
-    pointer-events: auto !important;
+
+/* =====================================================
+   ACTIVE PAGE LINK (CSS ONLY)
+   Uses the Secondary Yellow (#F2D275)
+   Works for both HEADER (.navbar) and FOOTER nav links
+   ===================================================== */
+
+/* ---------- Header active link ---------- */
+.navbar .nav-links a.active {
+    color: #F2D275;              /* secondary yellow */
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    transition: all 0.3s ease;
 }
 
-.filter-dropdown-menu {
-    z-index: 10000 !important;
+.navbar .nav-links a.active::after {
+    width: 100%;
+    background-color: #F2D275;
+}
+
+/* Keep hover behavior consistent */
+.navbar .nav-links a:hover {
+    color: #F2D275;
+}
+
+.navbar .nav-links a.active:hover {
+    color: #F2D275;
+}
+
+/* ---------- Footer active link ---------- */
+footer nav a.active {
+    color: #F2D275;              /* secondary yellow */
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+footer nav a.active::after {
+    width: 100%;
+    background-color: #F2D275;
+}
+
+/* Footer hover consistent with yellow tone */
+footer nav a:hover {
+    color: #F2D275;
+}
+
+footer nav a.active:hover {
+    color: #F2D275;
+}
+
+/* Optional — subtle glow effect for emphasis */
+.navbar .nav-links a.active,
+footer nav a.active {
+    text-shadow: 0 0 6px rgba(242, 210, 117, 0.4);
+}
+/* =====================================================
+   GLOBAL NAVIGATION BRAND COLOR UPDATE
+   Applies your secondary yellow (#F2D275)
+   to all navbar + footer link states (hover + active)
+   ===================================================== */
+
+/* ---------- Base Hover + Active Underline Animation ---------- */
+.navbar .nav-links a,
+footer nav a {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.navbar .nav-links a::after,
+footer nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #F2D275; /* secondary yellow underline */
+    transition: width 0.3s ease;
+}
+
+/* Hover: text + underline change to yellow */
+.navbar .nav-links a:hover,
+footer nav a:hover {
+    color: #F2D275;
+}
+
+.navbar .nav-links a:hover::after,
+footer nav a:hover::after {
+    width: 100%;
+    background-color: #F2D275;
+}
+
+/* ---------- ACTIVE PAGE LINK STYLING ---------- */
+.navbar .nav-links a.active,
+footer nav a.active {
+    color: #F2D275;              /* secondary yellow text */
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-shadow: 0 0 6px rgba(242, 210, 117, 0.4); /* soft yellow glow */
+}
+
+/* Keep underline visible on active page */
+.navbar .nav-links a.active::after,
+footer nav a.active::after {
+    width: 100%;
+    background-color: #F2D275;
+}
+
+/* Prevent hover overriding the active state */
+.navbar .nav-links a.active:hover,
+footer nav a.active:hover {
+    color: #F2D275;
+}
+
+/* ---------- Optional: Smoother Interaction Feel ---------- */
+.navbar .nav-links a,
+footer nav a {
+    transition: color 0.25s ease, text-shadow 0.3s ease;
 }

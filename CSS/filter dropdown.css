@@ -38,17 +38,17 @@
 
 /* Dropdown Box */
 .filter-dropdown {
-    position: absolute;
-    background: #E2DCCC;
-    color: #111A18;
-    border-radius: 6px;
-    padding: 16px 20px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
-    display: none;
-    min-width: 200px;
-    z-index: 9999;
-    animation: fadeIn 0.3s ease forwards;
+  position: fixed !important; /* was absolute */
+  background: #E2DCCC;
+  color: #111A18;
+  border-radius: 6px;
+  padding: 16px 20px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  display: none;
+  min-width: 200px;
+  z-index: 99999; /* stays above all content */
 }
+
 
 .filter-dropdown.active {
     display: block;
@@ -379,4 +379,10 @@
     color: #fff;
     transform: scale(1.05);
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.35);
+}
+/* ===== FIX FILTER POSITION BELOW NAVBAR ===== */
+.nav-filter-container {
+    position: relative;
+    margin-top: 100px; /* pushes filters below the fixed navbar */
+    z-index: 10;
 }

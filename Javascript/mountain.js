@@ -17,6 +17,9 @@ class MountainAnimation {
         this.h2 = this.section.querySelector('h2');
         this.svg = this.section.querySelector('.mountain-svg');
         this.peaks = this.section.querySelectorAll('.mountain-peak');
+
+        // 🌫️ Fog layers (new)
+        this.fogs = this.section.querySelectorAll('.fog-layer');
         
         this.isAnimating = false;
         this.hasAnimated = false;
@@ -32,6 +35,8 @@ class MountainAnimation {
     init() {
         this.observeAnimation();
         this.addInteractivity();
+        this.addScrollFogEffect();   // 🌫️ scroll-based fog control
+        this.addMouseFogDrift();     // 🖱️ mouse-move fog drift
         console.log('✓ Mountain Animation initialized (Hero only)');
         console.log('  - H1:', this.h1?.textContent || 'Not found');
         console.log('  - H2:', this.h2?.textContent || 'Not found');
@@ -51,7 +56,10 @@ class MountainAnimation {
                     this.isAnimating = true;
                     this.section.classList.add('animate-in');
                     console.log('✓ Mountain animation triggered');
-                    
+
+                    // 🌫️ Trigger fog reveal animation
+                    this.playFog();
+
                     // Stop observing after animation starts
                     observer.unobserve(entry.target);
                 }
@@ -62,6 +70,91 @@ class MountainAnimation {
         });
 
         observer.observe(this.section);
+    }
+
+    /**
+     * 🌫️ Fog reveal animation play
+     */
+    playFog() {
+        this.fogs.forEach((fog) => {
+            fog.style.animationPlayState = 'running';
+            fog.style.opacity = '1';
+            fog.style.transition = 'opacity 2s ease, filter 3s ease, transform 3s ease';
+        });
+        console.log('✓ Fog reveal animation started');
+    }
+
+    /**
+     * 🌫️ Fog reacts to scroll:
+     * - Thickens when scrolling up near hero
+     * - Fades gently when scrolling down
+     * - Fully reappears when returning to top
+     */
+    addScrollFogEffect() {
+        let lastScrollY = window.scrollY;
+
+        window.addEventListener('scroll', () => {
+            const currentY = window.scrollY;
+
+            // --- User scrolls up near top ---
+            if (currentY < lastScrollY && window.scrollY < window.innerHeight / 2) {
+                this.fogs.forEach(fog => {
+                    fog.style.opacity = '0.6';
+                    fog.style.filter = 'blur(100px)';
+                });
+            } 
+            // --- User scrolls down ---
+            else if (currentY > lastScrollY) {
+                this.fogs.forEach(fog => {
+                    fog.style.opacity = '0.3';
+                    fog.style.filter = 'blur(70px)';
+                });
+            }
+
+            // --- User scrolled back to very top ---
+            if (window.scrollY <= 10) {
+                this.fogs.forEach(fog => {
+                    fog.style.opacity = '1';
+                    fog.style.filter = 'blur(120px)';
+                    fog.style.transition = 'opacity 2.5s ease, filter 2.5s ease';
+                });
+                console.log('🌫️ Fog reappeared at top');
+            }
+
+            lastScrollY = currentY;
+        });
+    }
+
+    /**
+     * 🖱️ Fog drifts gently based on mouse movement
+     */
+    addMouseFogDrift() {
+        if (!this.fogs.length) return;
+
+        this.section.addEventListener('mousemove', (e) => {
+            const rect = this.section.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;  // -1 to 1 range
+            const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+
+            this.fogs.forEach((fog, i) => {
+                const intensity = (i + 1) * 10;
+                gsap.to(fog, {
+                    duration: 3,
+                    x: x * intensity,
+                    y: y * intensity,
+                    ease: "power2.out"
+                });
+            });
+        });
+
+        // Reset fogs when mouse leaves
+        this.section.addEventListener('mouseleave', () => {
+            this.fogs.forEach(fog => {
+                gsap.to(fog, { duration: 3, x: 0, y: 0, ease: "power2.out" });
+            });
+        });
+
+        console.log('🖱️ Fog drift interactivity enabled');
     }
 
     /**
@@ -184,6 +277,7 @@ class MountainAnimation {
         this.isAnimating = true;
         this.hasAnimated = true;
         this.section.classList.add('animate-in');
+        this.playFog(); // play fog when manually triggered
         console.log('✓ Hero animation playing');
     }
 
@@ -219,18 +313,3 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn('❌ No mountain sections found');
     }
 });
-
-/**
- * ==================== USAGE EXAMPLES ====================
- * 
- * // Access the global instance (first hero section)
- * window.mountainAnimation.setPeakColor('#4D7994');        // Primary blue
- * window.mountainAnimation.setPeakColor('#F2D275');        // Secondary yellow
- * window.mountainAnimation.setPeakWidth(5);               // Thicker lines
- * window.mountainAnimation.setAnimationDuration(2);       // Slower animation
- * window.mountainAnimation.reset();                       // Restart animation
- * console.log(window.mountainAnimation.getStatus());      // Check status
- * 
- * // Animation only triggers on hero sections with class .mountain-section
- * // No fill, only lines are drawn (stroke-dasharray animation)
- */
