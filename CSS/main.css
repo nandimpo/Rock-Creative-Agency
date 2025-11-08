@@ -19,7 +19,6 @@ h1,h2,h3{ font-family: "Conso", serif; font-weight:300; color:var(--neutral-ligh
     background-color: var(--primary-brown);
 }
 
-
 * {
     margin: 0;
     padding: 0;
@@ -42,6 +41,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 300;
     letter-spacing: 1px;
 }
+
 
 :root {
     --primary-brown: #A5744E;
@@ -219,6 +219,7 @@ section {
 }
 
 
+
 .contact-form input.valid,
 .contact-form textarea.valid {
     border-color: #4CAF50 !important;
@@ -289,6 +290,7 @@ section {
     }
 }
 
+
 .contact-form button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -356,7 +358,6 @@ footer nav {
     gap: 0;
     justify-content: flex-end;
 }
-
 
 @media (max-width: 1024px) {
     .navbar {
@@ -451,7 +452,7 @@ footer nav {
         padding: 30px 20px;
     }
 }
-
+/* CRITICAL FIX */
 .nav-links {
     position: relative;
     z-index: 1 !important;
@@ -475,7 +476,7 @@ footer nav {
     background-color: #F2D275;
 }
 
-
+/* Keep hover behavior consistent */
 .navbar .nav-links a:hover {
     color: #F2D275;
 }
@@ -540,6 +541,7 @@ footer nav a:hover::after {
     width: 100%;
     background-color: #F2D275;
 }
+
 
 .navbar .nav-links a.active,
 footer nav a.active {
