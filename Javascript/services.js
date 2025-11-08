@@ -1,26 +1,31 @@
-// ============================
-// ROCK CREATIVE AGENCY SERVICES INTERACTIONS
-// ============================
-
-// Ensure GSAP and ScrollTrigger are available
 gsap.registerPlugin(ScrollTrigger);
 
-// ---------- SCROLL REVEAL ANIMATION ----------
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (prefersReducedMotion) gsap.globalTimeline.timeScale(0.6);
+
+
+function responsiveDuration(base) {
+  return window.innerWidth < 600 ? base * 0.8 : base;
+}
+
+
 document.querySelectorAll(".service-item").forEach((item, i) => {
   gsap.from(item, {
     opacity: 0,
     y: 60,
-    duration: 1,
+    duration: responsiveDuration(1),
     delay: i * 0.2,
+    ease: "power2.out",
     scrollTrigger: {
       trigger: item,
-      start: "top 80%",
+      start: "top 85%",
       toggleActions: "play none none reverse",
+      once: false,
     },
   });
 });
 
-// ---------- HOVER REVEAL ANIMATION ----------
+
 document.querySelectorAll(".service-item").forEach((item) => {
   const image = item.querySelector(".service-image");
   const tl = gsap.timeline({ paused: true });
@@ -31,23 +36,34 @@ document.querySelectorAll(".service-item").forEach((item) => {
     { opacity: 1, scale: 1, duration: 0.8, ease: "power3.out" }
   );
 
-  item.addEventListener("mouseenter", () => tl.play());
-  item.addEventListener("mouseleave", () => tl.reverse());
+  const triggerAnim = () => tl.play();
+  const reverseAnim = () => tl.reverse();
+
+  item.addEventListener("mouseenter", triggerAnim);
+  item.addEventListener("mouseleave", reverseAnim);
+  item.addEventListener("focusin", triggerAnim);
+  item.addEventListener("focusout", reverseAnim);
+
+  item.setAttribute("tabindex", "0"); 
+  item.setAttribute("role", "group");
+  item.setAttribute("aria-label", item.querySelector(".service-title")?.textContent || "Service item");
 });
 
-// ---------- DISCOVER MORE ASIDE PANEL ----------
 const aside = document.createElement("aside");
 aside.classList.add("service-aside");
+aside.setAttribute("role", "dialog");
+aside.setAttribute("aria-modal", "true");
+aside.setAttribute("aria-hidden", "true");
+aside.setAttribute("tabindex", "-1");
 aside.innerHTML = `
-  <div class="aside-content">
-    <button class="close-aside">×</button>
+  <div class="aside-content" role="document">
+    <button class="close-aside" aria-label="Close service details">×</button>
     <h2 class="aside-title"></h2>
     <p class="aside-text"></p>
   </div>
 `;
 document.body.appendChild(aside);
 
-// Content for each service
 const serviceInfo = {
   branding: `Our branding services are designed to create authentic identities that speak volumes. We focus on connecting visuals with brand strategy, ensuring consistency across all platforms. Our approach blends creativity and insight to make your brand unforgettable. We guide your visual tone, typography, and brand storytelling. Every brand we build becomes an emotional experience.`,
   "public-relations": `Our PR team builds trust between you and your audience through honest storytelling. We specialize in campaigns that engage, inform, and inspire. Whether it’s media relations, brand events, or influencer outreach, we ensure your voice is heard. We craft strategies that highlight your brand’s true character. Every project is handled with precision and purpose.`,
@@ -59,62 +75,70 @@ const serviceInfo = {
   "audio-visual": `We specialize in immersive audio-visual experiences that engage the senses. Our team crafts sound, visuals, and motion to connect emotion and brand. From installations to music videos, we fuse rhythm and vision. Our AV projects create unforgettable brand memories. Every project is a sensory journey into your story.`,
 };
 
-// ---------- DISCOVER BUTTONS ----------
+
 document.querySelectorAll(".service-item").forEach((item) => {
   const discoverBtn = document.createElement("button");
   discoverBtn.classList.add("discover-btn");
   discoverBtn.textContent = "DISCOVER MORE";
+  discoverBtn.setAttribute("aria-haspopup", "dialog");
+  discoverBtn.setAttribute("aria-controls", "service-aside");
+  discoverBtn.setAttribute("aria-expanded", "false");
+  discoverBtn.classList.add("focus-outline");
   item.querySelector(".service-content").appendChild(discoverBtn);
 
   discoverBtn.addEventListener("click", (e) => {
     e.stopPropagation();
     const key = item.getAttribute("data-filter-services");
     const title = item.querySelector(".service-title").textContent;
-
     aside.querySelector(".aside-title").textContent = title;
     aside.querySelector(".aside-text").textContent =
       serviceInfo[key] || "More information coming soon.";
-
-    openAside();
+    openAside(discoverBtn);
   });
 });
 
-// ---------- ASIDE OPEN/CLOSE WITH GSAP ----------
-const openAside = () => {
-  gsap.to(".service-aside", {
-    x: 0,
-    duration: 0.8,
-    ease: "power4.out",
-  });
-  gsap.fromTo(
-    ".aside-content",
-    { opacity: 0, y: 50 },
-    { opacity: 1, y: 0, duration: 0.6, delay: 0.2 }
-  );
+
+let lastFocusedElement = null;
+
+const openAside = (triggerBtn) => {
+  lastFocusedElement = triggerBtn;
+  gsap.to(".service-aside", { x: 0, duration: 0.8, ease: "power4.out" });
+  gsap.fromTo(".aside-content", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.6, delay: 0.2 });
+  aside.setAttribute("aria-hidden", "false");
   document.body.classList.add("aside-open");
+  aside.focus();
+  triggerBtn.setAttribute("aria-expanded", "true");
 };
 
 const closeAside = () => {
-  gsap.to(".service-aside", {
-    x: "100%",
-    duration: 0.8,
-    ease: "power4.inOut",
-  });
+  gsap.to(".service-aside", { x: "100%", duration: 0.6, ease: "power4.inOut" });
+  aside.setAttribute("aria-hidden", "true");
   document.body.classList.remove("aside-open");
+  if (lastFocusedElement) lastFocusedElement.focus();
+  lastFocusedElement?.setAttribute("aria-expanded", "false");
 };
 
-// ---------- CLICK OUTSIDE CLOSE ----------
+
 document.addEventListener("click", (e) => {
-  if (
-    document.body.classList.contains("aside-open") &&
-    !e.target.closest(".aside-content")
-  ) {
+  if (document.body.classList.contains("aside-open") && !e.target.closest(".aside-content")) {
     closeAside();
   }
 });
 
-// ---------- CLOSE BUTTON ----------
-document.querySelector(".close-aside").addEventListener("click", closeAside);
 
-// ---------- INITIAL HIDE ----------
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && document.body.classList.contains("aside-open")) {
+    closeAside();
+  }
+});
+
+
+aside.querySelector(".close-aside").addEventListener("click", closeAside);
+
+
 gsap.set(".service-aside", { x: "100%" });
+
+
+window.addEventListener("resize", () => {
+  ScrollTrigger.refresh();
+});

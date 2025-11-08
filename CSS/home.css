@@ -1,14 +1,10 @@
-/* =====================================================
-   HOME.CSS - Home Page Specific Styles (FIXED)
-   ===================================================== */
 
-/* ==================== HEADING WORD DISPLAY ==================== */
 .heading-word {
     display: inline-block;
     margin-right: 0.25rem;
 }
 
-/* ==================== BUTTON STYLES ==================== */
+
 .btn {
     background-color: #3d6178 ;
     color:#3d6178 ;
@@ -28,13 +24,11 @@
     transform: translateY(-2px);
 }
 
-/* ==================== HERO SECTION Z-INDEX & VISIBILITY ==================== */
-/* SVG mountains visible */
+
 .hero svg {
     z-index: 3 !important;
 }
 
-/* Ensure hero content is above SVG */
 .hero h1,
 .hero h2,
 .hero .btn,
@@ -43,7 +37,7 @@
     z-index: 10;
 }
 
-/* Hero text and button always visible */
+
 .hero h1 {
     font-size: 4.5rem;
     color: #E2DCCC;
@@ -75,7 +69,7 @@
     visibility: visible !important;
 }
 
-/* Ensure all section content is above canvas during reveal */
+
 .who-we-are-box,
 .content-wrapper,
 .work-content,
@@ -85,13 +79,13 @@
     z-index: 9;
 }
 
-/* Canvas should be in front of content during reveal */
+
 canvas {
     z-index: 100 !important;
     pointer-events: none;
 }
 
-/* ==================== WHO WE ARE SECTION ==================== */
+
 .who-we-are {
     padding: 80px 60px;
     text-align: center;
@@ -157,7 +151,6 @@ canvas {
     font-family: 'Conso', serif;
 }
 
-/* ==================== WHAT WE DO SECTION ==================== */
 .what-we-do {
     padding: 5rem 2.5rem;
     position: relative;
@@ -208,7 +201,7 @@ canvas {
     color: #666;
 }
 
-/* ==================== OUR WORK SECTION ==================== */
+
 .our-work {
     padding: 5rem 2.5rem;
     position: relative;
@@ -263,7 +256,7 @@ canvas {
     text-decoration: underline;
 }
 
-/* ==================== OUR SERVICES SECTION ==================== */
+
 .our-services {
     padding: 5rem 2.5rem;
     position: relative;
@@ -326,8 +319,7 @@ canvas {
     color: #E2DCCC;
 }
 
-/* ==================== FILTER SYSTEM SECTION ==================== */
-/* Hide the empty filter system section to remove gap */
+
 .filter-system-section {
     padding: 0 !important;
     margin: 0 !important;
@@ -338,7 +330,7 @@ canvas {
     display: block !important;
 }
 
-/* ==================== CONTACT SECTION ==================== */
+
 .contact {
     padding: 5rem 2.5rem;
     width: 100%;
@@ -419,7 +411,7 @@ canvas {
     pointer-events: auto;
 }
 
-/* ==================== RESPONSIVE DESIGN ==================== */
+
 @media (max-width: 768px) {
     .content-wrapper {
         grid-template-columns: 1fr;

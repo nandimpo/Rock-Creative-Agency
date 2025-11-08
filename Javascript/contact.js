@@ -1,7 +1,3 @@
-// =====================================================
-// CONTACT.JS – Cinematic Fog + Contact Reveal (Hero Pin Version)
-// =====================================================
-
 document.addEventListener("DOMContentLoaded", () => {
   gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
@@ -10,43 +6,39 @@ document.addEventListener("DOMContentLoaded", () => {
   const footer = document.querySelector("footer");
   if (!hero || !contact) return;
 
-  // ======================
-  // 1️⃣ DARK FOG LIFT REVEAL
-  // ======================
-
   const smokeCanvas = document.createElement("canvas");
   smokeCanvas.classList.add("dark-smoke-layer");
   hero.appendChild(smokeCanvas);
 
   const ctx = smokeCanvas.getContext("2d");
   let w, h, smokes = [];
+  let prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function resize() {
     w = smokeCanvas.width = hero.offsetWidth;
     h = smokeCanvas.height = hero.offsetHeight;
   }
 
-  window.addEventListener("resize", resize);
+  window.addEventListener("resize", resize, { passive: true });
   resize();
 
-  // Generate fog particles
-  for (let i = 0; i < 80; i++) {
+  for (let i = 0; i < 60; i++) {
     smokes.push({
       x: Math.random() * w,
       y: Math.random() * h,
-      r: Math.random() * 200 + 100,
-      growth: Math.random() * 0.3 + 0.2,
-      alpha: Math.random() * 0.4 + 0.2,
-      driftX: (Math.random() - 0.5) * 0.3,
-      driftY: (Math.random() - 0.8) * 0.5
+      r: Math.random() * 150 + 80,
+      growth: Math.random() * 0.2 + 0.1,
+      alpha: Math.random() * 0.3 + 0.2,
+      driftX: (Math.random() - 0.5) * 0.2,
+      driftY: (Math.random() - 0.8) * 0.3
     });
   }
 
   function drawSmoke() {
-    ctx.fillStyle = "rgba(17,26,24,0.06)";
+    ctx.fillStyle = "rgba(17,26,24,0.05)";
     ctx.fillRect(0, 0, w, h);
 
-    smokes.forEach(s => {
+    for (let s of smokes) {
       const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r);
       g.addColorStop(0, `rgba(17,26,24,${s.alpha})`);
       g.addColorStop(1, "transparent");
@@ -60,115 +52,99 @@ document.addEventListener("DOMContentLoaded", () => {
       s.r += s.growth;
       s.alpha *= 0.995;
 
-      // Reset fog particle when faded or too large
-      if (s.r > 400 || s.alpha < 0.05) {
+      if (s.r > 350 || s.alpha < 0.05) {
         s.x = Math.random() * w;
-        s.y = h + 100;
-        s.r = Math.random() * 120 + 60;
-        s.alpha = Math.random() * 0.4 + 0.3;
+        s.y = h + 80;
+        s.r = Math.random() * 100 + 60;
+        s.alpha = Math.random() * 0.3 + 0.3;
       }
-    });
+    }
 
     requestAnimationFrame(drawSmoke);
   }
 
-  drawSmoke();
+  if (!prefersReducedMotion) drawSmoke();
 
-  // ======================
-  // 2️⃣ HERO PIN + FOG LIFT SEQUENCE
-  // ======================
   const heroTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: hero,
       start: "top top",
-      end: "+=120%",
-      scrub: 1.5,
+      end: "+=100%",
+      scrub: 1.2,
       pin: true,
       anticipatePin: 1
     }
   });
 
   heroTimeline
-    .fromTo(hero, { filter: "brightness(0.5) blur(10px)" }, { filter: "brightness(1) blur(0px)", duration: 2 })
-    .fromTo(smokeCanvas, { opacity: 1 }, { opacity: 0, y: -200, duration: 3, ease: "power2.inOut" }, "<")
-    .to(".mountain-svg", { opacity: 1, duration: 2, ease: "power2.out" }, "-=1");
+    .fromTo(hero, { filter: "brightness(0.5) blur(8px)" }, { filter: "brightness(1) blur(0px)", duration: 2 })
+    .fromTo(smokeCanvas, { opacity: 1 }, { opacity: 0, y: -150, duration: 2.5, ease: "power2.inOut" }, "<")
+    .to(".mountain-svg", { opacity: 1, duration: 1.8, ease: "power2.out" }, "-=1");
 
-  // ======================
-  // 3️⃣ POST-PIN REVEAL (After fog clears)
-  // ======================
-  gsap.delayedCall(3.8, () => {
+  gsap.delayedCall(3, () => {
     smokeCanvas.remove();
     hero.classList.add("animate-in");
 
-    // Reveal contact section smoothly
     gsap.to(contact, {
       opacity: 1,
       y: 0,
-      duration: 1.6,
+      duration: 1.4,
       ease: "power2.out"
     });
 
-    // Auto-scroll to contact section
-    gsap.delayedCall(0.8, () => {
+    gsap.delayedCall(0.7, () => {
       window.scrollTo({ top: hero.offsetHeight - 80, behavior: "smooth" });
     });
 
-    // TIMELINE: Breeze-style reveal of text + form
-    const tl = gsap.timeline({ delay: 0.8, defaults: { ease: "power2.out" } });
-    tl.from(".contact-label", { opacity: 0, y: 30, duration: 0.8 })
-      .from(".title-group h2", { opacity: 0, y: 30, duration: 0.8 }, "-=0.4")
-      .from(".decorative-elements", { opacity: 0, scale: 0.8, duration: 1, ease: "elastic.out(1, 0.6)" }, "-=0.4")
-      .from(".contact-info p", { opacity: 0, y: 20, stagger: 0.2, duration: 0.8 }, "-=0.5")
-      .from(".contact-form", { opacity: 0, y: 40, duration: 1.2 }, "-=0.3");
+    const tl = gsap.timeline({ delay: 0.6, defaults: { ease: "power2.out" } });
+    tl.from(".contact-label", { opacity: 0, y: 20, duration: 0.6 })
+      .from(".title-group h2", { opacity: 0, y: 25, duration: 0.7 }, "-=0.3")
+      .from(".decorative-elements", { opacity: 0, scale: 0.9, duration: 0.9, ease: "elastic.out(1, 0.6)" }, "-=0.3")
+      .from(".contact-info p", { opacity: 0, y: 15, stagger: 0.15, duration: 0.6 }, "-=0.4")
+      .from(".contact-form", { opacity: 0, y: 30, duration: 1 }, "-=0.2");
   });
 
-  // ======================
-  // 4️⃣ FLOATING ELEMENTS (infinite subtle motion)
-  // ======================
-  gsap.to(".logo-image", {
-    y: 10,
-    duration: 3,
-    repeat: -1,
-    yoyo: true,
-    ease: "sine.inOut"
-  });
+  if (!prefersReducedMotion) {
+    gsap.to(".logo-image", {
+      y: 8,
+      duration: 3,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
+    });
 
-  gsap.to(".circle", {
-    x: 5,
-    y: -5,
-    duration: 4,
-    repeat: -1,
-    yoyo: true,
-    ease: "sine.inOut"
-  });
+    gsap.to(".circle", {
+      x: 4,
+      y: -4,
+      duration: 4,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
+    });
+  }
 
-  // ======================
-  // 5️⃣ SCROLLTRIGGER ANIMATIONS
-  // ======================
-
-  // Footer reveal once (no pop)
   gsap.from(footer, {
     scrollTrigger: {
       trigger: footer,
-      start: "top 90%",
+      start: "top 95%",
       toggleActions: "play none none none",
       once: true
     },
     opacity: 0,
-    y: 80,
-    duration: 1.5,
+    y: 60,
+    duration: 1.2,
     ease: "power3.out"
   });
 
-  // Contact form parallax drift (smooth scrub effect)
   gsap.to(".contact-form", {
     scrollTrigger: {
       trigger: ".contact-form",
       start: "top bottom",
       end: "bottom top",
-      scrub: 1.5
+      scrub: 1.2
     },
-    y: -40,
+    y: -30,
     ease: "none"
   });
 });
+

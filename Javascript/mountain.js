@@ -1,10 +1,7 @@
-/* ==================== MOUNTAIN ANIMATION - HERO ONLY ==================== */
-/* File: Javascript/mountain.js */
-/* This animation is ONLY for hero sections with class .mountain-section */
 
 class MountainAnimation {
     constructor(selector = '.mountain-section') {
-        // Only target hero sections
+
         this.section = document.querySelector(selector);
         
         if (!this.section) {
@@ -12,13 +9,13 @@ class MountainAnimation {
             return;
         }
         
-        // Get elements only from the hero section
+  
         this.h1 = this.section.querySelector('h1');
         this.h2 = this.section.querySelector('h2');
         this.svg = this.section.querySelector('.mountain-svg');
         this.peaks = this.section.querySelectorAll('.mountain-peak');
 
-        // 🌫️ Fog layers (new)
+        
         this.fogs = this.section.querySelectorAll('.fog-layer');
         
         this.isAnimating = false;
@@ -29,38 +26,32 @@ class MountainAnimation {
         }
     }
 
-    /**
-     * Initialize the animation
-     */
     init() {
         this.observeAnimation();
         this.addInteractivity();
-        this.addScrollFogEffect();   // 🌫️ scroll-based fog control
-        this.addMouseFogDrift();     // 🖱️ mouse-move fog drift
+        this.addScrollFogEffect();  
+        this.addMouseFogDrift();     
         console.log('✓ Mountain Animation initialized (Hero only)');
         console.log('  - H1:', this.h1?.textContent || 'Not found');
         console.log('  - H2:', this.h2?.textContent || 'Not found');
         console.log('  - SVG Peaks:', this.peaks.length);
     }
 
-    /**
-     * Observe when hero section comes into view
-     * Animation only triggers once when section is first visible
-     */
+   
     observeAnimation() {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                // Only animate if in viewport and hasn't animated yet
+                
                 if (entry.isIntersecting && !this.hasAnimated) {
                     this.hasAnimated = true;
                     this.isAnimating = true;
                     this.section.classList.add('animate-in');
                     console.log('✓ Mountain animation triggered');
 
-                    // 🌫️ Trigger fog reveal animation
+                    
                     this.playFog();
 
-                    // Stop observing after animation starts
+                    
                     observer.unobserve(entry.target);
                 }
             });
@@ -72,9 +63,7 @@ class MountainAnimation {
         observer.observe(this.section);
     }
 
-    /**
-     * 🌫️ Fog reveal animation play
-     */
+    
     playFog() {
         this.fogs.forEach((fog) => {
             fog.style.animationPlayState = 'running';
@@ -84,26 +73,21 @@ class MountainAnimation {
         console.log('✓ Fog reveal animation started');
     }
 
-    /**
-     * 🌫️ Fog reacts to scroll:
-     * - Thickens when scrolling up near hero
-     * - Fades gently when scrolling down
-     * - Fully reappears when returning to top
-     */
+   
     addScrollFogEffect() {
         let lastScrollY = window.scrollY;
 
         window.addEventListener('scroll', () => {
             const currentY = window.scrollY;
 
-            // --- User scrolls up near top ---
+       
             if (currentY < lastScrollY && window.scrollY < window.innerHeight / 2) {
                 this.fogs.forEach(fog => {
                     fog.style.opacity = '0.6';
                     fog.style.filter = 'blur(100px)';
                 });
             } 
-            // --- User scrolls down ---
+         
             else if (currentY > lastScrollY) {
                 this.fogs.forEach(fog => {
                     fog.style.opacity = '0.3';
@@ -111,7 +95,7 @@ class MountainAnimation {
                 });
             }
 
-            // --- User scrolled back to very top ---
+          
             if (window.scrollY <= 10) {
                 this.fogs.forEach(fog => {
                     fog.style.opacity = '1';
@@ -125,9 +109,7 @@ class MountainAnimation {
         });
     }
 
-    /**
-     * 🖱️ Fog drifts gently based on mouse movement
-     */
+    
     addMouseFogDrift() {
         if (!this.fogs.length) return;
 
@@ -147,7 +129,7 @@ class MountainAnimation {
             });
         });
 
-        // Reset fogs when mouse leaves
+   
         this.section.addEventListener('mouseleave', () => {
             this.fogs.forEach(fog => {
                 gsap.to(fog, { duration: 3, x: 0, y: 0, ease: "power2.out" });
@@ -157,9 +139,7 @@ class MountainAnimation {
         console.log('🖱️ Fog drift interactivity enabled');
     }
 
-    /**
-     * Add hover interactivity - only in hero section
-     */
+  
     addInteractivity() {
         if (!this.section) return;
 
@@ -180,9 +160,6 @@ class MountainAnimation {
         });
     }
 
-    /**
-     * Reset hero animation to initial state
-     */
     reset() {
         this.isAnimating = false;
         this.hasAnimated = false;
@@ -192,7 +169,7 @@ class MountainAnimation {
         if (this.h2) this.h2.style.animation = 'none';
         if (this.svg) this.svg.style.animation = 'none';
         
-        // Trigger reflow to restart animation
+     
         void this.section.offsetWidth;
         
         if (this.h1) this.h1.style.animation = '';
@@ -254,9 +231,7 @@ class MountainAnimation {
         console.log('✓ Animation duration set to:', duration + 's');
     }
 
-    /**
-     * Get hero animation status
-     */
+   
     getStatus() {
         return {
             isAnimating: this.isAnimating,
@@ -270,20 +245,14 @@ class MountainAnimation {
         };
     }
 
-    /**
-     * Manually trigger hero animation
-     */
     play() {
         this.isAnimating = true;
         this.hasAnimated = true;
         this.section.classList.add('animate-in');
-        this.playFog(); // play fog when manually triggered
+        this.playFog(); 
         console.log('✓ Hero animation playing');
     }
 
-    /**
-     * Stop hero animation
-     */
     pause() {
         this.isAnimating = false;
         this.section.classList.remove('animate-in');
@@ -291,22 +260,19 @@ class MountainAnimation {
     }
 }
 
-/**
- * Auto-initialize on DOM ready
- * Only initializes for .mountain-section (hero sections)
- */
+
 document.addEventListener('DOMContentLoaded', () => {
     const heroSections = document.querySelectorAll('.mountain-section');
     
     if (heroSections.length > 0) {
         console.log('✓ Found ' + heroSections.length + ' mountain section(s)');
         
-        // Initialize all hero sections with mountain animation
+
         heroSections.forEach((section, index) => {
             const animation = new MountainAnimation(`.mountain-section:nth-of-type(${index + 1})`);
         });
         
-        // Store first instance globally for easy access
+
         window.mountainAnimation = new MountainAnimation('.mountain-section');
         console.log('✓ Mountain animations fully initialized');
     } else {

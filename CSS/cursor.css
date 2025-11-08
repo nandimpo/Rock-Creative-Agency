@@ -41,6 +41,40 @@ body {
   animation: subtleFlow 4s ease-in-out infinite;
   will-change: transform, border-color, opacity;
   box-shadow:
+
+  
     0 0 25px rgba(165, 116, 78, 0.4),
     0 0 50px rgba(242, 210, 117, 0.25);
+}
+/* Fix stuck ghost cursor bug */
+.rock-cursor,
+.rock-cursor-ring {
+  opacity: 0;
+  animation: fadeInCursor 0.3s ease forwards;
+}
+
+@keyframes fadeInCursor {
+  to { opacity: 1; }
+}
+/* Cursor now fades in safely */
+.rock-cursor,
+.rock-cursor-ring {
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+body:not([data-cursor-disabled]) .rock-cursor,
+body:not([data-cursor-disabled]) .rock-cursor-ring {
+  opacity: 1;
+}
+
+/* Accessibility fallback */
+@media (hover: none), (pointer: coarse) {
+  body {
+    cursor: auto !important;
+  }
+  .rock-cursor,
+  .rock-cursor-ring {
+    display: none !important;
+  }
 }

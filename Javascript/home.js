@@ -1,11 +1,8 @@
-// Register GSAP plugins
+
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
 console.log('SVG & GSAP Animations with Timelines loaded');
 
-// ===================================================
-// HERO SVG ANIMATIONS WITH TIMELINE
-// ===================================================
 
 function createHeroSVG() {
     const hero = document.querySelector('.hero');
@@ -25,10 +22,8 @@ function createHeroSVG() {
     const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
     svg.appendChild(defs);
 
-    // Create timeline for hero SVG animations
     const heroTimeline = gsap.timeline({ repeat: -1, yoyo: true });
 
-    // Mountain layers with SVG stroke animation
     const mountains = [
         { points: '0,900 400,400 800,700 1200,350 1600,600 1920,400 1920,1080 0,1080', opacity: 0.08, duration: 8 },
         { points: '0,950 300,500 700,800 1100,450 1500,650 1920,500 1920,1080 0,1080', opacity: 0.06, duration: 10 },
@@ -45,12 +40,11 @@ function createHeroSVG() {
         path.setAttribute('stroke-linejoin', 'round');
         svg.appendChild(path);
 
-        // SVG Stroke animation - Draw effect
         const pathLength = path.getTotalLength();
         path.style.strokeDasharray = pathLength;
         path.style.strokeDashoffset = pathLength;
 
-        // Timeline for mountain stroke animation
+
         const mountainTl = gsap.timeline();
         mountainTl.to(path, {
             strokeDashoffset: 0,
@@ -59,7 +53,7 @@ function createHeroSVG() {
             ease: 'power2.inOut'
         });
 
-        // Continuous breathing animation
+   
         mountainTl.to(path, {
             opacity: mountain.opacity + 0.5,
             duration: mountain.duration,
@@ -69,7 +63,6 @@ function createHeroSVG() {
         }, 2.5 + index * 0.3);
     });
 
-    // Animated trees with SVG
     for (let i = 0; i < 6; i++) {
         const x = Math.random() * 1920;
         const y = 600 + Math.random() * 300;
@@ -90,9 +83,7 @@ function createHeroSVG() {
         }, i * 0.3);
     }
 
-    // Animated mist/clouds - REMOVED
-
-    // Animated water ripples with SVG
+ 
     for (let i = 0; i < 3; i++) {
         const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
         const cx = 200 + i * 600;
@@ -120,9 +111,6 @@ function createHeroSVG() {
 
 window.addEventListener('load', createHeroSVG);
 
-// ===================================================
-// HERO H1 WAVE TEXT ANIMATION WITH TIMELINE
-// ===================================================
 
 function createWaveTextAnimation() {
     const h1 = document.querySelector('.hero h1');
@@ -152,7 +140,7 @@ function createWaveTextAnimation() {
     
     let xPosition = (1600 - totalWidth) / 2;
 
-    // Timeline for wave text animation
+
     const waveTimeline = gsap.timeline();
 
     for (let i = 0; i < text.length; i++) {
@@ -176,7 +164,7 @@ function createWaveTextAnimation() {
 
         const delay = i * 0.08;
 
-        // Add to timeline
+
         waveTimeline.fromTo(tspan, 
             {
                 attr: { y: 140 },
@@ -191,7 +179,7 @@ function createWaveTextAnimation() {
             delay
         );
 
-        // Continuous wave after initial animation
+
         waveTimeline.to(tspan, {
             attr: { y: 100 },
             duration: 2,
@@ -211,9 +199,6 @@ window.addEventListener('load', () => {
     setTimeout(createWaveTextAnimation, 300);
 });
 
-// ===================================================
-// ANIMATED SVG SERVICE ICONS WITH TIMELINE
-// ===================================================
 
 function createServiceSVGs() {
     const serviceTags = document.querySelectorAll('.service-tag');
@@ -348,7 +333,7 @@ function createServiceSVGs() {
         designs[index % designs.length]();
         tag.insertBefore(svg, tag.firstChild);
 
-        // Hover animation with timeline
+        
         tag.addEventListener('mouseenter', () => {
             gsap.to(svg, {
                 scale: 1.3,
@@ -373,11 +358,7 @@ window.addEventListener('load', () => {
     setTimeout(createServiceSVGs, 500);
 });
 
-// ===================================================
-// HERO SECTION ANIMATIONS WITH TIMELINE & SCROLLTRIGGER
-// ===================================================
 
-// Hero parallax on scroll with ScrollTrigger
 gsap.to('.hero', {
     backgroundPosition: '50% 100%',
     scrollTrigger: {
@@ -389,7 +370,7 @@ gsap.to('.hero', {
     }
 });
 
-// Hero elements timeline
+
 const heroElementsTimeline = gsap.timeline();
 heroElementsTimeline.from('.hero h2', {
     opacity: 0,
@@ -405,9 +386,6 @@ heroElementsTimeline.from('.hero h2', {
     immediateRender: false
 }, '-=0.5');
 
-// ===================================================
-// SCROLL-TRIGGERED SECTION ANIMATIONS WITH TIMELINES
-// ===================================================
 
 function createSectionTimeline(sectionSelector, headingSelector, paragraphSelector, cardSelector) {
     const sectionTimeline = gsap.timeline({
@@ -420,7 +398,7 @@ function createSectionTimeline(sectionSelector, headingSelector, paragraphSelect
 
     const words = document.querySelectorAll(`${sectionSelector} ${headingSelector} .heading-word`);
     
-    // Add heading animation
+
     if (words.length > 0) {
         sectionTimeline.from(words, {
             opacity: 0,
@@ -431,7 +409,7 @@ function createSectionTimeline(sectionSelector, headingSelector, paragraphSelect
         }, 0);
     }
 
-    // Add paragraph animation
+   
     if (paragraphSelector) {
         sectionTimeline.from(`${sectionSelector} ${paragraphSelector}`, {
             opacity: 0,
@@ -441,7 +419,7 @@ function createSectionTimeline(sectionSelector, headingSelector, paragraphSelect
         }, 0.3);
     }
 
-    // Add card/item animations
+   
     if (cardSelector) {
         const cards = document.querySelectorAll(`${sectionSelector} ${cardSelector}`);
         if (cards.length > 0) {
@@ -458,16 +436,11 @@ function createSectionTimeline(sectionSelector, headingSelector, paragraphSelect
     return sectionTimeline;
 }
 
-// Who We Are Section Timeline
 createSectionTimeline('.who-we-are', 'h2', 'p', '.who-we-are-card');
-
-// What We Do Section Timeline
 createSectionTimeline('.what-we-do', '.text-content h2', '.text-content p', null);
-
-// Our Work Section Timeline
 createSectionTimeline('.our-work', '.work-content h2', null, '.work-list li');
 
-// Our Services Section Timeline
+
 const servicesTimeline = gsap.timeline({
     scrollTrigger: {
         trigger: '.our-services',
@@ -487,7 +460,6 @@ if (servicesHeadingWords.length > 0) {
     }, 0);
 }
 
-// Contact Section Timeline
 const contactTimeline = gsap.timeline({
     scrollTrigger: {
         trigger: '.contact',
@@ -511,15 +483,12 @@ contactTimeline.from(contactWords, {
     ease: 'power2.out'
 }, 0.3);
 
-// ===================================================
-// MOTIONPATH ANIMATION - PARTICLES FOLLOWING PATH
-// ===================================================
 
 function createMotionPathAnimation(sectionSelector) {
     const section = document.querySelector(sectionSelector);
     if (!section) return;
 
-    // Create SVG with motion path
+  
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttribute('width', '100%');
     svg.setAttribute('height', '100%');
@@ -531,7 +500,7 @@ function createMotionPathAnimation(sectionSelector) {
     svg.style.zIndex = '0';
     svg.style.pointerEvents = 'none';
 
-    // Create curved path for particles to follow
+
     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     path.setAttribute('id', `motionPath-${sectionSelector}`);
     path.setAttribute('d', 'M0,300 Q250,100 500,300 T1000,300');
@@ -542,7 +511,7 @@ function createMotionPathAnimation(sectionSelector) {
     section.style.position = 'relative';
     section.insertBefore(svg, section.firstChild);
 
-    // Create circles that follow the motion path
+    
     ScrollTrigger.create({
         trigger: sectionSelector,
         start: 'top 70%',
@@ -553,7 +522,7 @@ function createMotionPathAnimation(sectionSelector) {
                 circle.setAttribute('fill', 'rgba(165, 116, 78, 0.4)');
                 svg.appendChild(circle);
 
-                // Timeline with MotionPath animation
+                
                 const mpTimeline = gsap.timeline({ repeat: -1 });
                 mpTimeline.to(circle, {
                     motionPath: {
@@ -575,9 +544,7 @@ function createMotionPathAnimation(sectionSelector) {
 createMotionPathAnimation('.who-we-are');
 createMotionPathAnimation('.our-work');
 
-// ===================================================
-// CANVAS REVEAL ANIMATION WITH TIMELINE
-// ===================================================
+
 
 function createCanvasReveal(sectionSelector, fillColor, revealType = 'circle') {
     const section = document.querySelector(sectionSelector);
@@ -613,7 +580,7 @@ function createCanvasReveal(sectionSelector, fillColor, revealType = 'circle') {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     if (revealType === 'circle') {
-        // Circle reveal with ScrollTrigger
+
         ScrollTrigger.create({
             trigger: section,
             start: 'top center',
@@ -710,9 +677,6 @@ createCanvasReveal('.our-work', '#A5744E', 'wipe-down');
 createCanvasReveal('.our-services', '#4D7994', 'diagonal');
 createCanvasReveal('.contact', '#A5744E', 'circle');
 
-// ===================================================
-// MOUSE BLUR EFFECT ON IMAGES
-// ===================================================
 
 document.querySelectorAll('.image-placeholder').forEach(img => {
     img.addEventListener('mousemove', (e) => {
@@ -736,9 +700,7 @@ document.querySelectorAll('.image-placeholder').forEach(img => {
     });
 });
 
-// ===================================================
-// PARTICLE EFFECT ANIMATION WITH TIMELINE
-// ===================================================
+
 
 function createParticles(sectionSelector) {
     ScrollTrigger.create({
@@ -748,7 +710,7 @@ function createParticles(sectionSelector) {
             const section = document.querySelector(sectionSelector);
             if (!section) return;
 
-            // Particle Timeline
+          
             const particleTimeline = gsap.timeline();
 
             for (let i = 0; i < 20; i++) {

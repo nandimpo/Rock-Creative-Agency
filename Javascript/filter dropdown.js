@@ -1,8 +1,3 @@
-// =====================================================
-// ROCK CREATIVE AGENCY - NAVBAR FILTER DROPDOWNS
-// Final Version – Fixed Audio-Visual Filter + Combined Logic + Global Visibility
-// =====================================================
-
 class NavigationFilter {
   constructor() {
     this.filters = { team: [], projects: [], services: [] };
@@ -28,7 +23,7 @@ class NavigationFilter {
       ],
       services: [
         "Public Relations",
-        "Audio-Visual",   // ✅ fixed from Audio-/-Visual
+        "Audio-Visual",
         "Branding",
         "Social Media",
         "Production",
@@ -45,7 +40,6 @@ class NavigationFilter {
     this.init();
   }
 
-  // ---------- INIT ----------
   init() {
     this.loadFilters();
     this.addArrows();
@@ -53,7 +47,6 @@ class NavigationFilter {
     this.setupListeners();
   }
 
-  // ---------- Add arrows beside About, Work, Services ----------
   addArrows() {
     const navMap = { About: "team", Work: "projects", Services: "services" };
     const navLinks = document.querySelectorAll(".nav-links a");
@@ -76,7 +69,6 @@ class NavigationFilter {
     });
   }
 
-  // ---------- Create dropdowns dynamically ----------
   createDropdowns() {
     Object.entries(this.categories).forEach(([key, items]) => {
       const dropdown = document.createElement("div");
@@ -90,26 +82,21 @@ class NavigationFilter {
       const options = document.createElement("div");
       options.className = "filter-options";
 
-      // ✅ Clean value creation (fix Audio-Visual bug)
       items.forEach((item) => {
         const label = document.createElement("label");
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.dataset.category = key;
-
-        // replace spaces/slashes/specials
         checkbox.value = item
-  .toLowerCase()
-  .replace(/[^\w\s-]/g, "")   // remove punctuation but keep spaces and hyphens
-  .replace(/[\s/]+/g, "-");   // convert spaces and slashes to hyphen
-
+          .toLowerCase()
+          .replace(/[^\w\s-]/g, "")
+          .replace(/[\s/]+/g, "-");
 
         label.appendChild(checkbox);
         label.append(" " + item);
         options.appendChild(label);
       });
 
-      // ---------- Action Buttons ----------
       const actions = document.createElement("div");
       actions.className = "filter-actions";
 
@@ -123,7 +110,6 @@ class NavigationFilter {
 
       actions.append(applyBtn, resetBtn);
 
-      // ---------- Unsplash API Section ----------
       const apiSection = document.createElement("div");
       apiSection.className = "filter-api-section";
       apiSection.innerHTML = `
@@ -137,9 +123,7 @@ class NavigationFilter {
     });
   }
 
-  // ---------- Event Listeners ----------
   setupListeners() {
-    // Toggle dropdown open/close
     document.addEventListener("click", (e) => {
       const wrapper = e.target.closest(".filter-arrow-wrapper");
       if (wrapper) {
@@ -151,7 +135,6 @@ class NavigationFilter {
       }
     });
 
-    // Apply filters
     document.addEventListener("click", (e) => {
       if (e.target.classList.contains("filter-apply-btn")) {
         this.collectFilters();
@@ -161,14 +144,12 @@ class NavigationFilter {
       }
     });
 
-    // Reset filters
     document.addEventListener("click", (e) => {
       if (e.target.classList.contains("filter-reset-btn")) {
         this.resetFilters();
       }
     });
 
-    // Unsplash API + Close gallery
     document.addEventListener("click", (e) => {
       if (e.target.classList.contains("filter-api-btn")) {
         const category = e.target.closest(".filter-dropdown")?.dataset.category;
@@ -186,7 +167,6 @@ class NavigationFilter {
     });
   }
 
-  // ---------- Dropdown Toggle ----------
   toggleDropdown(category) {
     const dropdown = document.querySelector(`.filter-dropdown[data-category='${category}']`);
     const arrow = document.querySelector(`.filter-arrow[data-category='${category}']`);
@@ -199,7 +179,6 @@ class NavigationFilter {
     dropdown.classList.add("active");
     arrow.classList.add("rotated");
 
-    // FIXED position for visibility across all pages
     const rect = arrow.getBoundingClientRect();
     dropdown.style.position = "fixed";
     dropdown.style.top = `${rect.bottom + 10}px`;
@@ -212,7 +191,6 @@ class NavigationFilter {
     document.querySelectorAll(".filter-arrow").forEach((a) => a.classList.remove("rotated"));
   }
 
-  // ---------- Filter Logic ----------
   collectFilters() {
     this.filters = { team: [], projects: [], services: [] };
     document.querySelectorAll(".filter-dropdown input:checked").forEach((cb) => {
@@ -230,7 +208,6 @@ class NavigationFilter {
     if (saved) this.filters = JSON.parse(saved);
   }
 
-  // ✅ Combined filter logic
   applyFilters() {
     const els = document.querySelectorAll(
       "[data-filter-team], [data-filter-projects], [data-filter-services]"
@@ -264,7 +241,6 @@ class NavigationFilter {
     }, 200);
   }
 
-  // ---------- Reset Filters ----------
   resetFilters() {
     document.querySelectorAll(".filter-dropdown input[type='checkbox']").forEach(
       (cb) => (cb.checked = false)
@@ -284,7 +260,6 @@ class NavigationFilter {
     );
   }
 
-  // ---------- UNSPLASH API ----------
   async fetchUnsplashImages(query) {
     try {
       const url = `${this.apiConfig.baseUrl}/search/photos?query=${encodeURIComponent(

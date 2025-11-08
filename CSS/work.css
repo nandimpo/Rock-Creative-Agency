@@ -1,6 +1,3 @@
-/* =====================================================
-   WORK HERO - CREATIVE ENERGY SURGE + ROCK SHATTER REVEAL
-   ===================================================== */
 
 .hero,
 .mountain-section {
@@ -25,7 +22,7 @@
   animation: heroFlow 10s ease-in-out infinite;
 }
 
-/* HERO TEXT */
+
 .hero h1,
 .hero h2,
 .mountain-section h1,
@@ -58,9 +55,7 @@
   100% { background-position: 0% 50%; }
 }
 
-/* =====================================================
-   ROCK SHATTER / CRUMBLE REVEAL
-   ===================================================== */
+
 
 .rock-overlay {
   position: absolute;
@@ -70,9 +65,7 @@
   transform-origin: center;
   display: block;
 }
-/* =====================================================
-   ROCK SHATTER GLOW FLASH EFFECT
-   ===================================================== */
+
 .crack-glow {
   position: absolute;
   inset: 0;
@@ -83,7 +76,7 @@
   pointer-events: none;
 }
 
-/* Each rock shard piece */
+
 .rock-shard {
   position: absolute;
   background: url('../Images/Home/rock.jpg') center/cover no-repeat;
@@ -100,7 +93,6 @@
 .shard-4 { bottom: 0; right: 0; clip-path: polygon(50% 50%, 100% 40%, 100% 100%, 40% 100%); }
 .shard-5 { inset: 20% 20%; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); opacity: 0.9; }
 
-/* Text intro animation (for gsap reveal) */
 .mountain-container h1 {
   font-size: 80px;
   text-transform: uppercase;
@@ -119,15 +111,12 @@
   transform: translateY(40px);
 }
 
-/* Pulse light subtle background */
 @keyframes pulseLight {
   0%, 100% { opacity: 0.85; filter: brightness(1); }
   50% { opacity: 1; filter: brightness(1.1); }
 }
 
-/* =====================================================
-   SPOTLIGHT EFFECT – STATIC BRIGHT TORCH
-   ===================================================== */
+
 .spotlight-canvas {
   position: fixed;
   top: 0;
@@ -158,9 +147,7 @@
   .mountain-section h1, .mountain-section h2 { transition: none !important; }
 }
 
-/* =====================================================
-   MAIN CONTENT
-   ===================================================== */
+
 main {
   padding: 80px 0;
   min-height: 100vh;
@@ -174,9 +161,7 @@ main {
   letter-spacing: 0.3px;
 }
 
-/* =====================================================
-   PORTFOLIO CONTAINER
-   ===================================================== */
+
 .portfolio-wrapper {
   position: relative;
   width: 100%;
@@ -197,9 +182,7 @@ main {
   display: none;
 }
 
-/* =====================================================
-   PORTFOLIO CARDS
-   ===================================================== */
+
 .portfolio-card {
   flex-shrink: 0;
   width: 320px;
@@ -295,9 +278,7 @@ main {
   width: 100%;
 }
 
-/* =====================================================
-   CARD DETAILS – MODAL REVEAL
-   ===================================================== */
+
 .card-details {
   position: absolute;
   top: 0;
@@ -399,9 +380,6 @@ body.modal-open {
   font-weight: 500;
 }
 
-/* =====================================================
-   SCROLL HINT
-   ===================================================== */
 .scroll-hint {
   text-align: center;
   color: #666;
@@ -415,9 +393,7 @@ body.modal-open {
   50% { opacity: 1; }
 }
 
-/* =====================================================
-   RESPONSIVE DESIGN
-   ===================================================== */
+
 @media (max-width: 1024px) {
   main { padding: 60px 50px; }
   .intro-text { padding: 0 50px 40px 50px; }
@@ -445,9 +421,7 @@ body.modal-open {
   .details-description { font-size: 12px; }
   .details-tags span { font-size: 11px; padding: 5px 10px; }
 }
-/* =====================================================
-   AMBIENT LIGHT FOLLOWER
-   ===================================================== */
+
 .ambient-light {
   position: fixed;
   top: 0;

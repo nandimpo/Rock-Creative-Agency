@@ -1,6 +1,4 @@
-// =====================================================
-// WORK.JS – Rock Shatter + Energy Reveal + Scroll + Ambient Light + Sound Flicker
-// =====================================================
+
 
 document.addEventListener("DOMContentLoaded", () => {
   gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
@@ -11,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const subtitle = document.querySelector(".mountain-container h2");
   const svgPaths = document.querySelectorAll(".mountain-svg path");
 
-  // =============== HERO TIMELINE (GSAP TIMELINE) ===============
+
   if (overlay && shards.length) {
     const glow = document.createElement("div");
     glow.classList.add("crack-glow");
@@ -19,11 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const tl = gsap.timeline({ delay: 0.6 });
 
-    // Golden flash crack
+    
     tl.to(glow, { opacity: 1, scale: 1.2, duration: 0.25, ease: "power2.inOut" })
       .to(glow, { opacity: 0, duration: 0.8, ease: "power2.out" }, "+=0.1");
 
-    // Shards scatter outward
+  
     shards.forEach((shard, i) => {
       const randomX = gsap.utils.random(-window.innerWidth * 0.3, window.innerWidth * 0.3);
       const randomY = gsap.utils.random(window.innerHeight * 0.3, window.innerHeight * 0.8);
@@ -39,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 0.2 + i * 0.08);
     });
 
-    // Screen shake + energy pulse
+    
     tl.to(overlay, {
       x: gsap.utils.random(-8, 8),
       y: gsap.utils.random(-8, 8),
@@ -49,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ease: "power1.inOut",
     }, 0.2);
 
-    // Fade overlay away
+  
     tl.to(overlay, {
       opacity: 0,
       duration: 1.2,
@@ -57,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
       onComplete: () => overlay.remove()
     }, "-=0.8");
 
-    // Reveal text
+  
     tl.fromTo([title, subtitle],
       { opacity: 0, y: 40, filter: "blur(6px)" },
       {
@@ -71,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "-=0.5"
     );
 
-    // Floating motion (continuous)
+
     gsap.to(title, {
       y: 10,
       duration: 3,
@@ -81,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // =============== SVG MOUNTAIN ANIMATION (MotionPath/SVG) ===============
+
   if (svgPaths.length) {
     svgPaths.forEach((path, i) => {
       const length = path.getTotalLength();
@@ -107,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // =============== PORTFOLIO ENERGIZED SCROLL ANIMATIONS (ScrollTrigger) ===============
+
   const cards = document.querySelectorAll(".portfolio-card");
   cards.forEach((card, i) => {
     gsap.from(card, {
@@ -125,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // =============== ENERGY ORB (MotionPath) ===============
+
   const energyOrb = document.createElement("div");
   energyOrb.classList.add("energy-orb");
   document.body.appendChild(energyOrb);
@@ -145,7 +143,6 @@ document.addEventListener("DOMContentLoaded", () => {
     yoyo: true,
   });
 
-  // =============== INTRO TEXT PULSE (ScrollTrigger + Timeline) ===============
   const pulse = gsap.timeline({
     scrollTrigger: {
       trigger: ".intro-text",
@@ -160,7 +157,6 @@ document.addEventListener("DOMContentLoaded", () => {
     .to(".intro-text", { textShadow: "0 0 20px rgba(242,210,117,0.6)", duration: 1.5, ease: "sine.inOut" })
     .to(".intro-text", { textShadow: "0 0 0px rgba(242,210,117,0.0)", duration: 1.2, ease: "sine.inOut" });
 
-  // =============== INTERACTIVE AMBIENT LIGHT FOLLOWER (Mouse-based) ===============
   const spotlight = document.createElement("div");
   spotlight.classList.add("ambient-light");
   document.body.appendChild(spotlight);
@@ -183,11 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ease: "sine.inOut",
   });
 
-  // =====================================================
-  // 🔊 NEW: AMBIENT LIGHT REACTIVITY + FLICKER ANIMATION
-  // =====================================================
 
-  // Scroll-based intensity change
   gsap.to(spotlight, {
     scrollTrigger: {
       trigger: ".portfolio-wrapper",
@@ -200,7 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ease: "sine.inOut",
   });
 
-  // Energy flicker effect (simulates electrical crackle)
+
   const flicker = gsap.timeline({ repeat: -1, repeatDelay: 3 });
   flicker
     .to(spotlight, { opacity: 1, duration: 0.05 })
@@ -209,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .to(spotlight, { opacity: 0.5, duration: 0.09 })
     .to(spotlight, { opacity: 0.85, duration: 0.1 });
 
-  // On click – flash effect (like energy surge)
+ 
   window.addEventListener("click", () => {
     gsap.fromTo(spotlight,
       { opacity: 1, scale: 1 },

@@ -1,4 +1,3 @@
-// Portfolio Dropdown & Horizontal Scroll Functionality
 
 document.addEventListener('DOMContentLoaded', function() {
     const portfolioContainer = document.querySelector('.portfolio-container');
@@ -9,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let startX;
     let scrollLeft;
 
-    // Mouse wheel horizontal scrolling
+   
     portfolioContainer.addEventListener('wheel', function(e) {
         if (e.deltaY !== 0) {
             e.preventDefault();
@@ -17,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Mouse drag scrolling
+
     portfolioContainer.addEventListener('mousedown', (e) => {
         isDown = true;
         portfolioContainer.style.cursor = 'grabbing';
@@ -43,7 +42,6 @@ document.addEventListener('DOMContentLoaded', function() {
         portfolioContainer.scrollLeft = scrollLeft - walk;
     });
 
-    // Open details on button click
     seeMoreButtons.forEach(button => {
         button.addEventListener('click', function(e) {
             e.stopPropagation();
@@ -53,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Close details on X click
+   
     closeButtons.forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.stopPropagation();
@@ -62,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Close details when clicking outside the card
+ 
     document.addEventListener('click', function(e) {
         if (!e.target.closest('.portfolio-card')) {
             const openDetails = document.querySelectorAll('.card-details:not(.hidden)');
@@ -72,7 +70,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Close details when clicking elsewhere on the card
     const portfolioCards = document.querySelectorAll('.portfolio-card');
     portfolioCards.forEach(card => {
         const cardContent = card.querySelector('.card-content');
