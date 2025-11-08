@@ -81,6 +81,7 @@ main {
     transform: scale(1.05);
 }
 
+
 @media (max-width: 1024px) {
     main {
         padding: 60px 50px;
@@ -156,7 +157,7 @@ main {
   white-space: nowrap;
   background: var(--primary-blue);
   color: var(--neutral-light);
-  padding: 10px 22px;            
+  padding: 10px 22px;          
   border-radius: 40px;
   font-size: 14px;
   font-family: "Avenir LT Pro", sans-serif;
@@ -238,4 +239,3 @@ main {
 body.aside-open {
   overflow: hidden;
 }
-

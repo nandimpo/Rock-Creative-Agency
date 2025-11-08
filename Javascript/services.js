@@ -1,26 +1,17 @@
+
 gsap.registerPlugin(ScrollTrigger);
-
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-if (prefersReducedMotion) gsap.globalTimeline.timeScale(0.6);
-
-
-function responsiveDuration(base) {
-  return window.innerWidth < 600 ? base * 0.8 : base;
-}
 
 
 document.querySelectorAll(".service-item").forEach((item, i) => {
   gsap.from(item, {
     opacity: 0,
     y: 60,
-    duration: responsiveDuration(1),
+    duration: 1,
     delay: i * 0.2,
-    ease: "power2.out",
     scrollTrigger: {
       trigger: item,
-      start: "top 85%",
+      start: "top 80%",
       toggleActions: "play none none reverse",
-      once: false,
     },
   });
 });
@@ -36,28 +27,16 @@ document.querySelectorAll(".service-item").forEach((item) => {
     { opacity: 1, scale: 1, duration: 0.8, ease: "power3.out" }
   );
 
-  const triggerAnim = () => tl.play();
-  const reverseAnim = () => tl.reverse();
-
-  item.addEventListener("mouseenter", triggerAnim);
-  item.addEventListener("mouseleave", reverseAnim);
-  item.addEventListener("focusin", triggerAnim);
-  item.addEventListener("focusout", reverseAnim);
-
-  item.setAttribute("tabindex", "0"); 
-  item.setAttribute("role", "group");
-  item.setAttribute("aria-label", item.querySelector(".service-title")?.textContent || "Service item");
+  item.addEventListener("mouseenter", () => tl.play());
+  item.addEventListener("mouseleave", () => tl.reverse());
 });
+
 
 const aside = document.createElement("aside");
 aside.classList.add("service-aside");
-aside.setAttribute("role", "dialog");
-aside.setAttribute("aria-modal", "true");
-aside.setAttribute("aria-hidden", "true");
-aside.setAttribute("tabindex", "-1");
 aside.innerHTML = `
-  <div class="aside-content" role="document">
-    <button class="close-aside" aria-label="Close service details">×</button>
+  <div class="aside-content">
+    <button class="close-aside">×</button>
     <h2 class="aside-title"></h2>
     <p class="aside-text"></p>
   </div>
@@ -80,65 +59,56 @@ document.querySelectorAll(".service-item").forEach((item) => {
   const discoverBtn = document.createElement("button");
   discoverBtn.classList.add("discover-btn");
   discoverBtn.textContent = "DISCOVER MORE";
-  discoverBtn.setAttribute("aria-haspopup", "dialog");
-  discoverBtn.setAttribute("aria-controls", "service-aside");
-  discoverBtn.setAttribute("aria-expanded", "false");
-  discoverBtn.classList.add("focus-outline");
   item.querySelector(".service-content").appendChild(discoverBtn);
 
   discoverBtn.addEventListener("click", (e) => {
     e.stopPropagation();
     const key = item.getAttribute("data-filter-services");
     const title = item.querySelector(".service-title").textContent;
+
     aside.querySelector(".aside-title").textContent = title;
     aside.querySelector(".aside-text").textContent =
       serviceInfo[key] || "More information coming soon.";
-    openAside(discoverBtn);
+
+    openAside();
   });
 });
 
 
-let lastFocusedElement = null;
-
-const openAside = (triggerBtn) => {
-  lastFocusedElement = triggerBtn;
-  gsap.to(".service-aside", { x: 0, duration: 0.8, ease: "power4.out" });
-  gsap.fromTo(".aside-content", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.6, delay: 0.2 });
-  aside.setAttribute("aria-hidden", "false");
+const openAside = () => {
+  gsap.to(".service-aside", {
+    x: 0,
+    duration: 0.8,
+    ease: "power4.out",
+  });
+  gsap.fromTo(
+    ".aside-content",
+    { opacity: 0, y: 50 },
+    { opacity: 1, y: 0, duration: 0.6, delay: 0.2 }
+  );
   document.body.classList.add("aside-open");
-  aside.focus();
-  triggerBtn.setAttribute("aria-expanded", "true");
 };
 
 const closeAside = () => {
-  gsap.to(".service-aside", { x: "100%", duration: 0.6, ease: "power4.inOut" });
-  aside.setAttribute("aria-hidden", "true");
+  gsap.to(".service-aside", {
+    x: "100%",
+    duration: 0.8,
+    ease: "power4.inOut",
+  });
   document.body.classList.remove("aside-open");
-  if (lastFocusedElement) lastFocusedElement.focus();
-  lastFocusedElement?.setAttribute("aria-expanded", "false");
 };
 
-
 document.addEventListener("click", (e) => {
-  if (document.body.classList.contains("aside-open") && !e.target.closest(".aside-content")) {
+  if (
+    document.body.classList.contains("aside-open") &&
+    !e.target.closest(".aside-content")
+  ) {
     closeAside();
   }
 });
 
 
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && document.body.classList.contains("aside-open")) {
-    closeAside();
-  }
-});
-
-
-aside.querySelector(".close-aside").addEventListener("click", closeAside);
+document.querySelector(".close-aside").addEventListener("click", closeAside);
 
 
 gsap.set(".service-aside", { x: "100%" });
-
-
-window.addEventListener("resize", () => {
-  ScrollTrigger.refresh();
-});
