@@ -1,6 +1,4 @@
-/* =============================
-   HERO & MOUNTAIN SECTION
-============================= */
+
 .hero,
 .mountain-section {
   background: radial-gradient(circle at center, #111A18 0%, #000 100%);
@@ -12,7 +10,7 @@
   justify-content: center;
   align-items: center;
   color: #E2DCCC;
-  margin-top: -2px; /* ✅ Fix gap under navbar */
+  margin-top: -2px; 
   top: 0;
 }
 
@@ -58,9 +56,7 @@
   100% { background-position: 0% 50%; }
 }
 
-/* =============================
-   ROCK TEXTURES & EFFECTS
-============================= */
+
 .rock-overlay {
   position: absolute;
   top: 0;
@@ -122,9 +118,7 @@
   50% { opacity: 1; filter: brightness(1.1); }
 }
 
-/* =============================
-   LIGHT EFFECTS
-============================= */
+
 .spotlight-canvas {
   position: fixed;
   top: 0;
@@ -155,9 +149,7 @@
   .mountain-section h1, .mountain-section h2 { transition: none !important; }
 }
 
-/* =============================
-   MAIN CONTENT
-============================= */
+
 main {
   padding: 80px 0;
   min-height: 100vh;
@@ -165,16 +157,16 @@ main {
 }
 
 .intro-text {
-  padding: 0 150px 40px 150px;
-  font-size: 16px;
-  line-height: 1.8;
-  color: #333;
-  letter-spacing: 0.3px;
+  padding: 0 150px 60px 150px;
+  font-size: 32px;
+  line-height: 1.4;
+  color: #111A18;
+  text-align: center;
+  font-weight: 500;
+  letter-spacing: 0.5px;
 }
 
-/* =============================
-   PORTFOLIO SECTION
-============================= */
+
 .portfolio-wrapper {
   position: relative;
   width: 100%;
@@ -290,9 +282,7 @@ main {
   width: 100%;
 }
 
-/* =============================
-   CARD DETAILS MODAL
-============================= */
+
 .card-details {
   position: absolute;
   top: 0;
@@ -394,9 +384,7 @@ body.modal-open {
   font-weight: 500;
 }
 
-/* =============================
-   SCROLL HINT
-============================= */
+
 .scroll-hint {
   text-align: center;
   color: #666;
@@ -410,9 +398,7 @@ body.modal-open {
   50% { opacity: 1; }
 }
 
-/* =============================
-   RESPONSIVE STYLES
-============================= */
+
 @media (max-width: 1024px) {
   main { padding: 60px 50px; }
   .intro-text { padding: 0 50px 40px 50px; }
@@ -441,9 +427,7 @@ body.modal-open {
   .details-tags span { font-size: 11px; padding: 5px 10px; }
 }
 
-/* =============================
-   AMBIENT LIGHT EFFECT
-============================= */
+
 .ambient-light {
   position: fixed;
   top: 0;
@@ -460,9 +444,7 @@ body.modal-open {
   transition: opacity 0.3s ease;
 }
 
-/* =============================
-   NAVBAR GAP FIX
-============================= */
+
 header {
   margin: 0;
   padding: 0;
