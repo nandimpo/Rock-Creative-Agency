@@ -1,440 +1,465 @@
 /* =====================================================
-   WORK.CSS - Work Page Specific Styles
+   WORK HERO - CREATIVE ENERGY SURGE + ROCK SHATTER REVEAL
    ===================================================== */
 
-/* ==================== HEADER OVERRIDE FOR WORK ==================== */
-header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 50px;
-    background-color: rgba(17, 26, 24, 0.98);
-    z-index: 1000;
-    border-bottom: 1px solid rgba(165, 116, 78, 0.3);
-    backdrop-filter: blur(10px);
+.hero,
+.mountain-section {
+  background: radial-gradient(circle at center, #111A18 0%, #000 100%);
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #E2DCCC;
 }
 
-header div {
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+.hero::before,
+.mountain-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(165,116,78,0.3));
+  z-index: 1;
+  animation: heroFlow 10s ease-in-out infinite;
 }
 
-header img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 2px solid var(--primary-brown);
-    padding: 8px;
-    object-fit: contain;
-    box-sizing: border-box;
+/* HERO TEXT */
+.hero h1,
+.hero h2,
+.mountain-section h1,
+.mountain-section h2 {
+  position: relative;
+  z-index: 5;
+  text-align: center;
 }
 
-nav {
-    display: flex;
-    list-style: none;
-    gap: 0;
-    margin: 0;
-    padding: 0;
+.hero h1,
+.mountain-section h1 {
+  font-size: 80px;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  text-shadow: 0 0 20px rgba(242,210,117,0.4);
 }
 
-nav a {
-    color: #E2DCCC;
-    text-decoration: none;
-    margin-left: 35px;
-    font-size: 14px;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
+.hero h2,
+.mountain-section h2 {
+  font-size: 22px;
+  color: #F2D275;
+  opacity: 0.9;
+  letter-spacing: 2px;
+  margin-top: 10px;
 }
 
-nav a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--primary-brown);
-    transition: width 0.3s ease;
+@keyframes heroFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-nav a:hover {
-    color: var(--primary-brown);
+/* =====================================================
+   ROCK SHATTER / CRUMBLE REVEAL
+   ===================================================== */
+
+.rock-overlay {
+  position: absolute;
+  inset: 0;
+  background: url('../Images/Home/rock.jpg') center/cover no-repeat;
+  z-index: 4;
+  transform-origin: center;
+  display: block;
+}
+/* =====================================================
+   ROCK SHATTER GLOW FLASH EFFECT
+   ===================================================== */
+.crack-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255,255,200,0.8) 0%, rgba(242,210,117,0.4) 30%, rgba(0,0,0,0) 70%);
+  opacity: 0;
+  z-index: 6;
+  mix-blend-mode: screen;
+  pointer-events: none;
 }
 
-nav a:hover::after {
-    width: 100%;
+/* Each rock shard piece */
+.rock-shard {
+  position: absolute;
+  background: url('../Images/Home/rock.jpg') center/cover no-repeat;
+  width: 50%;
+  height: 50%;
+  opacity: 1;
+  z-index: 5;
+  transition: transform 1.8s ease-in-out, opacity 1s ease-in-out;
 }
 
-/* ==================== HERO SECTION ==================== */
-.hero {
-    margin-top: 90px;
-    height: 50vh;
-    background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(165, 116, 78, 0.4)), 
-                url('../Images/Home/rock.jpg') center/cover;
-    background-color: #1a3f2f;
+.shard-1 { top: 0; left: 0; clip-path: polygon(0 0, 60% 0, 50% 50%, 0 60%); }
+.shard-2 { top: 0; right: 0; clip-path: polygon(40% 0, 100% 0, 100% 60%, 50% 50%); }
+.shard-3 { bottom: 0; left: 0; clip-path: polygon(0 40%, 50% 50%, 60% 100%, 0 100%); }
+.shard-4 { bottom: 0; right: 0; clip-path: polygon(50% 50%, 100% 40%, 100% 100%, 40% 100%); }
+.shard-5 { inset: 20% 20%; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); opacity: 0.9; }
+
+/* Text intro animation (for gsap reveal) */
+.mountain-container h1 {
+  font-size: 80px;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  text-shadow: 0 0 25px rgba(242,210,117,0.5);
+  opacity: 0;
+  transform: translateY(40px);
 }
 
-/* ==================== MAIN CONTENT ==================== */
+.mountain-container h2 {
+  font-size: 24px;
+  color: #F2D275;
+  opacity: 0;
+  letter-spacing: 2px;
+  margin-top: 10px;
+  transform: translateY(40px);
+}
+
+/* Pulse light subtle background */
+@keyframes pulseLight {
+  0%, 100% { opacity: 0.85; filter: brightness(1); }
+  50% { opacity: 1; filter: brightness(1.1); }
+}
+
+/* =====================================================
+   SPOTLIGHT EFFECT – STATIC BRIGHT TORCH
+   ===================================================== */
+.spotlight-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1500;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.mountain-section h1,
+.mountain-section h2 {
+  position: relative;
+  z-index: 2000;
+  mix-blend-mode: screen;
+}
+
+.mountain-section::before {
+  z-index: 1000;
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0,0,0,0.96), #000);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spotlight-canvas { display: none !important; }
+  .mountain-section h1, .mountain-section h2 { transition: none !important; }
+}
+
+/* =====================================================
+   MAIN CONTENT
+   ===================================================== */
 main {
-    padding: 80px 0;
-    min-height: 100vh;
+  padding: 80px 0;
+  min-height: 100vh;
 }
 
 .intro-text {
-    padding: 0 150px 40px 150px;
-    font-size: 16px;
-    line-height: 1.8;
-    color: #333;
-    letter-spacing: 0.3px;
+  padding: 0 150px 40px 150px;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #333;
+  letter-spacing: 0.3px;
 }
 
-/* ==================== PORTFOLIO SCROLL CONTAINER ==================== */
+/* =====================================================
+   PORTFOLIO CONTAINER
+   ===================================================== */
 .portfolio-wrapper {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
 }
 
 .portfolio-container {
-    display: flex;
-    gap: 30px;
-    padding: 0 150px;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-    padding-bottom: 40px;
+  display: flex;
+  gap: 30px;
+  padding: 0 150px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding-bottom: 40px;
 }
 
 .portfolio-container::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
-/* ==================== PORTFOLIO CARD STYLES ==================== */
+/* =====================================================
+   PORTFOLIO CARDS
+   ===================================================== */
 .portfolio-card {
-    flex-shrink: 0;
-    width: 320px;
-    height: 380px;
-    background: white;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-    transition: all 0.3s ease;
-    cursor: pointer;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  flex-shrink: 0;
+  width: 320px;
+  height: 380px;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .portfolio-card:hover {
-    transform: translateY(-15px);
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+  transform: translateY(-15px);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
 }
 
 .card-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
 .portfolio-card:hover .card-image {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .card-content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-    padding: 40px 20px 20px;
-    color: white;
-    text-align: center;
-    transform: translateY(20px);
-    transition: transform 0.3s ease;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  padding: 40px 20px 20px;
+  color: white;
+  text-align: center;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
 }
 
 .portfolio-card:hover .card-content {
-    transform: translateY(0);
+  transform: translateY(0);
 }
 
 .card-content h2 {
-    font-size: 24px;
-    margin: 0 0 8px 0;
-    color: white;
-    letter-spacing: 1px;
+  font-size: 24px;
+  margin: 0 0 8px 0;
+  color: white;
+  letter-spacing: 1px;
 }
 
 .card-content p {
-    font-size: 13px;
-    color: #E2DCCC;
-    margin: 0 0 15px 0;
+  font-size: 13px;
+  color: #E2DCCC;
+  margin: 0 0 15px 0;
 }
 
 .card-content a,
 .card-content button {
-    display: inline-block;
-    color: #F2D275;
-    text-decoration: none;
-    font-size: 13px;
-    transition: all 0.3s ease;
-    position: relative;
-    font-weight: 500;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
+  display: inline-block;
+  color: #F2D275;
+  text-decoration: none;
+  font-size: 13px;
+  transition: all 0.3s ease;
+  position: relative;
+  font-weight: 500;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .card-content a::after,
 .card-content button::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #F2D275;
-    transition: width 0.3s ease;
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #F2D275;
+  transition: width 0.3s ease;
 }
 
 .card-content a:hover::after,
 .card-content button:hover::after {
-    width: 100%;
+  width: 100%;
 }
 
-/* ==================== CARD DETAILS DROPDOWN ==================== */
+/* =====================================================
+   CARD DETAILS – MODAL REVEAL
+   ===================================================== */
 .card-details {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(77, 121, 148, 0.95), rgba(165, 116, 78, 0.95));
-    padding: 30px;
-    color: white;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    overflow-y: auto;
-    z-index: 10;
-    animation: slideDown 0.4s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(77,121,148,0.95), rgba(165,116,78,0.95));
+  padding: 30px;
+  color: white;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-y: auto;
+  z-index: 10;
+  animation: slideDown 0.4s ease;
 }
 
 .card-details.hidden {
-    display: none;
+  display: none;
+}
+
+.card-details.open {
+  position: fixed;
+  display: flex;
+  width: min(1000px, 94%);
+  max-height: calc(100vh - 120px);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 18px;
+  z-index: 9999;
+  overflow-y: auto;
+  padding: 28px 36px;
+  backdrop-filter: blur(6px);
+}
+
+body.modal-open {
+  overflow: hidden;
 }
 
 @keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .details-close {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 28px;
-    cursor: pointer;
-    color: #F2D275;
-    transition: all 0.3s ease;
-    background: none;
-    border: none;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #F2D275;
+  transition: all 0.3s ease;
+  background: none;
+  border: none;
+  z-index: 10000;
 }
 
 .details-close:hover {
-    color: #E2DCCC;
+  color: #E2DCCC;
 }
 
 .card-details h3 {
-    font-size: 28px;
-    margin: 0 0 8px 0;
-    letter-spacing: 1px;
-    color: white;
+  font-size: 28px;
+  margin: 0 0 8px 0;
+  letter-spacing: 1px;
+  color: white;
 }
 
 .details-category {
-    font-size: 13px;
-    color: #F2D275;
-    margin: 0 0 20px 0;
-    font-weight: 500;
+  font-size: 13px;
+  color: #F2D275;
+  margin: 0 0 20px 0;
+  font-weight: 500;
 }
 
 .details-description {
-    font-size: 14px;
-    line-height: 1.7;
-    margin: 0 0 25px 0;
-    color: #E2DCCC;
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0 0 25px 0;
+  color: #E2DCCC;
 }
 
 .details-tags {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
 }
 
 .details-tags span {
-    background: rgba(242, 208, 117, 0.2);
-    border: 1px solid #F2D075;
-    color: #F2D275;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 500;
+  background: rgba(242, 208, 117, 0.2);
+  border: 1px solid #F2D075;
+  color: #F2D275;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
 }
 
-/* ==================== SCROLL HINT ==================== */
+/* =====================================================
+   SCROLL HINT
+   ===================================================== */
 .scroll-hint {
-    text-align: center;
-    color: #666;
-    font-size: 14px;
-    margin-top: 20px;
-    animation: pulse 2s infinite;
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+  margin-top: 20px;
+  animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 1; }
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
 }
 
-/* ==================== RESPONSIVE DESIGN ==================== */
+/* =====================================================
+   RESPONSIVE DESIGN
+   ===================================================== */
 @media (max-width: 1024px) {
-    header {
-        padding: 15px 30px;
-    }
-
-    nav a {
-        margin-left: 20px;
-        font-size: 13px;
-    }
-
-    main {
-        padding: 60px 50px;
-    }
-
-    .intro-text {
-        padding: 0 50px 40px 50px;
-    }
-
-    .portfolio-container {
-        padding: 0 50px;
-    }
+  main { padding: 60px 50px; }
+  .intro-text { padding: 0 50px 40px 50px; }
+  .portfolio-container { padding: 0 50px; }
 }
 
 @media (max-width: 768px) {
-    header {
-        padding: 15px 20px;
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    nav {
-        flex-wrap: wrap;
-        gap: 1.25rem;
-        justify-content: center;
-    }
-
-    nav a {
-        margin-left: 0;
-        font-size: 12px;
-    }
-
-    main {
-        padding: 40px 30px;
-    }
-
-    .intro-text {
-        padding: 0 30px 40px 30px;
-    }
-
-    .portfolio-container {
-        padding: 0 30px;
-        gap: 20px;
-    }
-
-    .portfolio-card {
-        width: 280px;
-        height: 340px;
-    }
-
-    .card-content h2 {
-        font-size: 20px;
-    }
-
-    .card-content p {
-        font-size: 12px;
-    }
-
-    .card-details h3 {
-        font-size: 24px;
-    }
+  main { padding: 40px 30px; }
+  .intro-text { padding: 0 30px 40px 30px; }
+  .portfolio-container { padding: 0 30px; gap: 20px; }
+  .portfolio-card { width: 280px; height: 340px; }
+  .card-content h2 { font-size: 20px; }
+  .card-content p { font-size: 12px; }
+  .card-details h3 { font-size: 24px; }
 }
 
 @media (max-width: 480px) {
-    header {
-        padding: 12px 15px;
-    }
-
-    nav a {
-        margin-left: 0;
-        font-size: 11px;
-    }
-
-    main {
-        padding: 30px 20px;
-    }
-
-    .intro-text {
-        padding: 0 20px 40px 20px;
-        font-size: 14px;
-    }
-
-    .portfolio-container {
-        padding: 0 20px;
-        gap: 15px;
-    }
-
-    .portfolio-card {
-        width: 250px;
-        height: 300px;
-    }
-
-    .card-content h2 {
-        font-size: 18px;
-    }
-
-    .card-content p {
-        font-size: 11px;
-    }
-
-    .card-details h3 {
-        font-size: 20px;
-    }
-
-    .details-description {
-        font-size: 12px;
-    }
-
-    .details-tags span {
-        font-size: 11px;
-        padding: 5px 10px;
-    }
+  main { padding: 30px 20px; }
+  .intro-text { padding: 0 20px 40px 20px; font-size: 14px; }
+  .portfolio-container { padding: 0 20px; gap: 15px; }
+  .portfolio-card { width: 250px; height: 300px; }
+  .card-content h2 { font-size: 18px; }
+  .card-content p { font-size: 11px; }
+  .card-details h3 { font-size: 20px; }
+  .details-description { font-size: 12px; }
+  .details-tags span { font-size: 11px; padding: 5px 10px; }
+}
+/* =====================================================
+   AMBIENT LIGHT FOLLOWER
+   ===================================================== */
+.ambient-light {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(242,210,117,0.25) 0%, rgba(242,210,117,0.15) 40%, transparent 80%);
+  filter: blur(60px);
+  z-index: 1000;
+  mix-blend-mode: screen;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
 }
