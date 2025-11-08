@@ -325,12 +325,13 @@ function initTextRevealAnimation() {
     const heading = document.querySelector('.team-section h2');
 
     if (heading) {
-        const text = heading.textContent;
+        const text = heading.textContent.trim();
         heading.textContent = '';
 
-        gsap.utils.toArray(text.split('').forEach((char, index) => {
+        // Split into characters, but preserve spaces visually
+        text.split('').forEach((char, index) => {
             const span = document.createElement('span');
-            span.textContent = char;
+            span.textContent = char === ' ' ? '\u00A0' : char; // ✅ Non-breaking space fix
             span.style.opacity = '0';
             span.style.display = 'inline-block';
             heading.appendChild(span);
@@ -338,17 +339,19 @@ function initTextRevealAnimation() {
             gsap.to(span, {
                 scrollTrigger: {
                     trigger: '.team-section',
-                    start: 'top 70%',
+                    start: 'top 75%',
                     toggleActions: 'play none none reverse',
                 },
                 opacity: 1,
+                y: 0,
                 duration: 0.05,
                 delay: index * 0.02,
                 ease: 'power1.out',
             });
-        }));
+        });
     }
 }
+
 
 // ============================================================
 // 9. SECTION TRANSITION - Dissolve Effect

@@ -221,11 +221,12 @@
     border-bottom: 3px solid var(--primary-brown);
     padding-bottom: 30px;
     display: block;
-    white-space: normal;
-    word-spacing: normal;
-    max-width: 100%;
     text-align: center;
+    word-spacing: 20px;       /* ✅ adds space between words */
+    letter-spacing: 1.5px;    /* ✅ slight letter spacing for elegance */
+    line-height: 1.3;
 }
+
 
 .team-grid {
     display: grid;
