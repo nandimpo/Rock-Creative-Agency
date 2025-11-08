@@ -9,31 +9,31 @@
     <link rel="stylesheet" href="../CSS/main.css">
     <link rel="stylesheet" href="../CSS/contact.css">
     <link rel="stylesheet" href="../CSS/mountain.css">
-    <link rel="stylesheet" href="../CSS/filter system.css">
+    <link rel="stylesheet" href="../CSS/filter dropdown.css">
 </head>
 
 <body>
-    <!-- ================= HEADER ================= -->
-    <header>
-        <div>
-            <img src="../Images/Logo.png" alt="R Logo">
-        </div>
-        <nav>
-            <a href="../index.html">Home</a>
-            <a href="../About/about.html">About</a>
-            <a href="../Expertise/expertise.html">Expertise</a>
-            <a href="../Work/work.html">Work</a>
-            <a href="../Services/services.html">Services</a>
-            <a href="../Contact/contact.html" class="active">Expertise</a> 
-        </nav>
-    </header>
+    <header class="navbar">
+    <div class="logo">
+        <img src="../Images/Logo.png" alt="R Logo">
+    </div>
+    <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../About/about.html">About</a></li>
+        <li><a href="../Expertise/expertise.html">Expertise</a></li>
+        <li><a href="../Work/work.html">Work</a></li>
+        <li><a href="../Services/services.html">Services</a></li>
+        <li><a href="../Contact/contact.html" class="active">Contact</a></li>
+    </ul>
+</header>
+
 
     <!-- ================= HERO SECTION WITH SVG MOUNTAIN ================= -->
     <section class="mountain-section" style="background-image: url('../Images/Home/rock.jpg');">
         <div class="mountain-container">
             <div class="mountain-content">
                 <h1>Contact</h1>
-                <h2>Why not say Hi to us? We love to hear from you.</h2>
+                <h2>Why not say Hi to us? We'd love to hear from you.</h2>
             </div>
 
             <!-- SVG Mountain Animation -->
@@ -83,8 +83,8 @@
     <!-- ================= FOOTER ================= -->
     <footer>
         <div>
-            <a href="https://linkedin.com" target="_blank">in</a>
-            <a href="https://instagram.com" target="_blank">ig</a>
+            <a href="https://linkedin.com" target="_blank">Linkedin</a>
+            <a href="https://instagram.com" target="_blank">Instagram</a>
         </div>
         <nav>
             <a href="../index.html">Home</a>
@@ -106,7 +106,7 @@
     <script src="../Javascript/mountain.js"></script>
 
     <!-- Custom Scripts -->
-    <script src="../Javascript/filter system.js"></script>
+    <script src="../Javascript/filter dropdown.js"></script>
     <script src="../Javascript/form-validation.js"></script>
     <script src="../Javascript/contact.js"></script>
 

@@ -1,139 +1,174 @@
 // =====================================================
-// CONTACT-ANIMATIONS.JS
+// CONTACT.JS – Cinematic Fog + Contact Reveal (Hero Pin Version)
 // =====================================================
 
 document.addEventListener("DOMContentLoaded", () => {
-  // HERO TIMELINE ANIMATION ============================
-  const heroTimeline = gsap.timeline({ defaults: { ease: "power2.out", duration: 1.2 } });
+  gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
-  heroTimeline
-    .from(".mountain-section h1", { y: 100, opacity: 0 })
-    .from(".mountain-section h2", { y: 50, opacity: 0 }, "-=0.8")
-    .from(".mountain-svg", { opacity: 0, scale: 0.95 }, "-=0.6");
+  const hero = document.querySelector(".mountain-section");
+  const contact = document.querySelector(".contact-section");
+  const footer = document.querySelector("footer");
+  if (!hero || !contact) return;
 
-  // MOTION PATH (Floating rock symbol) ==================
-  const floatingRock = document.createElement("div");
-  floatingRock.classList.add("floating-rock");
-  document.body.appendChild(floatingRock);
+  // ======================
+  // 1️⃣ DARK FOG LIFT REVEAL
+  // ======================
 
-  gsap.set(floatingRock, {
-    width: 25,
-    height: 25,
-    background: "#A5744E",
-    borderRadius: "50%",
-    position: "absolute",
-    top: "60%",
-    left: "20%",
-    opacity: 0.8,
-    boxShadow: "0 0 10px rgba(165,116,78,0.5)"
-  });
+  const smokeCanvas = document.createElement("canvas");
+  smokeCanvas.classList.add("dark-smoke-layer");
+  hero.appendChild(smokeCanvas);
 
-  gsap.to(floatingRock, {
-    motionPath: {
-      path: [
-        { x: 100, y: -80 },
-        { x: 300, y: 0 },
-        { x: 500, y: -60 },
-        { x: 700, y: 20 },
-      ],
-      curviness: 1.5,
-      autoRotate: false
-    },
-    ease: "sine.inOut",
-    duration: 10,
-    repeat: -1,
-    yoyo: true
-  });
+  const ctx = smokeCanvas.getContext("2d");
+  let w, h, smokes = [];
 
-  // SCROLLTRIGGER ANIMATIONS ============================
-  gsap.registerPlugin(ScrollTrigger);
-
-  gsap.to(".contact-section", {
-    scrollTrigger: {
-      trigger: ".contact-section",
-      start: "top 80%",
-      toggleActions: "play none none none"
-    },
-    opacity: 1,
-    y: 0,
-    duration: 1
-  });
-
-  gsap.to(".contact-left", {
-    scrollTrigger: {
-      trigger: ".contact-left",
-      start: "top 85%"
-    },
-    x: 0,
-    opacity: 1,
-    duration: 1.2,
-    ease: "power3.out"
-  });
-
-  gsap.to(".contact-right", {
-    scrollTrigger: {
-      trigger: ".contact-right",
-      start: "top 85%"
-    },
-    x: 0,
-    opacity: 1,
-    duration: 1.2,
-    ease: "power3.out"
-  });
-
-  gsap.to("footer", {
-    scrollTrigger: {
-      trigger: "footer",
-      start: "top 90%"
-    },
-    opacity: 1,
-    y: 0,
-    duration: 1,
-    ease: "power2.out"
-  });
-
-  // CANVAS BACKGROUND ==================================
-  const canvas = document.createElement("canvas");
-  canvas.classList.add("hero-canvas");
-  document.querySelector(".mountain-section").appendChild(canvas);
-  const ctx = canvas.getContext("2d");
-
-  let particles = [];
-  let w, h;
-
-  function resizeCanvas() {
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = window.innerHeight;
+  function resize() {
+    w = smokeCanvas.width = hero.offsetWidth;
+    h = smokeCanvas.height = hero.offsetHeight;
   }
 
-  window.addEventListener("resize", resizeCanvas);
-  resizeCanvas();
+  window.addEventListener("resize", resize);
+  resize();
 
-  for (let i = 0; i < 40; i++) {
-    particles.push({
+  // Generate fog particles
+  for (let i = 0; i < 80; i++) {
+    smokes.push({
       x: Math.random() * w,
       y: Math.random() * h,
-      r: Math.random() * 2 + 1,
-      dx: (Math.random() - 0.5) * 0.4,
-      dy: (Math.random() - 0.5) * 0.4
+      r: Math.random() * 200 + 100,
+      growth: Math.random() * 0.3 + 0.2,
+      alpha: Math.random() * 0.4 + 0.2,
+      driftX: (Math.random() - 0.5) * 0.3,
+      driftY: (Math.random() - 0.8) * 0.5
     });
   }
 
-  function animateParticles() {
-    ctx.clearRect(0, 0, w, h);
-    ctx.fillStyle = "rgba(165,116,78,0.35)";
-    particles.forEach(p => {
+  function drawSmoke() {
+    ctx.fillStyle = "rgba(17,26,24,0.06)";
+    ctx.fillRect(0, 0, w, h);
+
+    smokes.forEach(s => {
+      const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r);
+      g.addColorStop(0, `rgba(17,26,24,${s.alpha})`);
+      g.addColorStop(1, "transparent");
+      ctx.fillStyle = g;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
       ctx.fill();
-      p.x += p.dx;
-      p.y += p.dy;
 
-      if (p.x < 0 || p.x > w) p.dx *= -1;
-      if (p.y < 0 || p.y > h) p.dy *= -1;
+      s.x += s.driftX;
+      s.y += s.driftY;
+      s.r += s.growth;
+      s.alpha *= 0.995;
+
+      // Reset fog particle when faded or too large
+      if (s.r > 400 || s.alpha < 0.05) {
+        s.x = Math.random() * w;
+        s.y = h + 100;
+        s.r = Math.random() * 120 + 60;
+        s.alpha = Math.random() * 0.4 + 0.3;
+      }
     });
-    requestAnimationFrame(animateParticles);
+
+    requestAnimationFrame(drawSmoke);
   }
 
-  animateParticles();
+  drawSmoke();
+
+  // ======================
+  // 2️⃣ HERO PIN + FOG LIFT SEQUENCE
+  // ======================
+  const heroTimeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: hero,
+      start: "top top",
+      end: "+=120%",
+      scrub: 1.5,
+      pin: true,
+      anticipatePin: 1
+    }
+  });
+
+  heroTimeline
+    .fromTo(hero, { filter: "brightness(0.5) blur(10px)" }, { filter: "brightness(1) blur(0px)", duration: 2 })
+    .fromTo(smokeCanvas, { opacity: 1 }, { opacity: 0, y: -200, duration: 3, ease: "power2.inOut" }, "<")
+    .to(".mountain-svg", { opacity: 1, duration: 2, ease: "power2.out" }, "-=1");
+
+  // ======================
+  // 3️⃣ POST-PIN REVEAL (After fog clears)
+  // ======================
+  gsap.delayedCall(3.8, () => {
+    smokeCanvas.remove();
+    hero.classList.add("animate-in");
+
+    // Reveal contact section smoothly
+    gsap.to(contact, {
+      opacity: 1,
+      y: 0,
+      duration: 1.6,
+      ease: "power2.out"
+    });
+
+    // Auto-scroll to contact section
+    gsap.delayedCall(0.8, () => {
+      window.scrollTo({ top: hero.offsetHeight - 80, behavior: "smooth" });
+    });
+
+    // TIMELINE: Breeze-style reveal of text + form
+    const tl = gsap.timeline({ delay: 0.8, defaults: { ease: "power2.out" } });
+    tl.from(".contact-label", { opacity: 0, y: 30, duration: 0.8 })
+      .from(".title-group h2", { opacity: 0, y: 30, duration: 0.8 }, "-=0.4")
+      .from(".decorative-elements", { opacity: 0, scale: 0.8, duration: 1, ease: "elastic.out(1, 0.6)" }, "-=0.4")
+      .from(".contact-info p", { opacity: 0, y: 20, stagger: 0.2, duration: 0.8 }, "-=0.5")
+      .from(".contact-form", { opacity: 0, y: 40, duration: 1.2 }, "-=0.3");
+  });
+
+  // ======================
+  // 4️⃣ FLOATING ELEMENTS (infinite subtle motion)
+  // ======================
+  gsap.to(".logo-image", {
+    y: 10,
+    duration: 3,
+    repeat: -1,
+    yoyo: true,
+    ease: "sine.inOut"
+  });
+
+  gsap.to(".circle", {
+    x: 5,
+    y: -5,
+    duration: 4,
+    repeat: -1,
+    yoyo: true,
+    ease: "sine.inOut"
+  });
+
+  // ======================
+  // 5️⃣ SCROLLTRIGGER ANIMATIONS
+  // ======================
+
+  // Footer reveal once (no pop)
+  gsap.from(footer, {
+    scrollTrigger: {
+      trigger: footer,
+      start: "top 90%",
+      toggleActions: "play none none none",
+      once: true
+    },
+    opacity: 0,
+    y: 80,
+    duration: 1.5,
+    ease: "power3.out"
+  });
+
+  // Contact form parallax drift (smooth scrub effect)
+  gsap.to(".contact-form", {
+    scrollTrigger: {
+      trigger: ".contact-form",
+      start: "top bottom",
+      end: "bottom top",
+      scrub: 1.5
+    },
+    y: -40,
+    ease: "none"
+  });
 });
