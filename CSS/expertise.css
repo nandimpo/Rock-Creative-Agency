@@ -1,16 +1,12 @@
-/* =====================================================
-   THE METHOD - IMMERSIVE EARTH JOURNEY
-   ===================================================== */
 
-/* ---------- COLOR & FONT SETUP ---------- */
 :root {
   --primary-brown: #A5744E;
   --primary-blue: #4D7994;
   --secondary-yellow: #F2D275;
   --neutral-dark: #111A18;
   --neutral-light: #E2DCCC;
-  --accent-ink: rgba(0,0,0,0.6);
-  --glass: rgba(255,255,255,0.06);
+  --accent-ink: rgba(0, 0, 0, 0.6);
+  --glass: rgba(255, 255, 255, 0.06);
 }
 
 body {
@@ -18,9 +14,10 @@ body {
   background-color: var(--neutral-light);
   color: var(--neutral-dark);
   overflow-x: hidden;
+  line-height: 1.7;
 }
 
-/* ---------- HERO SECTION ---------- */
+
 .mountain-section {
   position: relative;
   overflow: hidden;
@@ -29,11 +26,12 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #A5744E;
-  color: #E2DCCC;
+  background-color: var(--primary-brown);
+  color: var(--neutral-light);
   text-align: center;
   clip-path: circle(0% at 50% 100%);
   transition: clip-path 2.8s cubic-bezier(0.19, 1, 0.22, 1);
+  will-change: clip-path;
 }
 
 .mountain-section.revealed {
@@ -42,7 +40,7 @@ body {
 
 .mountain-section h1 {
   font-family: "Conso", serif;
-  font-size: 5rem;
+  font-size: clamp(2.8rem, 7vw, 5rem);
   letter-spacing: 2px;
   margin: 0;
   z-index: 2;
@@ -51,8 +49,8 @@ body {
 }
 
 .mountain-section h2 {
-  font-size: 1.5rem;
-  color: rgba(226,220,204,0.8);
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  color: rgba(226, 220, 204, 0.8);
   font-weight: 300;
   margin-top: 20px;
   z-index: 2;
@@ -60,7 +58,7 @@ body {
   transform: translateY(40px);
 }
 
-/* Background gradient */
+
 .mountain-section::before {
   content: "";
   position: absolute;
@@ -73,7 +71,7 @@ body {
   z-index: 1;
 }
 
-/* Fog layers */
+
 .fog-layer {
   position: absolute;
   width: 200%;
@@ -84,6 +82,7 @@ body {
   opacity: 0.4;
   z-index: 0;
   animation: fogMove 80s linear infinite;
+  will-change: transform;
 }
 
 @keyframes fogMove {
@@ -91,7 +90,7 @@ body {
   100% { transform: translateX(-50%); }
 }
 
-/* Mountain lines */
+
 .mountain-svg {
   position: absolute;
   bottom: 0;
@@ -101,35 +100,44 @@ body {
   z-index: 1;
 }
 
-/* ---------- INTRODUCTION ---------- */
+
 .journey-intro {
   background: var(--neutral-light);
   text-align: center;
   padding: 120px 10%;
 }
+
 .intro-lead {
-  font-size: 1.2rem;
+  font-size: clamp(1.4rem, 2vw + 0.5rem, 2rem);
   color: var(--accent-ink);
-  margin-bottom: 2rem;
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  text-align: center;
 }
+
+
 .intro-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
   align-items: center;
 }
+
 .intro-text p {
   font-size: 1rem;
   line-height: 1.9;
   color: #333;
 }
+
 .intro-image img {
   width: 100%;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-/* ---------- PARALLAX QUOTE ---------- */
+
 .journey-parallax {
   position: relative;
   background-size: cover;
@@ -141,41 +149,53 @@ body {
   min-height: 80vh;
   color: var(--neutral-light);
 }
+
 .journey-parallax .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(17,26,24,0.65);
+  background: rgba(17, 26, 24, 0.65);
   backdrop-filter: blur(4px);
 }
+
 .journey-quote {
   position: relative;
   z-index: 2;
   text-align: center;
 }
+
 .journey-quote h2 {
-  font-size: 2.2rem;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
   font-family: "Conso", serif;
   color: var(--secondary-yellow);
-  letter-spacing: 1px;
+  text-shadow: 0 0 15px rgba(242, 210, 117, 0.4);
+  letter-spacing: 1.2px;
+  animation: quoteGlow 6s ease-in-out infinite alternate;
 }
 
-/* ---------- FLOW DIAGRAM ---------- */
+@keyframes quoteGlow {
+  0% { text-shadow: 0 0 10px rgba(242, 210, 117, 0.2); }
+  100% { text-shadow: 0 0 25px rgba(242, 210, 117, 0.6); }
+}
+
+
 .journey-flow {
   background-color: var(--neutral-light);
   text-align: center;
   padding: 100px 10%;
 }
+
 .journey-flow h2 {
   color: var(--neutral-dark);
   margin-bottom: 3rem;
 }
+
 .flow-frame img {
   width: 100%;
   border-radius: 8px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
-/* ---------- PRODUCTION STAGES ---------- */
+
 .journey-stages {
   position: relative;
   background: linear-gradient(to bottom, #E2DCCC 0%, #D8C5A3 30%, #C7A072 70%, #A5744E 100%);
@@ -184,20 +204,19 @@ body {
   overflow: hidden;
 }
 
-/* Earth layer */
 .earth-layer {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 100%, rgba(242,210,117,0.2), transparent 70%);
+  background: radial-gradient(circle at 50% 100%, rgba(242, 210, 117, 0.2), transparent 70%);
   animation: pulseEarth 10s ease-in-out infinite alternate;
   z-index: 0;
 }
+
 @keyframes pulseEarth {
   0% { opacity: 0.3; transform: scale(1); }
   100% { opacity: 0.6; transform: scale(1.05); }
 }
 
-/* Root SVG */
 .earth-roots {
   position: absolute;
   bottom: 0;
@@ -208,48 +227,33 @@ body {
   z-index: 0;
   opacity: 0.8;
 }
+
 .root-path {
   fill: none;
   stroke: var(--secondary-yellow);
   stroke-width: 2.5;
   stroke-linecap: round;
   stroke-linejoin: round;
-  filter: drop-shadow(0 0 8px rgba(242,210,117,0.5));
+  filter: drop-shadow(0 0 8px rgba(242, 210, 117, 0.5));
   stroke-dasharray: 800;
   stroke-dashoffset: 800;
 }
-.journey-parallax {
-  min-height: 60vh; /* slightly shorter, sits comfortably below hero */
-}
 
-.journey-quote h2 {
-  font-size: 2.4rem;
-  font-family: "Conso", serif;
-  color: var(--secondary-yellow);
-  text-shadow: 0 0 15px rgba(242,210,117,0.4);
-  letter-spacing: 1.2px;
-  animation: quoteGlow 6s ease-in-out infinite alternate;
-}
 
-@keyframes quoteGlow {
-  0% { text-shadow: 0 0 10px rgba(242,210,117,0.2); }
-  100% { text-shadow: 0 0 25px rgba(242,210,117,0.6); }
-}
-
-/* Section heading */
 .section-heading {
   text-align: center;
   margin-bottom: 60px;
   position: relative;
   z-index: 1;
 }
+
 .section-heading h2 {
   font-family: "Conso", serif;
-  font-size: 2.8rem;
+  font-size: clamp(2rem, 4vw, 2.8rem);
   color: var(--primary-brown);
-  letter-spacing: 1px;
   margin-bottom: 10px;
 }
+
 .section-heading p {
   font-size: 1.1rem;
   color: var(--accent-ink);
@@ -257,7 +261,7 @@ body {
   margin: 0 auto;
 }
 
-/* Stage cards */
+
 .stages-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -265,87 +269,42 @@ body {
   position: relative;
   z-index: 1;
 }
+
 .stage-card {
-  background: rgba(255,255,255,0.12);
+  background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(6px);
-  border: 1px solid rgba(255,255,255,0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 16px;
   padding: 40px 30px;
   text-align: left;
   color: #E2DCCC;
   transform: translateY(60px);
   opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
 }
+
 .stage-card h3 {
-  color: var(--secondary-yellow);
-  font-size: 1.4rem;
+  color: var(--neutral-light); /* Beige text color */
+  font-family: "Conso", serif;
+  font-weight: 400;
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
   margin-bottom: 15px;
-  font-weight: 500;
+  letter-spacing: 0.6px;
+  text-align: center;
+  transition: color 0.3s ease;
 }
-.stage-card p {
-  color: rgba(226,220,204,0.9);
-  font-size: 1rem;
-  line-height: 1.7;
+
+.stage-card:hover h3 {
+  color: var(--secondary-yellow); /* Optional hover glow */
 }
+
+
 .stage-card:hover {
   transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 12px 30px rgba(17,26,24,0.3);
-  transition: all 0.5s cubic-bezier(0.19,1,0.22,1);
+  box-shadow: 0 12px 30px rgba(17, 26, 24, 0.3);
 }
 
-/* ---------- SUPPORT ---------- */
-.journey-support {
-  background-color: var(--neutral-light);
-  padding: 120px 10%;
-}
-.journey-support h2 {
-  color: var(--neutral-dark);
-  text-align: center;
-  margin-bottom: 3rem;
-}
-.support-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 30px;
-}
-.support-grid article {
-  background: #fff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
-}
-.support-grid article:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 35px rgba(0,0,0,0.12);
-}
-.support-grid h3 {
-  color: var(--primary-brown);
-  font-size: 1.2rem;
-  margin-bottom: 12px;
-}
-.support-grid p {
-  color: #555;
-  line-height: 1.7;
-}
 
-/* ---------- SCROLL FADE ---------- */
-.fade-in, .fade-in-up {
-  opacity: 0;
-  transform: translateY(60px);
-  transition: all 1.2s ease-out;
-}
-.fade-in.visible, .fade-in-up.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ---------- RESPONSIVE ---------- */
-@media (max-width: 900px) {
-  .intro-grid { grid-template-columns: 1fr; }
-  .mountain-section h1 { font-size: 3rem; }
-}
-/* ---------- SUPPORT PHASE (EARTHY, CONNECTED) ---------- */
 .journey-support {
   position: relative;
   background: linear-gradient(to top, #E2DCCC 0%, #DCC8A9 40%, #F2D275 95%);
@@ -359,13 +318,14 @@ body {
   margin-bottom: 80px;
   z-index: 2;
 }
+
 .support-heading h2 {
   font-family: "Conso", serif;
-  font-size: 2.8rem;
+  font-size: clamp(2rem, 4vw, 2.8rem);
   color: var(--primary-brown);
-  letter-spacing: 1px;
   margin-bottom: 15px;
 }
+
 .support-heading p {
   font-size: 1.1rem;
   color: var(--accent-ink);
@@ -373,7 +333,6 @@ body {
   margin: 0 auto;
 }
 
-/* Vine animation SVG */
 .vine-growth {
   position: absolute;
   bottom: -10%;
@@ -384,6 +343,7 @@ body {
   z-index: 1;
   opacity: 0.85;
 }
+
 .vine-path {
   fill: none;
   stroke: #A5744E;
@@ -392,10 +352,10 @@ body {
   stroke-linejoin: round;
   stroke-dasharray: 800;
   stroke-dashoffset: 800;
-  filter: drop-shadow(0 0 8px rgba(165,116,78,0.4));
+  filter: drop-shadow(0 0 8px rgba(165, 116, 78, 0.4));
 }
 
-/* Support cards */
+
 .support-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -403,32 +363,23 @@ body {
   position: relative;
   z-index: 2;
 }
+
 .support-grid article {
-  background: rgba(255,255,255,0.85);
+  background: rgba(255, 255, 255, 0.85);
   border-radius: 14px;
   padding: 40px 30px;
-  box-shadow: 0 10px 30px rgba(17,26,24,0.1);
-  border: 1px solid rgba(255,255,255,0.4);
+  box-shadow: 0 10px 30px rgba(17, 26, 24, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   transition: all 0.4s ease;
 }
+
 .support-grid article:hover {
   transform: translateY(-6px);
-  box-shadow: 0 14px 35px rgba(165,116,78,0.3);
-  background: rgba(255,255,255,0.95);
-}
-.support-grid h3 {
-  color: var(--primary-brown);
-  font-size: 1.3rem;
-  margin-bottom: 12px;
-  font-family: "Conso", serif;
-}
-.support-grid p {
-  color: #333;
-  line-height: 1.8;
-  font-size: 1rem;
+  box-shadow: 0 14px 35px rgba(165, 116, 78, 0.3);
+  background: rgba(255, 255, 255, 0.95);
 }
 
-/* Add a subtle glowing wave behind section */
+
 .journey-support::before {
   content: "";
   position: absolute;
@@ -437,7 +388,7 @@ body {
   transform: translateX(-50%);
   width: 120%;
   height: 140%;
-  background: radial-gradient(circle at 50% 0%, rgba(242,210,117,0.2), transparent 70%);
+  background: radial-gradient(circle at 50% 0%, rgba(242, 210, 117, 0.2), transparent 70%);
   z-index: 0;
   animation: waveGlow 10s ease-in-out infinite alternate;
 }
@@ -445,4 +396,54 @@ body {
 @keyframes waveGlow {
   0% { opacity: 0.3; transform: scale(1) translateX(-50%); }
   100% { opacity: 0.7; transform: scale(1.05) translateX(-50%); }
+}
+
+.fade-in, .fade-in-up {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 1.2s ease-out;
+}
+
+.fade-in.visible, .fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+@media (max-width: 1024px) {
+  .intro-grid { grid-template-columns: 1fr; }
+  .mountain-section h1 { font-size: 3.5rem; }
+}
+
+@media (max-width: 768px) {
+  .journey-intro { padding: 80px 8%; }
+  .journey-flow, .journey-stages, .journey-support { padding: 100px 6%; }
+  .stage-card { padding: 30px 20px; }
+}
+
+@media (max-width: 480px) {
+  .mountain-section h1 { font-size: 2.5rem; }
+  .mountain-section h2 { font-size: 1rem; }
+  .journey-intro, .journey-flow, .journey-support { padding: 80px 5%; }
+  .section-heading p { font-size: 1rem; }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .mountain-section,
+  .journey-stages,
+  .journey-support {
+    background: Canvas !important;
+    color: CanvasText !important;
+  }
 }

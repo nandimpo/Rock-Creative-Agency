@@ -1,388 +1,311 @@
-/* =====================================================
-   NAVBAR FILTER DROPDOWNS - With Apply + Unsplash
-   ===================================================== */
-/* =====================================================
-   FILTER ARROW - ENLARGED CLICKABLE AREA
-   ===================================================== */
+
 .filter-arrow-wrapper {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    margin-left: 6px;
-    width: 22px;  /* Larger clickable width */
-    height: 22px; /* Larger clickable height */
-    cursor: pointer;
-    border-radius: 50%;
-    transition: background 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-left: 6px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.3s ease;
 }
 
-.filter-arrow-wrapper:hover {
-    background: rgba(255, 255, 255, 0.15);
+.filter-arrow-wrapper:hover,
+.filter-arrow-wrapper:focus-visible {
+  background: rgba(255, 255, 255, 0.2);
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }
 
-/* Make the triangle larger & more readable */
 .filter-arrow {
-    font-size: 14px; /* increased from 10px */
-    color: #E2DCCC;
-    transition: transform 0.3s ease, color 0.3s ease;
-    user-select: none;
-    pointer-events: none; /* ensures wrapper handles click */
+  font-size: 16px;
+  color: #E2DCCC;
+  transition: transform 0.3s ease, color 0.3s ease;
+  user-select: none;
+  pointer-events: none;
 }
 
 .filter-arrow.rotated {
-    transform: rotate(180deg);
-    color: #b68957; /* bronze tone when active */
+  transform: rotate(180deg);
+  color: #b68957;
 }
 
 
-/* Dropdown Box */
 .filter-dropdown {
-  position: fixed !important; /* was absolute */
+  position: fixed !important;
   background: #E2DCCC;
   color: #111A18;
   border-radius: 6px;
   padding: 16px 20px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
   display: none;
   min-width: 200px;
-  z-index: 99999; /* stays above all content */
+  z-index: 99999;
+  animation: fadeIn 0.4s ease-out;
 }
-
 
 .filter-dropdown.active {
-    display: block;
+  display: block;
 }
 
-/* Dropdown Title */
 .filter-title {
-    font-weight: 700;
-    font-size: 14px;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-/* Checkbox list */
+
 .filter-options {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .filter-options label {
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    color: #222;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: #222;
 }
 
-.filter-options label:hover {
-    color: #555;
+.filter-options label:hover,
+.filter-options input[type="checkbox"]:focus-visible + label {
+  color: #555;
 }
 
 .filter-options input[type="checkbox"] {
-    accent-color: #111A18;
+  accent-color: #111A18;
+  width: 16px;
+  height: 16px;
 }
 
-/* Apply button */
+
 .filter-actions {
-    margin-top: 10px;
-    text-align: center;
+  margin-top: 12px;
+  text-align: center;
 }
 
-.filter-apply-btn {
-    background: #b68957;
-    color: #fff;
-    border: none;
-    padding: 8px 20px;
-    border-radius: 20px;
-    font-size: 13px;
-    cursor: pointer;
-    transition: background 0.3s ease;
+.filter-apply-btn,
+.filter-reset-btn,
+.filter-api-btn,
+.unsplash-close-btn {
+  background: #b68957;
+  color: #fff;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
 }
 
-.filter-apply-btn:hover {
-    background: #d6a770;
+.filter-apply-btn:hover,
+.filter-reset-btn:hover,
+.filter-api-btn:hover,
+.unsplash-close-btn:hover,
+.filter-apply-btn:focus-visible,
+.filter-reset-btn:focus-visible,
+.filter-api-btn:focus-visible,
+.unsplash-close-btn:focus-visible {
+  background: #d6a770;
+  transform: scale(1.05);
+  outline: 2px solid transparent;
+  outline-offset: 3px;
 }
 
-/* Unsplash Section */
+
 .filter-api-section {
-    border-top: 1px solid rgba(0,0,0,0.2);
-    margin-top: 10px;
-    padding-top: 10px;
-    text-align: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  margin-top: 10px;
+  padding-top: 10px;
+  text-align: center;
 }
 
 .filter-category-title {
-    font-weight: 700;
-    font-size: 13px;
-    color: #b22222;
-    margin-bottom: 5px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: #b22222;
+  margin-bottom: 6px;
 }
 
 .filter-api-subtext {
-    font-size: 11px;
-    color: #555;
-    margin-bottom: 8px;
+  font-size: 0.75rem;
+  color: #555;
+  margin-bottom: 10px;
 }
 
-.filter-api-btn {
-    background: #b68957;
-    color: #fff;
-    border: none;
-    padding: 7px 16px;
-    border-radius: 20px;
-    font-size: 12px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
 
-.filter-api-btn:hover {
-    background: #d6a770;
-}
-
-/* Unsplash Gallery */
 .unsplash-gallery {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    display: flex;
-    gap: 8px;
-    background: rgba(255,255,255,0.9);
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    z-index: 99999;
-}
-
-.unsplash-gallery img {
-    width: 80px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 6px;
-}
-
-/* Hide filtered items */
-.filtered-hidden {
-    display: none !important;
-}
-
-/* Fade animation */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-/* =====================================================
-   UNSPLASH GALLERY ABOVE NAVBAR
-   ===================================================== */
-.unsplash-gallery {
-    position: relative;
-    width: 100%;
-    background: #E2DCCC;
-    color: #111A18;
-    padding: 40px 0 20px;
-    text-align: center;
-    border-bottom: 2px solid #b68957;
-    opacity: 0;
-    transition: opacity 0.8s ease;
-    z-index: 9999;
+  position: relative;
+  width: 100%;
+  background: #E2DCCC;
+  color: #111A18;
+  padding: 50px 5%;
+  text-align: center;
+  border-top: 2px solid #b68957;
+  border-bottom: 2px solid #b68957;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  z-index: 50;
 }
 
 .unsplash-heading {
-    font-size: 22px;
-    font-weight: 700;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
-    color: #111A18;
-}
-
-.unsplash-images {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    padding: 0 20px;
-}
-
-.unsplash-images img {
-    width: 180px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.25);
-    transition: transform 0.3s ease;
-}
-
-.unsplash-images img:hover {
-    transform: scale(1.05);
-}
-/* =====================================================
-   UNSPLASH GALLERY ABOVE NAVBAR (with Close Button)
-   ===================================================== */
-.unsplash-gallery {
-    position: relative;
-    width: 100%;
-    background: #E2DCCC;
-    color: #111A18;
-    padding: 40px 0 30px;
-    text-align: center;
-    border-bottom: 2px solid #b68957;
-    opacity: 0;
-    transition: opacity 0.8s ease;
-    z-index: 9999;
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  margin-bottom: 25px;
+  color: #111A18;
 }
 
 .unsplash-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 20px;
 }
 
-.unsplash-heading {
-    font-size: 24px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin: 0;
-    color: #111A18;
-}
 
 .unsplash-close-btn {
-    position: absolute;
-    right: 30px;
-    top: -5px;
-    background: transparent;
-    border: none;
-    font-size: 30px;
-    color: #b22222;
-    cursor: pointer;
-    transition: transform 0.2s ease, color 0.3s ease;
-}
-
-.unsplash-close-btn:hover {
-    transform: scale(1.1);
-    color: #000;
+  display: block;
+  margin: 25px auto 0 auto;
+  background: #111A18;
+  color: #E2DCCC;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 28px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
 }
 
 .unsplash-images {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    padding: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  padding: 0 20px;
 }
 
 .unsplash-images img {
-    width: 180px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.25);
-    transition: transform 0.3s ease;
+  width: clamp(120px, 25vw, 180px);
+  height: auto;
+  aspect-ratio: 3/2;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease;
 }
 
-.unsplash-images img:hover {
-    transform: scale(1.05);
-}
-/* =====================================================
-   FINAL UNSPLASH GALLERY (BOTTOM OF PAGE)
-   ===================================================== */
-.unsplash-gallery {
-    position: relative;
-    width: 100%;
-    background: #E2DCCC;
-    color: #111A18;
-    padding: 50px 0 40px;
-    text-align: center;
-    border-top: 2px solid #b68957;
-    border-bottom: 2px solid #b68957;
-    opacity: 0;
-    transition: opacity 0.8s ease;
-    z-index: 50;
+.unsplash-images img:hover,
+.unsplash-images img:focus-visible {
+  transform: scale(1.05);
+  outline: 2px solid #b68957;
+  outline-offset: 3px;
 }
 
-/* Gallery heading */
-.unsplash-heading {
-    font-size: 24px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin-bottom: 25px;
-    color: #111A18;
-}
 
-/* Image grid */
-.unsplash-images {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    padding: 0 20px;
-}
-
-.unsplash-images img {
-    width: 180px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.25);
-    transition: transform 0.3s ease;
-}
-
-/* Reset Filters Button */
 .filter-reset-btn {
-    background: #111A18;
-    color: #E2DCCC;
-    border: none;
-    padding: 7px 20px;
-    border-radius: 20px;
-    font-size: 13px;
-    cursor: pointer;
-    margin-top: 8px;
-    transition: all 0.3s ease;
-}
-
-.filter-reset-btn:hover {
-    background: #b68957;
-    color: #fff;
-    transform: scale(1.05);
+  background: #111A18;
+  color: #E2DCCC;
+  border-radius: 25px;
+  margin-top: 8px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
 }
 
 
-.unsplash-images img:hover {
-    transform: scale(1.05);
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* =====================================================
-   NEW CLOSE BUTTON BELOW IMAGE GALLERY
-   ===================================================== */
-.unsplash-close-btn {
-    display: block;
-    margin: 35px auto 0 auto; /* centers below images */
-    background: #111A18; /* dark brand color */
-    color: #E2DCCC; /* light beige text */
-    border: none;
-    border-radius: 25px;
-    padding: 10px 28px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    letter-spacing: 0.5px;
-    transition: all 0.3s ease;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
-}
 
-.unsplash-close-btn:hover {
-    background: #b68957; /* bronze hover */
-    color: #fff;
-    transform: scale(1.05);
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.35);
-}
-/* ===== FIX FILTER POSITION BELOW NAVBAR ===== */
 .nav-filter-container {
-    position: relative;
-    margin-top: 100px; /* pushes filters below the fixed navbar */
-    z-index: 10;
+  position: relative;
+  margin-top: 100px;
+  z-index: 10;
+}
+
+
+@media (max-width: 1024px) {
+  .filter-dropdown {
+    min-width: 180px;
+    padding: 14px 16px;
+  }
+
+  .unsplash-images img {
+    width: clamp(100px, 40vw, 150px);
+  }
+}
+
+@media (max-width: 768px) {
+  .filter-dropdown {
+    width: 85%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .unsplash-gallery {
+    padding: 40px 3%;
+  }
+
+  .unsplash-heading {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .filter-arrow-wrapper {
+    width: 20px;
+    height: 20px;
+  }
+
+  .unsplash-images img {
+    width: 100px;
+  }
+
+  .filter-dropdown {
+    font-size: 0.85rem;
+    padding: 12px 14px;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .filter-dropdown,
+  .unsplash-gallery {
+    background: Canvas !important;
+    color: CanvasText !important;
+    border-color: CanvasText !important;
+  }
+
+  .filter-apply-btn,
+  .filter-reset-btn,
+  .filter-api-btn,
+  .unsplash-close-btn {
+    background: ButtonFace !important;
+    color: ButtonText !important;
+  }
+
+  .unsplash-images img {
+    box-shadow: none !important;
+  }
 }
