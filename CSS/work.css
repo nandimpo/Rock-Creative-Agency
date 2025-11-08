@@ -1,4 +1,6 @@
-
+/* =============================
+   HERO & MOUNTAIN SECTION
+============================= */
 .hero,
 .mountain-section {
   background: radial-gradient(circle at center, #111A18 0%, #000 100%);
@@ -10,6 +12,8 @@
   justify-content: center;
   align-items: center;
   color: #E2DCCC;
+  margin-top: -2px; /* ✅ Fix gap under navbar */
+  top: 0;
 }
 
 .hero::before,
@@ -21,7 +25,6 @@
   z-index: 1;
   animation: heroFlow 10s ease-in-out infinite;
 }
-
 
 .hero h1,
 .hero h2,
@@ -55,11 +58,15 @@
   100% { background-position: 0% 50%; }
 }
 
-
-
+/* =============================
+   ROCK TEXTURES & EFFECTS
+============================= */
 .rock-overlay {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: url('../Images/Home/rock.jpg') center/cover no-repeat;
   z-index: 4;
   transform-origin: center;
@@ -75,7 +82,6 @@
   mix-blend-mode: screen;
   pointer-events: none;
 }
-
 
 .rock-shard {
   position: absolute;
@@ -116,7 +122,9 @@
   50% { opacity: 1; filter: brightness(1.1); }
 }
 
-
+/* =============================
+   LIGHT EFFECTS
+============================= */
 .spotlight-canvas {
   position: fixed;
   top: 0;
@@ -147,10 +155,13 @@
   .mountain-section h1, .mountain-section h2 { transition: none !important; }
 }
 
-
+/* =============================
+   MAIN CONTENT
+============================= */
 main {
   padding: 80px 0;
   min-height: 100vh;
+  background-color: #E2DCCC;
 }
 
 .intro-text {
@@ -161,7 +172,9 @@ main {
   letter-spacing: 0.3px;
 }
 
-
+/* =============================
+   PORTFOLIO SECTION
+============================= */
 .portfolio-wrapper {
   position: relative;
   width: 100%;
@@ -181,7 +194,6 @@ main {
 .portfolio-container::-webkit-scrollbar {
   display: none;
 }
-
 
 .portfolio-card {
   flex-shrink: 0;
@@ -278,7 +290,9 @@ main {
   width: 100%;
 }
 
-
+/* =============================
+   CARD DETAILS MODAL
+============================= */
 .card-details {
   position: absolute;
   top: 0;
@@ -380,6 +394,9 @@ body.modal-open {
   font-weight: 500;
 }
 
+/* =============================
+   SCROLL HINT
+============================= */
 .scroll-hint {
   text-align: center;
   color: #666;
@@ -393,7 +410,9 @@ body.modal-open {
   50% { opacity: 1; }
 }
 
-
+/* =============================
+   RESPONSIVE STYLES
+============================= */
 @media (max-width: 1024px) {
   main { padding: 60px 50px; }
   .intro-text { padding: 0 50px 40px 50px; }
@@ -422,6 +441,9 @@ body.modal-open {
   .details-tags span { font-size: 11px; padding: 5px 10px; }
 }
 
+/* =============================
+   AMBIENT LIGHT EFFECT
+============================= */
 .ambient-light {
   position: fixed;
   top: 0;
@@ -436,4 +458,22 @@ body.modal-open {
   mix-blend-mode: screen;
   opacity: 0.9;
   transition: opacity 0.3s ease;
+}
+
+/* =============================
+   NAVBAR GAP FIX
+============================= */
+header {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2000;
+  border-bottom: 1px solid rgba(242,210,117,0.15);
 }
