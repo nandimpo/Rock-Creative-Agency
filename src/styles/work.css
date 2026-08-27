@@ -63,7 +63,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('../Images/Home/rock.jpg') center/cover no-repeat;
+  background: url('/Images/Home/rock.jpg') center/cover no-repeat;
   z-index: 4;
   transform-origin: center;
   display: block;
@@ -81,7 +81,7 @@
 
 .rock-shard {
   position: absolute;
-  background: url('../Images/Home/rock.jpg') center/cover no-repeat;
+  background: url('/Images/Home/rock.jpg') center/cover no-repeat;
   width: 50%;
   height: 50%;
   opacity: 1;
