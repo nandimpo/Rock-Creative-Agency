@@ -87,7 +87,9 @@
 }
 
 
-main {
+.work-page main {
+  position: relative;
+  overflow: hidden;
   padding: 80px 0;
   min-height: 100vh;
   background-color: #E2DCCC;

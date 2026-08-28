@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 import { useDragScroll } from '../hooks/useDragScroll';
 import ParticleHeading from '../components/ParticleHeading';
+import LineMotif from '../components/LineMotif';
 import WorkCard from '../components/WorkCard';
 import { workProjects } from '../data/workProjects';
 import '../styles/mountain.css';
@@ -150,6 +151,7 @@ export default function Work() {
       </section>
 
       <main>
+        <LineMotif variant="sparse" />
         <p className="intro-text">One great thing about creative is that the work speaks for itself</p>
 
         <div className="portfolio-wrapper">

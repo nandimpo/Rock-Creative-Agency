@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ParticleHeading from '../components/ParticleHeading';
+import LineMotif from '../components/LineMotif';
 import ServiceCard from '../components/ServiceCard';
 import { services } from '../data/services';
 import '../styles/mountain.css';
@@ -97,6 +98,7 @@ export default function Services() {
       </div>
 
       <main>
+        <LineMotif variant="columns" />
         <div className="services-grid">
           {services.map((service, index) => (
             <ServiceCard service={service} index={index} onDiscover={setOpenIndex} key={service.title} />

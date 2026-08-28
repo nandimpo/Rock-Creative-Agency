@@ -12,6 +12,21 @@
 body{ font-family: "Avenir LT Pro", Avenir, sans-serif; color:var(--neutral-dark); }
 h1,h2,h3{ font-family: "Conso", serif; font-weight:300; color:var(--neutral-light); }
 
+/* Site-wide film-grain texture so flat colour fields read as paper/stone
+   rather than screen-flat. Fixed + pointer-events:none so it never blocks
+   interaction; multiply blend keeps it from washing out dark sections. */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 220px 220px;
+    mix-blend-mode: multiply;
+}
+
 .visually-hidden {
     position: absolute;
     width: 1px;
@@ -37,6 +52,24 @@ h1,h2,h3{ font-family: "Conso", serif; font-weight:300; color:var(--neutral-ligh
     width: 100%;
     height: 100%;
     display: block;
+}
+
+.line-motif {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.line-motif line,
+.line-motif circle {
+    stroke: var(--primary-brown);
+    stroke-width: 1;
+    fill: none;
+    opacity: 0.16;
+    vector-effect: non-scaling-stroke;
 }
 
 .nav-links a.active {
@@ -383,10 +416,7 @@ header + section h1 {
 
 .btn,
 button {
-    background:
-        radial-gradient(120% 140% at 22% 18%, rgba(255,255,255,0.35), transparent 45%),
-        radial-gradient(140% 160% at 82% 88%, rgba(0,0,0,0.35), transparent 50%),
-        var(--primary-brown);
+    background-color: var(--primary-brown);
     color: #E2DCCC;
     border: none;
     padding: 13px 32px;
@@ -396,7 +426,7 @@ button {
     font-weight: 600;
     letter-spacing: 0.3px;
     cursor: pointer;
-    box-shadow: 0 8px 24px rgba(165, 116, 78, 0.35);
+    box-shadow: 0 4px 10px rgba(17, 26, 24, 0.18);
     animation: blobMorph 8s ease-in-out infinite;
     transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, animation-duration 0.3s ease;
     position: relative;
@@ -406,7 +436,7 @@ button {
 .btn:hover,
 button:hover {
     animation-duration: 2.5s;
-    box-shadow: 0 10px 30px rgba(165, 116, 78, 0.55);
+    box-shadow: 0 6px 16px rgba(17, 26, 24, 0.22);
     opacity: 0.9;
     transform: translateY(-2px);
 }

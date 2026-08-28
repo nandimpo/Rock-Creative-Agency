@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useFormValidation } from '../hooks/useFormValidation';
 import ParticleHeading from '../components/ParticleHeading';
 import ServicesShowcase from '../components/ServicesShowcase';
+import LineMotif from '../components/LineMotif';
 import { whoWeAreCards, workList } from '../data/homeContent';
 import '../styles/home.css';
 
@@ -378,6 +379,7 @@ export default function Home() {
       </section>
 
       <section className="who-we-are">
+        <LineMotif variant="corner" />
         <div className="who-we-are-box">
           <h2 className="visually-hidden">Who we are</h2>
           <div className="rolling-tape" aria-hidden="true">
@@ -450,6 +452,7 @@ export default function Home() {
       <ServicesShowcase />
 
       <section className="contact" id="contact">
+        <LineMotif variant="sparse" />
         <h2>
           <span className="heading-word">How</span> <span className="heading-word">can</span>{' '}
           <span className="heading-word">we</span> <span className="heading-word">help?</span>
@@ -495,6 +498,10 @@ export default function Home() {
           <button type="submit" className="btn">
             Send
           </button>
+          <svg className="form-corner-mark" viewBox="0 0 24 24" aria-hidden="true">
+            <line x1="4" y1="4" x2="20" y2="20" />
+            <polyline points="20,10 20,20 10,20" />
+          </svg>
         </form>
       </section>
     </div>

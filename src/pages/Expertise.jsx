@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 import ParticleHeading from '../components/ParticleHeading';
+import LineMotif from '../components/LineMotif';
 import { journeyStages, journeySupport } from '../data/journey';
 import '../styles/mountain.css';
 import '../styles/expertise.css';
@@ -111,6 +112,7 @@ export default function Expertise() {
 
       <main className="journey-main">
         <section className="journey-intro fade-in">
+          <LineMotif variant="compass" />
           <p className="intro-lead">
             To truly understand what we do, you need to experience our flagship project.
           </p>

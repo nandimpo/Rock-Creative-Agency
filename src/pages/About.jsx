@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 import ParticleHeading from '../components/ParticleHeading';
+import LineMotif from '../components/LineMotif';
 import TeamCard from '../components/TeamCard';
 import { team } from '../data/team';
 import '../styles/mountain.css';
@@ -225,6 +226,7 @@ export default function About() {
       </section>
 
       <main>
+        <LineMotif variant="diagonal" />
         <section className="intro-section">
           <div className="intro-content">
             <p>

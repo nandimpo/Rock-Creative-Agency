@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { services } from '../data/services';
+import LineMotif from './LineMotif';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -41,6 +42,7 @@ export default function ServicesShowcase() {
       style={{ height: `${services.length * 100}vh` }}
     >
       <div className="services-showcase-sticky">
+        <LineMotif variant="diagonal" />
         <span className="services-showcase-dot" />
         <div className="services-showcase-grid">
           <ul className="services-showcase-list">

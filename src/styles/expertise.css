@@ -66,6 +66,8 @@ body {
 
 
 .journey-intro {
+  position: relative;
+  overflow: hidden;
   background: var(--neutral-light);
   text-align: center;
   padding: 120px 10%;

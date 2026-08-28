@@ -1,5 +1,7 @@
 
 .services-page main {
+    position: relative;
+    overflow: hidden;
     display: flex;
     justify-content: center;
 }

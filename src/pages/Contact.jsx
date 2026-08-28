@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 import { useFormValidation } from '../hooks/useFormValidation';
 import ParticleHeading from '../components/ParticleHeading';
+import LineMotif from '../components/LineMotif';
 import '../styles/mountain.css';
 import '../styles/contact.css';
 
@@ -61,27 +62,7 @@ export default function Contact() {
 
       <main>
         <section className="contact-section">
-          <svg
-            className="contact-motif"
-            viewBox="0 0 1200 800"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <line x1="0" y1="0" x2="0" y2="800" />
-            <line x1="200" y1="0" x2="200" y2="800" />
-            <line x1="400" y1="0" x2="400" y2="800" />
-            <line x1="600" y1="0" x2="600" y2="800" />
-            <line x1="800" y1="0" x2="800" y2="800" />
-            <line x1="1000" y1="0" x2="1000" y2="800" />
-            <line x1="1200" y1="0" x2="1200" y2="800" />
-            <line x1="0" y1="0" x2="1200" y2="0" />
-            <line x1="0" y1="400" x2="1200" y2="400" />
-            <line x1="0" y1="800" x2="1200" y2="800" />
-            <line x1="400" y1="0" x2="800" y2="800" />
-            <circle cx="960" cy="400" r="220" />
-            <line x1="740" y1="180" x2="1180" y2="620" />
-            <line x1="1180" y1="180" x2="740" y2="620" />
-          </svg>
+          <LineMotif variant="grid" />
 
           <div className="contact-wrapper">
             <div className="contact-left">
@@ -161,6 +142,10 @@ export default function Contact() {
                   onBlur={() => form.handleBlur('message')}
                 />
                 <button type="submit">Send Message</button>
+                <svg className="form-corner-mark" viewBox="0 0 24 24" aria-hidden="true">
+                  <line x1="4" y1="4" x2="20" y2="20" />
+                  <polyline points="20,10 20,20 10,20" />
+                </svg>
               </form>
             </div>
           </div>
