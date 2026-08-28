@@ -2,8 +2,8 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
-import { useMountainAnimation } from '../hooks/useMountainAnimation';
 import { useFormValidation } from '../hooks/useFormValidation';
+import ParticleHeading from '../components/ParticleHeading';
 import '../styles/mountain.css';
 import '../styles/contact.css';
 
@@ -21,106 +21,14 @@ const contactFields = [
 // dropped here: the footer is now a single component mounted once at the app root
 // (App.jsx) rather than remounting per page, so re-triggering an "enter" reveal every
 // time this page mounts would look wrong once it has already been visible elsewhere.
+// The hero is a static intro video with no entrance animation.
 export default function Contact() {
   const rootRef = useRef(null);
-  const mountainRef = useRef(null);
-  const contactSectionRef = useRef(null);
   const form = useFormValidation(contactFields);
-  useMountainAnimation(mountainRef);
 
   useEffect(() => {
-    let animationId;
-    let onResize;
-
     const ctx = gsap.context(() => {
-      const hero = mountainRef.current;
-      const contact = contactSectionRef.current;
-      if (!hero || !contact) return;
-
-      const smokeCanvas = document.createElement('canvas');
-      smokeCanvas.classList.add('dark-smoke-layer');
-      hero.appendChild(smokeCanvas);
-
-      const smokeCtx = smokeCanvas.getContext('2d');
-      let w, h;
-      const smokes = [];
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      const resize = () => {
-        w = smokeCanvas.width = hero.offsetWidth;
-        h = smokeCanvas.height = hero.offsetHeight;
-      };
-      onResize = resize;
-      window.addEventListener('resize', resize, { passive: true });
-      resize();
-
-      for (let i = 0; i < 60; i++) {
-        smokes.push({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          r: Math.random() * 150 + 80,
-          growth: Math.random() * 0.2 + 0.1,
-          alpha: Math.random() * 0.3 + 0.2,
-          driftX: (Math.random() - 0.5) * 0.2,
-          driftY: (Math.random() - 0.8) * 0.3,
-        });
-      }
-
-      function drawSmoke() {
-        smokeCtx.fillStyle = 'rgba(17,26,24,0.05)';
-        smokeCtx.fillRect(0, 0, w, h);
-
-        for (const s of smokes) {
-          const g = smokeCtx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r);
-          g.addColorStop(0, `rgba(17,26,24,${s.alpha})`);
-          g.addColorStop(1, 'transparent');
-          smokeCtx.fillStyle = g;
-          smokeCtx.beginPath();
-          smokeCtx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-          smokeCtx.fill();
-
-          s.x += s.driftX;
-          s.y += s.driftY;
-          s.r += s.growth;
-          s.alpha *= 0.995;
-
-          if (s.r > 350 || s.alpha < 0.05) {
-            s.x = Math.random() * w;
-            s.y = h + 80;
-            s.r = Math.random() * 100 + 60;
-            s.alpha = Math.random() * 0.3 + 0.3;
-          }
-        }
-        animationId = requestAnimationFrame(drawSmoke);
-      }
-      if (!prefersReducedMotion) drawSmoke();
-
-      gsap
-        .timeline({
-          scrollTrigger: { trigger: hero, start: 'top top', end: '+=100%', scrub: 1.2, pin: true, anticipatePin: 1 },
-        })
-        .fromTo(hero, { filter: 'brightness(0.5) blur(8px)' }, { filter: 'brightness(1) blur(0px)', duration: 2 })
-        .fromTo(smokeCanvas, { opacity: 1 }, { opacity: 0, y: -150, duration: 2.5, ease: 'power2.inOut' }, '<')
-        .to('.mountain-svg', { opacity: 1, duration: 1.8, ease: 'power2.out' }, '-=1');
-
-      gsap.delayedCall(3, () => {
-        smokeCanvas.remove();
-        hero.classList.add('animate-in');
-
-        gsap.to(contact, { opacity: 1, y: 0, duration: 1.4, ease: 'power2.out' });
-
-        gsap.delayedCall(0.7, () => {
-          window.scrollTo({ top: hero.offsetHeight - 80, behavior: 'smooth' });
-        });
-
-        gsap
-          .timeline({ delay: 0.6, defaults: { ease: 'power2.out' } })
-          .from('.contact-label', { opacity: 0, y: 20, duration: 0.6 })
-          .from('.title-group h2', { opacity: 0, y: 25, duration: 0.7 }, '-=0.3')
-          .from('.decorative-elements', { opacity: 0, scale: 0.9, duration: 0.9, ease: 'elastic.out(1, 0.6)' }, '-=0.3')
-          .from('.contact-info p', { opacity: 0, y: 15, stagger: 0.15, duration: 0.6 }, '-=0.4')
-          .from('.contact-form', { opacity: 0, y: 30, duration: 1 }, '-=0.2');
-      });
 
       if (!prefersReducedMotion) {
         gsap.to('.logo-image', { y: 8, duration: 3, repeat: -1, yoyo: true, ease: 'sine.inOut' });
@@ -134,36 +42,47 @@ export default function Contact() {
       });
     }, rootRef);
 
-    return () => {
-      if (animationId) cancelAnimationFrame(animationId);
-      if (onResize) window.removeEventListener('resize', onResize);
-      ctx.revert();
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
-    <div ref={rootRef}>
-      <section
-        className="mountain-section"
-        ref={mountainRef}
-        style={{ backgroundImage: "url('/Images/Home/rock.jpg')" }}
-      >
+    <div className="contact-page" ref={rootRef}>
+      <section className="mountain-section">
+        <video className="hero-video" autoPlay loop muted playsInline>
+          <source src="/Images/Intro Video - Contact.mp4" type="video/mp4" />
+        </video>
         <div className="mountain-container">
           <div className="mountain-content">
-            <h1>Contact</h1>
+            <ParticleHeading text="Contact" variant="ring" />
             <h2>Why not say Hi to us? We'd love to hear from you.</h2>
           </div>
-
-          <svg className="mountain-svg" viewBox="0 0 1000 400">
-            <path className="mountain-peak mountain-peak-1" d="M100 350 L250 150 L400 350" />
-            <path className="mountain-peak mountain-peak-2" d="M300 350 L500 100 L700 350" />
-            <path className="mountain-peak mountain-peak-3" d="M600 350 L800 180 L950 350" />
-          </svg>
         </div>
       </section>
 
       <main>
-        <section className="contact-section" ref={contactSectionRef}>
+        <section className="contact-section">
+          <svg
+            className="contact-motif"
+            viewBox="0 0 1200 800"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <line x1="0" y1="0" x2="0" y2="800" />
+            <line x1="200" y1="0" x2="200" y2="800" />
+            <line x1="400" y1="0" x2="400" y2="800" />
+            <line x1="600" y1="0" x2="600" y2="800" />
+            <line x1="800" y1="0" x2="800" y2="800" />
+            <line x1="1000" y1="0" x2="1000" y2="800" />
+            <line x1="1200" y1="0" x2="1200" y2="800" />
+            <line x1="0" y1="0" x2="1200" y2="0" />
+            <line x1="0" y1="400" x2="1200" y2="400" />
+            <line x1="0" y1="800" x2="1200" y2="800" />
+            <line x1="400" y1="0" x2="800" y2="800" />
+            <circle cx="960" cy="400" r="220" />
+            <line x1="740" y1="180" x2="1180" y2="620" />
+            <line x1="1180" y1="180" x2="740" y2="620" />
+          </svg>
+
           <div className="contact-wrapper">
             <div className="contact-left">
               <p className="contact-label">● contact</p>

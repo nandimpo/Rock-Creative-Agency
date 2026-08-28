@@ -85,14 +85,15 @@
     color: #fff;
     border: none;
     padding: 8px 20px;
-    border-radius: 20px;
+    border-radius: var(--blob-radius);
     font-size: 13px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background 0.3s ease, border-radius 0.5s ease;
 }
 
 .filter-apply-btn:hover {
     background: #d6a770;
+    border-radius: var(--blob-radius-hover);
 }
 
 .filter-api-section {
@@ -120,14 +121,15 @@
     color: #fff;
     border: none;
     padding: 7px 16px;
-    border-radius: 20px;
+    border-radius: var(--blob-radius);
     font-size: 12px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background 0.3s ease, border-radius 0.5s ease;
 }
 
 .filter-api-btn:hover {
     background: #d6a770;
+    border-radius: var(--blob-radius-hover);
 }
 
 .unsplash-gallery {
@@ -311,17 +313,18 @@
     color: #E2DCCC;
     border: none;
     padding: 7px 20px;
-    border-radius: 20px;
+    border-radius: var(--blob-radius);
     font-size: 13px;
     cursor: pointer;
     margin-top: 8px;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, border-radius 0.5s ease;
 }
 
 .filter-reset-btn:hover {
     background: #b68957;
     color: #fff;
     transform: scale(1.05);
+    border-radius: var(--blob-radius-hover);
 }
 
 .unsplash-images img:hover {
@@ -334,13 +337,13 @@
     background: #111A18;
     color: #E2DCCC;
     border: none;
-    border-radius: 25px;
+    border-radius: var(--blob-radius);
     padding: 10px 28px;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     letter-spacing: 0.5px;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, border-radius 0.5s ease;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
 }
 
@@ -349,6 +352,7 @@
     color: #fff;
     transform: scale(1.05);
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.35);
+    border-radius: var(--blob-radius-hover);
 }
 
 .nav-filter-container {

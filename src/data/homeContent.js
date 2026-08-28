@@ -10,14 +10,3 @@ export const workList = [
   { title: 'Loeries', to: '/work' },
   { title: 'Riot Agency', to: '/work' },
 ];
-
-export const serviceTags = [
-  'Branding',
-  'Social Media',
-  'Production',
-  'Post Production',
-  'Public relations',
-  'Creative Direction',
-  'Pre Production',
-  'Audio/Visual',
-];

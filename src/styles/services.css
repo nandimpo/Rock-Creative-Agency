@@ -1,5 +1,5 @@
 
-main {
+.services-page main {
     display: flex;
     justify-content: center;
 }
@@ -83,7 +83,7 @@ main {
 
 
 @media (max-width: 1024px) {
-    main {
+    .services-page main {
         padding: 60px 50px;
     }
 
@@ -98,7 +98,7 @@ main {
 }
 
 @media (max-width: 768px) {
-    main {
+    .services-page main {
         padding: 40px 30px;
     }
 
@@ -122,7 +122,7 @@ main {
 }
 
 @media (max-width: 480px) {
-    main {
+    .services-page main {
         padding: 30px 20px;
     }
 
@@ -157,8 +157,8 @@ main {
   white-space: nowrap;
   background: var(--primary-blue);
   color: var(--neutral-light);
-  padding: 10px 22px;          
-  border-radius: 40px;
+  padding: 10px 22px;
+  border-radius: var(--blob-radius);
   font-size: 14px;
   font-family: "Avenir LT Pro", sans-serif;
   letter-spacing: 0.5px;
@@ -166,10 +166,10 @@ main {
   border: none;
   margin-top: 25px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease, border-radius 0.5s ease;
   text-transform: uppercase;
-  align-self: flex-start;        
-  max-width: fit-content;        
+  align-self: flex-start;
+  max-width: fit-content;
 }
 
 .discover-btn:hover {
@@ -177,6 +177,7 @@ main {
   color: var(--neutral-light);
   transform: translateY(-2px) scale(1.03);
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+  border-radius: var(--blob-radius-hover);
 }
 
 

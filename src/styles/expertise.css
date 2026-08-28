@@ -18,8 +18,10 @@ body {
 }
 
 
-.mountain-section {
+/* Scoped to .expertise-page so this doesn't leak onto other pages' heroes. */
+.expertise-page .mountain-section {
   position: relative;
+  isolation: isolate;
   overflow: hidden;
   height: 100vh;
   display: flex;
@@ -29,74 +31,36 @@ body {
   background-color: var(--primary-brown);
   color: var(--neutral-light);
   text-align: center;
-  clip-path: circle(0% at 50% 100%);
-  transition: clip-path 2.8s cubic-bezier(0.19, 1, 0.22, 1);
-  will-change: clip-path;
 }
 
-.mountain-section.revealed {
-  clip-path: circle(150% at 50% 100%);
-}
-
-.mountain-section h1 {
+.expertise-page .mountain-section h1 {
   font-family: "Conso", serif;
   font-size: clamp(2.8rem, 7vw, 5rem);
   letter-spacing: 2px;
   margin: 0;
   z-index: 2;
-  opacity: 0;
-  transform: translateY(40px);
+  position: relative;
 }
 
-.mountain-section h2 {
+.expertise-page .mountain-section h2 {
   font-size: clamp(1.1rem, 2vw, 1.6rem);
   color: rgba(226, 220, 204, 0.8);
   font-weight: 300;
   margin-top: 20px;
   z-index: 2;
-  opacity: 0;
-  transform: translateY(40px);
+  position: relative;
 }
 
 
-.mountain-section::before {
+.expertise-page .hero-video {
+  filter: sepia(0.4) saturate(1.4) brightness(0.65) hue-rotate(-8deg) blur(1px);
+}
+
+.expertise-page .mountain-section::before {
   content: "";
   position: absolute;
-  bottom: -20%;
-  left: 0;
-  width: 100%;
-  height: 120%;
-  background: radial-gradient(circle at 50% 100%, #5a3a22 0%, transparent 70%);
-  opacity: 0.9;
-  z-index: 1;
-}
-
-
-.fog-layer {
-  position: absolute;
-  width: 200%;
-  height: 100%;
-  bottom: 0;
-  background-repeat: repeat-x;
-  background-size: contain;
-  opacity: 0.4;
-  z-index: 0;
-  animation: fogMove 80s linear infinite;
-  will-change: transform;
-}
-
-@keyframes fogMove {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-
-.mountain-svg {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 40%;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(60, 38, 20, 0.45) 0%, rgba(30, 18, 12, 0.35) 50%, rgba(20, 12, 8, 0.65) 100%);
   z-index: 1;
 }
 
@@ -137,45 +101,6 @@ body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-
-.journey-parallax {
-  position: relative;
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 80vh;
-  color: var(--neutral-light);
-}
-
-.journey-parallax .overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(17, 26, 24, 0.65);
-  backdrop-filter: blur(4px);
-}
-
-.journey-quote {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-}
-
-.journey-quote h2 {
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
-  font-family: "Conso", serif;
-  color: var(--secondary-yellow);
-  text-shadow: 0 0 15px rgba(242, 210, 117, 0.4);
-  letter-spacing: 1.2px;
-  animation: quoteGlow 6s ease-in-out infinite alternate;
-}
-
-@keyframes quoteGlow {
-  0% { text-shadow: 0 0 10px rgba(242, 210, 117, 0.2); }
-  100% { text-shadow: 0 0 25px rgba(242, 210, 117, 0.6); }
-}
 
 
 .journey-flow {
@@ -412,7 +337,7 @@ body {
 
 @media (max-width: 1024px) {
   .intro-grid { grid-template-columns: 1fr; }
-  .mountain-section h1 { font-size: 3.5rem; }
+  .expertise-page .mountain-section h1 { font-size: 3.5rem; }
 }
 
 @media (max-width: 768px) {
@@ -422,8 +347,8 @@ body {
 }
 
 @media (max-width: 480px) {
-  .mountain-section h1 { font-size: 2.5rem; }
-  .mountain-section h2 { font-size: 1rem; }
+  .expertise-page .mountain-section h1 { font-size: 2.5rem; }
+  .expertise-page .mountain-section h2 { font-size: 1rem; }
   .journey-intro, .journey-flow, .journey-support { padding: 80px 5%; }
   .section-heading p { font-size: 1rem; }
 }
@@ -440,7 +365,7 @@ body {
 }
 
 @media (forced-colors: active) {
-  .mountain-section,
+  .expertise-page .mountain-section,
   .journey-stages,
   .journey-support {
     background: Canvas !important;

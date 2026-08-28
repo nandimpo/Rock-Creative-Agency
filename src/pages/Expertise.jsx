@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
-import { useMountainAnimation } from '../hooks/useMountainAnimation';
+import ParticleHeading from '../components/ParticleHeading';
 import { journeyStages, journeySupport } from '../data/journey';
 import '../styles/mountain.css';
 import '../styles/expertise.css';
@@ -13,36 +13,12 @@ gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 // unthrottled `scroll` listener for `.fade-in`/`.fade-in-up` reveal is replaced with
 // ScrollTrigger (used everywhere else on the site) per the migration plan, since it
 // gets cleanup for free via gsap.context and avoids an extra listener leak on route change.
+// The hero is a static intro video with no entrance animation.
 export default function Expertise() {
   const rootRef = useRef(null);
-  const mountainRef = useRef(null);
-  useMountainAnimation(mountainRef);
 
   useEffect(() => {
-    const heroTimer = setTimeout(() => {
-      mountainRef.current?.classList.add('revealed');
-    }, 400);
-
     const ctx = gsap.context(() => {
-      const hero = mountainRef.current;
-      if (hero) {
-        const h1 = hero.querySelector('h1');
-        const h2 = hero.querySelector('h2');
-
-        gsap
-          .timeline()
-          .to(h1, { opacity: 1, y: 0, duration: 1.8, ease: 'power4.out', delay: 2.2 })
-          .to(h2, { opacity: 1, y: 0, duration: 1.8, ease: 'power4.out' }, '-=1.0');
-
-        gsap.utils.toArray('.fog-layer').forEach((fog, i) => {
-          gsap.to(fog, {
-            xPercent: i % 2 === 0 ? -15 : 15,
-            ease: 'none',
-            scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true },
-          });
-        });
-      }
-
       gsap.utils.toArray('.fade-in, .fade-in-up').forEach((el) => {
         ScrollTrigger.create({
           trigger: el,
@@ -119,52 +95,18 @@ export default function Expertise() {
     }, rootRef);
 
     return () => {
-      clearTimeout(heroTimer);
       ctx.revert();
     };
   }, []);
 
   return (
-    <div ref={rootRef}>
-      <section
-        className="mountain-section"
-        ref={mountainRef}
-        style={{ backgroundImage: "url('/Images/Home/rock.jpg')" }}
-      >
-        <div className="fog-layer fog-layer-1" />
-        <div className="fog-layer fog-layer-2" />
-        <div className="fog-layer fog-layer-3" />
-
-        <h1>The Method.</h1>
+    <div className="expertise-page" ref={rootRef}>
+      <section className="mountain-section">
+        <video className="hero-video" autoPlay loop muted playsInline>
+          <source src="/Images/Intro video - expertise.mp4" type="video/mp4" />
+        </video>
+        <ParticleHeading text="The Method." variant="rise" />
         <h2>This is where you truly see our process</h2>
-
-        <svg className="mountain-svg" viewBox="0 0 1600 320" preserveAspectRatio="xMidYMid meet">
-          <path
-            className="mountain-peak mountain-peak-2"
-            d="M200,160 L600,70 L1000,160 L1300,100 L1500,160"
-            fill="none"
-            stroke="rgba(226,220,204,0.35)"
-            strokeWidth="1"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            className="mountain-peak mountain-peak-1"
-            d="M100,180 L550,40 L1000,180 L1350,70 L1550,180"
-            fill="none"
-            stroke="#A5744E"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </section>
-
-      <section className="journey-parallax" style={{ backgroundImage: "url('/Images/Home/rock.jpg')" }}>
-        <div className="overlay" />
-        <div className="journey-quote fade-in-up">
-          <h2>&ldquo;Every frame tells a story, every moment reveals our method.&rdquo;</h2>
-        </div>
       </section>
 
       <main className="journey-main">

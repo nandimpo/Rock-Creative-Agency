@@ -6,9 +6,38 @@
   --neutral-light: #E2DCCC;
   --accent-ink: rgba(0,0,0,0.6);
   --glass: rgba(255,255,255,0.06);
+  --blob-radius: 63% 37% 54% 46% / 45% 48% 52% 55%;
+  --blob-radius-hover: 42% 58% 40% 60% / 55% 45% 55% 45%;
 }
 body{ font-family: "Avenir LT Pro", Avenir, sans-serif; color:var(--neutral-dark); }
 h1,h2,h3{ font-family: "Conso", serif; font-weight:300; color:var(--neutral-light); }
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.particle-heading {
+    position: relative;
+    width: 100%;
+    height: clamp(4rem, 11vw, 8rem);
+    margin: 0;
+}
+
+.particle-heading canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
 
 .nav-links a.active {
     color: var(--primary-brown);
@@ -34,6 +63,7 @@ body {
     background-color: #E2DCCC;
     color: #333;
     overflow-x: hidden;
+    overflow-y: visible;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -59,11 +89,9 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 50px;
-    background-color: rgba(17, 26, 24, 0.98);
+    padding: 25px 50px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.25) 60%, transparent 100%);
     z-index: 1000;
-    border-bottom: 1px solid rgba(165, 116, 78, 0.3);
-    backdrop-filter: blur(10px);
 }
 
 
@@ -96,6 +124,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-links li {
     list-style: none;
+    display: flex;
+    align-items: center;
 }
 
 .nav-links a {
@@ -103,6 +133,7 @@ h1, h2, h3, h4, h5, h6 {
     text-decoration: none;
     margin-left: 35px;
     font-size: 14px;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
     transition: all 0.3s ease;
     position: relative;
     display: inline-block;
@@ -128,9 +159,170 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 30px;
+    min-width: 30px;
+    height: 22px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    animation: none;
+    flex-shrink: 0;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.nav-toggle:hover {
+    box-shadow: none;
+    opacity: 1;
+    transform: none;
+}
+
+.nav-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #E2DCCC;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.nav-toggle.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+
+.menu-toggle {
+    background: transparent;
+    border: 1px solid var(--primary-brown);
+    color: #E2DCCC;
+    padding: 10px 24px;
+    border-radius: var(--blob-radius);
+    font-family: 'Avenir LT Pro', 'Avenir', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: border-radius 0.5s ease, background 0.3s ease, color 0.3s ease;
+}
+
+.menu-toggle:hover {
+    background: var(--primary-brown);
+    color: #111A18;
+    border-radius: var(--blob-radius-hover);
+}
+
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: #111A18;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto;
+    padding: 100px 60px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-16px);
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+}
+
+.menu-overlay.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.menu-close {
+    position: absolute;
+    top: 30px;
+    right: 50px;
+    background: transparent;
+    border: 1px solid var(--primary-brown);
+    color: #E2DCCC;
+    padding: 8px 20px;
+    border-radius: var(--blob-radius);
+    font-family: 'Avenir LT Pro', 'Avenir', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: border-radius 0.5s ease, background 0.3s ease, color 0.3s ease;
+}
+
+.menu-close:hover {
+    background: var(--primary-brown);
+    color: #111A18;
+    border-radius: var(--blob-radius-hover);
+}
+
+.menu-overlay-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-overlay-links li {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(165, 116, 78, 0.25);
+    padding: 18px 10px;
+    transition: background 0.3s ease;
+}
+
+.menu-overlay-links li:hover {
+    background: rgba(165, 116, 78, 0.1);
+}
+
+.menu-overlay-links a {
+    font-family: 'Conso', serif;
+    font-weight: 300;
+    font-size: clamp(2.25rem, 6vw, 5rem);
+    color: #E2DCCC;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.menu-overlay-links a:hover,
+.menu-overlay-links a.active {
+    color: var(--primary-brown);
+}
+
+@media (max-width: 768px) {
+    .menu-overlay {
+        padding: 0 24px;
+    }
+
+    .menu-close {
+        top: 20px;
+        right: 24px;
+    }
+
+    .menu-toggle {
+        padding: 8px 14px;
+        font-size: 12px;
+    }
+}
+
+
 .hero,
 header + section {
-    margin-top: 90px;
+    margin-top: 0;
     height: 100vh;
     background-size: cover;
     background-position: center;
@@ -182,24 +374,40 @@ header + section h1 {
 }
 
 
+@keyframes blobMorph {
+    0%   { border-radius: 63% 37% 54% 46% / 45% 48% 52% 55%; }
+    33%  { border-radius: 48% 52% 38% 62% / 58% 42% 60% 40%; }
+    66%  { border-radius: 55% 45% 62% 38% / 40% 60% 35% 65%; }
+    100% { border-radius: 63% 37% 54% 46% / 45% 48% 52% 55%; }
+}
+
 .btn,
 button {
-    background-color: var(--primary-brown);
+    background:
+        radial-gradient(120% 140% at 22% 18%, rgba(255,255,255,0.35), transparent 45%),
+        radial-gradient(140% 160% at 82% 88%, rgba(0,0,0,0.35), transparent 50%),
+        var(--primary-brown);
     color: #E2DCCC;
     border: none;
-    padding: 12px 30px;
-    border-radius: 20px;
+    padding: 13px 32px;
+    border-radius: var(--blob-radius);
     font-family: 'Avenir LT Pro', 'Avenir', sans-serif;
     font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    box-shadow: 0 8px 24px rgba(165, 116, 78, 0.35);
+    animation: blobMorph 8s ease-in-out infinite;
+    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, animation-duration 0.3s ease;
     position: relative;
     z-index: 10;
 }
 
 .btn:hover,
 button:hover {
-    opacity: 0.85;
+    animation-duration: 2.5s;
+    box-shadow: 0 10px 30px rgba(165, 116, 78, 0.55);
+    opacity: 0.9;
     transform: translateY(-2px);
 }
 
@@ -382,25 +590,46 @@ footer nav {
 
 @media (max-width: 768px) {
     .navbar {
-        padding: 15px 20px;
-        flex-direction: column;
-        gap: 15px;
+        padding: 18px 20px;
+    }
+
+    .nav-toggle {
+        display: flex;
     }
 
     .nav-links {
-        flex-wrap: wrap;
-        gap: 1.25rem;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        margin: 0;
+        background: rgba(17, 26, 24, 0.97);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+    }
+
+    .nav-links.open {
+        max-height: 24rem;
+        padding: 10px 0 20px;
+    }
+
+    .nav-links li {
         justify-content: center;
+        padding: 10px 0;
     }
 
     .nav-links a {
         margin-left: 0;
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .hero,
     header + section {
-        margin-top: 120px;
+        margin-top: 0;
         height: 100vh;
     }
 

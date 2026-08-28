@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useMountainAnimation } from '../hooks/useMountainAnimation';
+import ParticleHeading from '../components/ParticleHeading';
 import ServiceCard from '../components/ServiceCard';
 import { services } from '../data/services';
 import '../styles/mountain.css';
@@ -12,13 +12,12 @@ gsap.registerPlugin(ScrollTrigger);
 // Ports Javascript/services.js. The "DISCOVER MORE" aside drawer (originally a single
 // DOM node appended to document.body and populated per click) is now React state
 // (`openIndex`) driving one ServiceCard-agnostic <aside>, with GSAP still handling the
-// slide transform so the reveal motion matches the original exactly.
+// slide transform so the reveal motion matches the original exactly. The hero is a
+// static intro clip with no entrance animation.
 export default function Services() {
   const rootRef = useRef(null);
-  const mountainRef = useRef(null);
   const asideRef = useRef(null);
   const [openIndex, setOpenIndex] = useState(null);
-  useMountainAnimation(mountainRef);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -82,28 +81,14 @@ export default function Services() {
   const activeService = openIndex !== null ? services[openIndex] : null;
 
   return (
-    <div ref={rootRef}>
-      <section
-        className="mountain-section"
-        ref={mountainRef}
-        style={{ backgroundImage: "url('/Images/Home/rock.jpg')" }}
-      >
-        <div className="mountain-container natural-mask">
-          <div className="fog-reveal">
-            <div className="fog-layer fog1" />
-            <div className="fog-layer fog2" />
-          </div>
-
+    <div className="services-page" ref={rootRef}>
+      <section className="mountain-section">
+        <img className="hero-video" src="/Images/Intro - Services.gif" alt="" />
+        <div className="mountain-container">
           <div className="mountain-content">
-            <h1>Our Services.</h1>
+            <ParticleHeading text="Our Services." variant="sides" />
             <h2>We blend real and digital worlds.</h2>
           </div>
-
-          <svg className="mountain-svg" viewBox="0 0 1000 400">
-            <path className="mountain-peak mountain-peak-1" d="M50 350 L250 150 L450 350" />
-            <path className="mountain-peak mountain-peak-2" d="M400 350 L600 100 L800 350" />
-            <path className="mountain-peak mountain-peak-3" d="M700 350 L900 200 L1050 350" />
-          </svg>
         </div>
       </section>
 

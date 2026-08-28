@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
-import { useMountainAnimation } from '../hooks/useMountainAnimation';
+import ParticleHeading from '../components/ParticleHeading';
 import TeamCard from '../components/TeamCard';
 import { team } from '../data/team';
 import '../styles/mountain.css';
@@ -10,24 +10,14 @@ import '../styles/about.css';
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
-// Ports Javascript/about.js. The fog/hover/reveal behavior shared by every mountain
-// hero across the site lives in useMountainAnimation; everything else here (hero
-// timeline, team scroll reveal, per-character heading split, canvas particle burst)
-// is specific to the About page and scoped via gsap.context for cleanup on unmount.
+// Ports Javascript/about.js. Team scroll reveal, per-character heading split, and
+// canvas particle burst are specific to the About page and scoped via gsap.context
+// for cleanup on unmount. The hero is a static intro video with no entrance animation.
 export default function About() {
   const rootRef = useRef(null);
-  const mountainRef = useRef(null);
-  useMountainAnimation(mountainRef);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap
-        .timeline({ delay: 0.2 })
-        .to('.mountain-section h1', { duration: 1, opacity: 1, y: 0, letterSpacing: '3px', ease: 'power2.out' }, 0)
-        .to('.mountain-section h2', { duration: 0.9, opacity: 1, y: 0, ease: 'power2.out' }, 0.2)
-        .to('.mountain-svg', { duration: 1.3, opacity: 1, scale: 1, ease: 'elastic.out(1, 0.5)' }, 0.1)
-        .to('.mountain-peak', { duration: 0.6, strokeDashoffset: 0, stagger: 0.1, ease: 'power1.inOut' }, 0.6);
-
       gsap.to('.intro-content p', {
         scrollTrigger: { trigger: '.intro-section', start: 'top 85%', end: 'top 35%', scrub: 1 },
         duration: 0.9,
@@ -159,13 +149,6 @@ export default function About() {
         });
       });
 
-      gsap.to('.mountain-svg', {
-        scrollTrigger: { trigger: '.mountain-section', start: 'top top', end: 'bottom top', scrub: 1 },
-        y: 80,
-        opacity: 0.7,
-        ease: 'none',
-      });
-
       const heading = document.querySelector('.team-section h2');
       if (heading) {
         const text = heading.textContent.trim();
@@ -228,22 +211,16 @@ export default function About() {
   }, []);
 
   return (
-    <div ref={rootRef}>
-      <section
-        className="mountain-section"
-        ref={mountainRef}
-        style={{ backgroundImage: "url('/Images/Home/rock.jpg')" }}
-      >
+    <div className="about-page" ref={rootRef}>
+      <section className="mountain-section">
+        <video className="hero-video" autoPlay loop muted playsInline>
+          <source src="/Images/Intro Video - About.mp4" type="video/mp4" />
+        </video>
         <div className="mountain-container">
           <div className="mountain-content">
-            <h1>About.</h1>
+            <ParticleHeading text="About." variant="fall" />
             <h2>Meet The Rock Creative Team</h2>
           </div>
-          <svg className="mountain-svg" viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid meet">
-            <polyline className="mountain-peak mountain-peak-1" points="100,300 250,100 350,200" />
-            <polyline className="mountain-peak mountain-peak-2" points="320,220 500,50 680,220" />
-            <polyline className="mountain-peak mountain-peak-3" points="650,200 800,120 900,300" />
-          </svg>
         </div>
       </section>
 

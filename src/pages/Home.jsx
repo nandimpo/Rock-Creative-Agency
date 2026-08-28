@@ -2,12 +2,13 @@ import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 import { useFormValidation } from '../hooks/useFormValidation';
-import { whoWeAreCards, workList, serviceTags } from '../data/homeContent';
+import ParticleHeading from '../components/ParticleHeading';
+import ServicesShowcase from '../components/ServicesShowcase';
+import { whoWeAreCards, workList } from '../data/homeContent';
 import '../styles/home.css';
 
-gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
+gsap.registerPlugin(ScrollTrigger);
 
 const contactFields = [
   { name: 'firstName', type: 'text', required: true },
@@ -27,157 +28,6 @@ export default function Home() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       const cleanupFns = [];
-
-      function createHeroSVG() {
-        const hero = document.querySelector('.hero');
-        if (!hero) return;
-
-        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        svg.setAttribute('width', '100%');
-        svg.setAttribute('height', '100%');
-        svg.setAttribute('viewBox', '0 0 1920 1080');
-        svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
-        svg.style.position = 'absolute';
-        svg.style.top = '0';
-        svg.style.left = '0';
-        svg.style.zIndex = '2';
-        svg.style.pointerEvents = 'none';
-
-        const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
-        svg.appendChild(defs);
-
-        const mountains = [
-          { points: '0,900 400,400 800,700 1200,350 1600,600 1920,400 1920,1080 0,1080', opacity: 0.08, duration: 8 },
-          { points: '0,950 300,500 700,800 1100,450 1500,650 1920,500 1920,1080 0,1080', opacity: 0.06, duration: 10 },
-          { points: '0,800 250,600 600,850 950,550 1350,700 1700,400 1920,600 1920,1080 0,1080', opacity: 0.04, duration: 12 },
-        ];
-
-        mountains.forEach((mountain, index) => {
-          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-          path.setAttribute('d', `M${mountain.points}`);
-          path.setAttribute('fill', 'none');
-          path.setAttribute('stroke', '#111A18');
-          path.setAttribute('stroke-width', '3');
-          path.setAttribute('stroke-linecap', 'round');
-          path.setAttribute('stroke-linejoin', 'round');
-          svg.appendChild(path);
-
-          const pathLength = path.getTotalLength();
-          path.style.strokeDasharray = pathLength;
-          path.style.strokeDashoffset = pathLength;
-
-          const mountainTl = gsap.timeline();
-          mountainTl.to(path, {
-            strokeDashoffset: 0,
-            duration: 3 + index * 0.6,
-            delay: 0.3 + index * 0.4,
-            ease: 'power2.inOut',
-          });
-          mountainTl.to(
-            path,
-            {
-              opacity: mountain.opacity + 0.5,
-              duration: mountain.duration,
-              yoyo: true,
-              repeat: -1,
-              ease: 'sine.inOut',
-            },
-            2.5 + index * 0.3
-          );
-        });
-
-        for (let i = 0; i < 6; i++) {
-          const x = Math.random() * 1920;
-          const y = 600 + Math.random() * 300;
-          const scale = 0.5 + Math.random() * 0.8;
-
-          const tree = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-          tree.setAttribute('points', `${x},${y - 40 * scale} ${x - 20 * scale},${y + 30 * scale} ${x + 20 * scale},${y + 30 * scale}`);
-          tree.setAttribute('fill', 'rgba(77, 121, 148, 0.1)');
-          tree.setAttribute('opacity', '0.3');
-          svg.appendChild(tree);
-
-          gsap.to(tree, { opacity: 0.6, duration: 3 + Math.random() * 2, yoyo: true, repeat: -1, ease: 'sine.inOut' });
-        }
-
-        for (let i = 0; i < 3; i++) {
-          const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-          const cx = 200 + i * 600;
-          const cy = 850;
-          circle.setAttribute('cx', cx);
-          circle.setAttribute('cy', cy);
-          circle.setAttribute('r', '30');
-          circle.setAttribute('fill', 'none');
-          circle.setAttribute('stroke', 'rgba(77, 121, 148, 0.3)');
-          circle.setAttribute('stroke-width', '2');
-          svg.appendChild(circle);
-
-          gsap.to(circle, { attr: { r: 150 }, 'stroke-width': 0, opacity: 0, duration: 3, repeat: -1, ease: 'power1.out' });
-        }
-
-        hero.appendChild(svg);
-      }
-      createHeroSVG();
-
-      function createWaveTextAnimation() {
-        const h1 = document.querySelector('.hero h1');
-        if (!h1) return;
-
-        const text = h1.textContent;
-        h1.textContent = '';
-
-        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        svg.setAttribute('width', '100%');
-        svg.setAttribute('height', '200');
-        svg.setAttribute('viewBox', '0 0 1600 200');
-        svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-        svg.style.display = 'block';
-        svg.style.margin = '0 auto';
-
-        const charWidth = 50;
-        let totalWidth = 0;
-        for (let i = 0; i < text.length; i++) {
-          totalWidth += text[i] !== ' ' ? charWidth : charWidth * 0.5;
-        }
-        let xPosition = (1600 - totalWidth) / 2;
-
-        const waveTimeline = gsap.timeline();
-
-        for (let i = 0; i < text.length; i++) {
-          const char = text[i];
-          if (char === ' ') {
-            xPosition += charWidth * 0.5;
-            continue;
-          }
-
-          const tspan = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-          tspan.setAttribute('x', xPosition);
-          tspan.setAttribute('y', '120');
-          tspan.setAttribute('font-size', '80');
-          tspan.setAttribute('font-weight', '300');
-          tspan.setAttribute('letter-spacing', '3');
-          tspan.setAttribute('font-family', 'Conso, serif');
-          tspan.setAttribute('fill', '#E2DCCC');
-          tspan.setAttribute('text-anchor', 'middle');
-          tspan.textContent = char;
-
-          const delay = i * 0.08;
-
-          waveTimeline.fromTo(
-            tspan,
-            { attr: { y: 140 }, opacity: 0 },
-            { attr: { y: 120 }, opacity: 1, duration: 0.6, ease: 'back.out' },
-            delay
-          );
-          waveTimeline.to(tspan, { attr: { y: 100 }, duration: 2, ease: 'sine.inOut', yoyo: true, repeat: -1 }, delay + 0.6);
-
-          svg.appendChild(tspan);
-          xPosition += charWidth;
-        }
-
-        h1.appendChild(svg);
-      }
-      gsap.delayedCall(0.3, createWaveTextAnimation);
 
       function createServiceSVGs() {
         const serviceTagEls = document.querySelectorAll('.service-tag');
@@ -303,16 +153,6 @@ export default function Home() {
       }
       gsap.delayedCall(0.5, createServiceSVGs);
 
-      gsap.to('.hero', {
-        backgroundPosition: '50% 100%',
-        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 },
-      });
-
-      gsap
-        .timeline()
-        .from('.hero h2', { opacity: 0, y: 30, duration: 1, delay: 0.4, immediateRender: false })
-        .from('.hero .btn', { opacity: 0, y: 30, duration: 1.5, immediateRender: false }, '-=0.5');
-
       function createSectionTimeline(sectionSelector, headingSelector, paragraphSelector, cardSelector) {
         const sectionTimeline = gsap.timeline({
           scrollTrigger: { trigger: sectionSelector, start: 'top center', once: true },
@@ -337,14 +177,6 @@ export default function Home() {
       createSectionTimeline('.what-we-do', '.text-content h2', '.text-content p', null);
       createSectionTimeline('.our-work', '.work-content h2', null, '.work-list li');
 
-      const servicesTimeline = gsap.timeline({
-        scrollTrigger: { trigger: '.our-services', start: 'top center', once: true },
-      });
-      const servicesHeadingWords = document.querySelectorAll('.our-services .services-content h2 .heading-word');
-      if (servicesHeadingWords.length > 0) {
-        servicesTimeline.from(servicesHeadingWords, { opacity: 0, y: 40, duration: 0.7, stagger: 0.1, ease: 'back.out' }, 0);
-      }
-
       const contactTimeline = gsap.timeline({
         scrollTrigger: { trigger: '.contact', start: 'top center', once: true },
       });
@@ -353,60 +185,11 @@ export default function Home() {
         .from(contactWords, { opacity: 0, rotationX: 90, duration: 0.8, stagger: 0.1, ease: 'power2.out' }, 0)
         .from('.contact > p', { opacity: 0, y: 20, duration: 0.8, ease: 'power2.out' }, 0.3);
 
-      function createMotionPathAnimation(sectionSelector) {
-        const section = document.querySelector(sectionSelector);
-        if (!section) return;
-
-        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        svg.setAttribute('width', '100%');
-        svg.setAttribute('height', '100%');
-        svg.setAttribute('viewBox', '0 0 1000 600');
-        svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
-        svg.style.position = 'absolute';
-        svg.style.top = '0';
-        svg.style.left = '0';
-        svg.style.zIndex = '0';
-        svg.style.pointerEvents = 'none';
-
-        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        path.setAttribute('id', `motionPath-${sectionSelector.replace(/[^\w-]/g, '')}`);
-        path.setAttribute('d', 'M0,300 Q250,100 500,300 T1000,300');
-        path.setAttribute('fill', 'none');
-        path.setAttribute('stroke', 'none');
-        svg.appendChild(path);
-
-        section.style.position = 'relative';
-        section.insertBefore(svg, section.firstChild);
-
-        ScrollTrigger.create({
-          trigger: sectionSelector,
-          start: 'top 70%',
-          once: true,
-          onEnter: () => {
-            for (let i = 0; i < 4; i++) {
-              const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-              circle.setAttribute('r', '8');
-              circle.setAttribute('fill', 'rgba(165, 116, 78, 0.4)');
-              svg.appendChild(circle);
-
-              gsap.timeline({ repeat: -1 }).to(circle, {
-                motionPath: { path, align: path, alignOrigin: [0.5, 0.5], autoRotate: false },
-                duration: 4 + i * 0.5,
-                ease: 'sine.inOut',
-                delay: i * 0.8,
-              });
-            }
-          },
-        });
-      }
-      createMotionPathAnimation('.who-we-are');
-      createMotionPathAnimation('.our-work');
-
       function createCanvasReveal(sectionSelector, fillColor, revealType = 'circle') {
         const section = document.querySelector(sectionSelector);
         if (!section) return;
         if (sectionSelector === '.hero') return;
-        if (sectionSelector === '.what-we-do' || sectionSelector === '.our-services') return;
+        if (sectionSelector === '.what-we-do') return;
 
         let canvas = section.querySelector('canvas');
         if (!canvas) {
@@ -507,7 +290,6 @@ export default function Home() {
       createCanvasReveal('.who-we-are', '#A5744E', 'circle');
       createCanvasReveal('.what-we-do', '#4D7994', 'wipe-right');
       createCanvasReveal('.our-work', '#A5744E', 'wipe-down');
-      createCanvasReveal('.our-services', '#4D7994', 'diagonal');
       createCanvasReveal('.contact', '#A5744E', 'circle');
 
       document.querySelectorAll('.image-placeholder').forEach((img) => {
@@ -572,7 +354,6 @@ export default function Home() {
       createParticles('.who-we-are');
       createParticles('.what-we-do');
       createParticles('.our-work');
-      createParticles('.our-services');
       createParticles('.contact');
 
       return () => cleanupFns.forEach((fn) => fn());
@@ -585,20 +366,27 @@ export default function Home() {
     <div ref={rootRef}>
       <div id="dust-haze" />
 
-      <section className="hero" style={{ backgroundImage: "url('/Images/Home/rock.jpg')" }}>
-        <h1>Rock Creative Agency</h1>
-        <h2>We are always solid.</h2>
-        <a href="#contact">
-          <button className="btn">Connect with us</button>
+      <section className="hero">
+        <video className="hero-video" autoPlay loop muted playsInline>
+          <source src="/Images/Home/Intro Video.mp4" type="video/mp4" />
+        </video>
+        <ParticleHeading text="Rock Creative Agency" />
+        <h2>Are you ready to rock the world?</h2>
+        <a href="#contact" className="hero-link">
+          Connect with us
         </a>
       </section>
 
       <section className="who-we-are">
         <div className="who-we-are-box">
-          <h2>
-            <span className="heading-word">Who</span> <span className="heading-word">we</span>{' '}
-            <span className="heading-word">are</span>
-          </h2>
+          <h2 className="visually-hidden">Who we are</h2>
+          <div className="rolling-tape" aria-hidden="true">
+            <div className="rolling-tape-track">
+              {Array.from({ length: 8 }).map((_, i) => (
+                <span key={i}>Who We Are</span>
+              ))}
+            </div>
+          </div>
           <p>
             We're more than just a creative agency — we're your trusted partner in bringing bold visions to
             life. At Rock, we believe every client deserves a safe space where creativity flourishes and ideas
@@ -659,29 +447,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="our-services">
-        <div className="content-wrapper">
-          <div
-            className="image-placeholder"
-            style={{ backgroundImage: "url('/Images/Home/Production (Home).jpg')" }}
-          />
-          <div className="services-content">
-            <h2>
-              <span className="heading-word">Our</span> <span className="heading-word">Services</span>
-            </h2>
-            <div className="services-grid">
-              {serviceTags.map((label) => (
-                <span className="service-tag" key={label}>
-                  <Link to="/services">{label}</Link>
-                </span>
-              ))}
-            </div>
-            <Link to="/services">
-              <button className="btn">Explore</button>
-            </Link>
-          </div>
-        </div>
-      </section>
+      <ServicesShowcase />
 
       <section className="contact" id="contact">
         <h2>
