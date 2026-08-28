@@ -288,11 +288,6 @@ export default function Home() {
           );
         }
       }
-      createCanvasReveal('.who-we-are', '#A5744E', 'circle');
-      createCanvasReveal('.what-we-do', '#4D7994', 'wipe-right');
-      createCanvasReveal('.our-work', '#A5744E', 'wipe-down');
-      createCanvasReveal('.contact', '#A5744E', 'circle');
-
       document.querySelectorAll('.image-placeholder').forEach((img) => {
         const onMove = (e) => {
           const rect = img.getBoundingClientRect();
