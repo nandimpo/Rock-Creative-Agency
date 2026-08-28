@@ -146,7 +146,6 @@
     transform-style: preserve-3d;
 }
 
-.team-card:hover .team-card-flip,
 .team-card.flipped .team-card-flip {
     transform: rotateY(180deg);
 }

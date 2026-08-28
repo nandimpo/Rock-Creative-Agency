@@ -312,51 +312,6 @@ export default function Home() {
         });
       });
 
-      function createParticles(sectionSelector) {
-        ScrollTrigger.create({
-          trigger: sectionSelector,
-          start: 'top 70%',
-          once: true,
-          onEnter: () => {
-            const section = document.querySelector(sectionSelector);
-            if (!section) return;
-            const particleTimeline = gsap.timeline();
-            for (let i = 0; i < 20; i++) {
-              const particle = document.createElement('div');
-              Object.assign(particle.style, {
-                position: 'absolute',
-                left: Math.random() * 100 + '%',
-                top: Math.random() * 50 + '%',
-                width: Math.random() * 4 + 2 + 'px',
-                height: Math.random() * 4 + 2 + 'px',
-                background: Math.random() > 0.5 ? 'rgba(165, 116, 78, 0.3)' : 'rgba(77, 121, 148, 0.3)',
-                borderRadius: '50%',
-                pointerEvents: 'none',
-                zIndex: '1',
-              });
-              section.style.position = 'relative';
-              section.appendChild(particle);
-
-              particleTimeline.to(
-                particle,
-                {
-                  y: Math.random() * 100 + 50,
-                  opacity: 0,
-                  duration: 2 + Math.random(),
-                  ease: 'power1.out',
-                  onComplete: () => particle.remove(),
-                },
-                Math.random() * 0.5
-              );
-            }
-          },
-        });
-      }
-      createParticles('.who-we-are');
-      createParticles('.what-we-do');
-      createParticles('.our-work');
-      createParticles('.contact');
-
       return () => cleanupFns.forEach((fn) => fn());
     }, rootRef);
 

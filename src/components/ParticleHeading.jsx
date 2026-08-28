@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-const DEFAULT_PALETTE = ['#F2D275', '#E2DCCC', '#A5744E'];
+const DEFAULT_PALETTE = ['#E2DCCC'];
 
 // Where a particle starts before converging on its target point (tx, ty),
 // per `variant`. Each variant gives a page its own distinct "coming together"
@@ -127,16 +127,14 @@ export default function ParticleHeading({
 
     const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
 
-    const drawSolid = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const drawSolid = (alpha = 1) => {
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.font = fontString;
       ctx.fillStyle = '#E2DCCC';
-      ctx.shadowColor = 'rgba(242, 210, 117, 0.4)';
-      ctx.shadowBlur = canvas.height * 0.05;
+      ctx.globalAlpha = alpha;
       ctx.fillText(text, textX, textY);
-      ctx.shadowBlur = 0;
+      ctx.globalAlpha = 1;
     };
 
     const render = (time) => {
@@ -144,24 +142,27 @@ export default function ParticleHeading({
       const elapsed = time - startTime;
       const progress = Math.min(elapsed / duration, 1);
 
+      const eased = easeOutCubic(progress);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const solidAlpha = Math.max(0, (progress - 0.72) / 0.28);
+      if (solidAlpha < 1) {
+        particles.forEach((p) => {
+          const x = p.sx + (p.tx - p.sx) * eased;
+          const y = p.sy + (p.ty - p.sy) * eased;
+          ctx.beginPath();
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = (0.5 + eased * 0.5) * (1 - solidAlpha);
+          ctx.arc(x, y, p.r, 0, Math.PI * 2);
+          ctx.fill();
+        });
+      }
+      ctx.globalAlpha = 1;
+      drawSolid(solidAlpha);
+
       if (progress >= 1) {
-        drawSolid();
         frameId = undefined;
         return;
       }
-
-      const eased = easeOutCubic(progress);
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach((p) => {
-        const x = p.sx + (p.tx - p.sx) * eased;
-        const y = p.sy + (p.ty - p.sy) * eased;
-        ctx.beginPath();
-        ctx.fillStyle = p.color;
-        ctx.globalAlpha = 0.5 + eased * 0.5;
-        ctx.arc(x, y, p.r, 0, Math.PI * 2);
-        ctx.fill();
-      });
-      ctx.globalAlpha = 1;
 
       frameId = requestAnimationFrame(render);
     };

@@ -407,38 +407,27 @@ header + section h1 {
 }
 
 
-@keyframes blobMorph {
-    0%   { border-radius: 63% 37% 54% 46% / 45% 48% 52% 55%; }
-    33%  { border-radius: 48% 52% 38% 62% / 58% 42% 60% 40%; }
-    66%  { border-radius: 55% 45% 62% 38% / 40% 60% 35% 65%; }
-    100% { border-radius: 63% 37% 54% 46% / 45% 48% 52% 55%; }
-}
-
 .btn,
 button {
     background-color: var(--primary-brown);
     color: #E2DCCC;
     border: none;
     padding: 13px 32px;
-    border-radius: var(--blob-radius);
+    border-radius: 0.35rem;
     font-family: 'Avenir LT Pro', 'Avenir', sans-serif;
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.3px;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(17, 26, 24, 0.18);
-    animation: blobMorph 8s ease-in-out infinite;
-    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, animation-duration 0.3s ease;
+    box-shadow: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
     position: relative;
     z-index: 10;
 }
 
 .btn:hover,
 button:hover {
-    animation-duration: 2.5s;
-    box-shadow: 0 6px 16px rgba(17, 26, 24, 0.22);
-    opacity: 0.9;
-    transform: translateY(-2px);
+    background-color: #8e5e3e;
 }
 
 
