@@ -206,6 +206,7 @@ canvas {
 .what-we-do {
     padding: 5rem 2.5rem;
     position: relative;
+    overflow: hidden;
     z-index: 5;
 }
 

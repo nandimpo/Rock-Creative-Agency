@@ -186,108 +186,6 @@ export default function Home() {
         .from(contactWords, { opacity: 0, rotationX: 90, duration: 0.8, stagger: 0.1, ease: 'power2.out' }, 0)
         .from('.contact > p', { opacity: 0, y: 20, duration: 0.8, ease: 'power2.out' }, 0.3);
 
-      function createCanvasReveal(sectionSelector, fillColor, revealType = 'circle') {
-        const section = document.querySelector(sectionSelector);
-        if (!section) return;
-        if (sectionSelector === '.hero') return;
-        if (sectionSelector === '.what-we-do') return;
-
-        let canvas = section.querySelector('canvas');
-        if (!canvas) {
-          canvas = document.createElement('canvas');
-          Object.assign(canvas.style, {
-            position: 'absolute',
-            top: '0',
-            left: '0',
-            width: '100%',
-            height: '100%',
-            zIndex: '100',
-            pointerEvents: 'none',
-          });
-          section.style.position = 'relative';
-          section.appendChild(canvas);
-        }
-
-        const ctx2d = canvas.getContext('2d');
-        const resizeCanvas = () => {
-          canvas.width = section.offsetWidth;
-          canvas.height = section.offsetHeight;
-        };
-        resizeCanvas();
-        ctx2d.fillStyle = fillColor;
-        ctx2d.fillRect(0, 0, canvas.width, canvas.height);
-
-        if (revealType === 'circle') {
-          ScrollTrigger.create({
-            trigger: section,
-            start: 'top center',
-            end: 'center center',
-            scrub: 1,
-            onUpdate: (self) => {
-              const maxRadius = Math.max(canvas.width, canvas.height) * 1.5;
-              const radius = maxRadius * self.progress;
-              ctx2d.clearRect(0, 0, canvas.width, canvas.height);
-              ctx2d.fillStyle = fillColor;
-              ctx2d.fillRect(0, 0, canvas.width, canvas.height);
-              ctx2d.globalCompositeOperation = 'destination-out';
-              ctx2d.beginPath();
-              ctx2d.arc(canvas.width / 2, canvas.height / 2, radius, 0, Math.PI * 2);
-              ctx2d.fill();
-              ctx2d.globalCompositeOperation = 'source-over';
-            },
-          });
-        } else if (revealType === 'wipe-right') {
-          gsap.timeline({ scrollTrigger: { trigger: section, start: 'top center', end: 'center center', scrub: 1 } }).to(
-            { x: 0 },
-            {
-              x: canvas.width,
-              duration: 2,
-              ease: 'power2.inOut',
-              onUpdate: function () {
-                const x = this.targets()[0].x;
-                ctx2d.clearRect(0, 0, canvas.width, canvas.height);
-                ctx2d.fillStyle = fillColor;
-                ctx2d.fillRect(0, 0, canvas.width - x, canvas.height);
-              },
-            }
-          );
-        } else if (revealType === 'wipe-down') {
-          gsap.timeline({ scrollTrigger: { trigger: section, start: 'top center', end: 'center center', scrub: 1 } }).to(
-            { y: 0 },
-            {
-              y: canvas.height,
-              duration: 2,
-              ease: 'power2.inOut',
-              onUpdate: function () {
-                const y = this.targets()[0].y;
-                ctx2d.clearRect(0, 0, canvas.width, canvas.height);
-                ctx2d.fillStyle = fillColor;
-                ctx2d.fillRect(0, 0, canvas.width, canvas.height - y);
-              },
-            }
-          );
-        } else if (revealType === 'diagonal') {
-          gsap.timeline({ scrollTrigger: { trigger: section, start: 'top center', end: 'center center', scrub: 1 } }).to(
-            { progress: 0 },
-            {
-              progress: 1,
-              duration: 2,
-              ease: 'power2.inOut',
-              onUpdate: function () {
-                const progress = this.targets()[0].progress;
-                ctx2d.clearRect(0, 0, canvas.width, canvas.height);
-                ctx2d.fillStyle = fillColor;
-                ctx2d.beginPath();
-                ctx2d.moveTo(0, 0);
-                ctx2d.lineTo(canvas.width * progress, 0);
-                ctx2d.lineTo(0, canvas.height * progress);
-                ctx2d.closePath();
-                ctx2d.fill();
-              },
-            }
-          );
-        }
-      }
       document.querySelectorAll('.image-placeholder').forEach((img) => {
         const onMove = (e) => {
           const rect = img.getBoundingClientRect();
@@ -357,6 +255,7 @@ export default function Home() {
       </section>
 
       <section className="what-we-do">
+        <LineMotif variant="columns" />
         <div className="content-wrapper">
           <div className="text-content">
             <h2>

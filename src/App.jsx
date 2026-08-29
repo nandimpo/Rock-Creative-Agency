@@ -2,7 +2,6 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import Cursor from './components/Cursor';
 import UnsplashGallery from './components/UnsplashGallery';
 import { FilterProvider } from './context/FilterContext';
 import Home from './pages/Home';
@@ -36,7 +35,6 @@ export default function App() {
       </Routes>
       <UnsplashGallery />
       <Footer />
-      <Cursor />
     </FilterProvider>
   );
 }
