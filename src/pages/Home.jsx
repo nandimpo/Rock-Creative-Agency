@@ -5,8 +5,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useFormValidation } from '../hooks/useFormValidation';
 import ParticleHeading from '../components/ParticleHeading';
 import ServicesShowcase from '../components/ServicesShowcase';
+import WorkCarousel from '../components/WorkCarousel';
 import LineMotif from '../components/LineMotif';
-import { whoWeAreCards, workList } from '../data/homeContent';
+import { whoWeAreCards } from '../data/homeContent';
 import '../styles/home.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -176,7 +177,6 @@ export default function Home() {
       }
       createSectionTimeline('.who-we-are', 'h2', 'p', '.who-we-are-card');
       createSectionTimeline('.what-we-do', '.text-content h2', '.text-content p', null);
-      createSectionTimeline('.our-work', '.work-content h2', null, '.work-list li');
 
       const contactTimeline = gsap.timeline({
         scrollTrigger: { trigger: '.contact', start: 'top center', once: true },
@@ -274,29 +274,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="our-work">
-        <div className="content-wrapper">
-          <div
-            className="image-placeholder"
-            style={{ backgroundImage: "url('/Images/Home/Togetherness (home).jpg')" }}
-          />
-          <div className="work-content">
-            <h2>
-              <span className="heading-word">Our</span> <span className="heading-word">Work</span>
-            </h2>
-            <ul className="work-list">
-              {workList.map((item) => (
-                <li key={item.title}>
-                  <Link to={item.to}>{item.title}</Link>
-                </li>
-              ))}
-            </ul>
-            <Link to="/work">
-              <button className="btn">Explore</button>
-            </Link>
-          </div>
-        </div>
-      </section>
+      <WorkCarousel />
 
       <ServicesShowcase />
 

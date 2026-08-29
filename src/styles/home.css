@@ -4,6 +4,18 @@
     margin-right: 0.25rem;
 }
 
+section.hero {
+    align-items: flex-end;
+    justify-content: flex-end;
+    text-align: right;
+    padding: 0 6vw 10vh 6vw;
+}
+
+section.hero .particle-heading {
+    width: min(85vw, 40rem);
+    margin-left: auto;
+}
+
 
 .btn {
     background-color: #3d6178 ;
@@ -89,7 +101,6 @@
 
 .who-we-are-box,
 .content-wrapper,
-.work-content,
 .contact {
     position: relative;
     z-index: 9;
@@ -255,58 +266,63 @@ canvas {
 }
 
 
-.our-work {
-    padding: 5rem 2.5rem;
+.work-carousel {
     position: relative;
+    background-color: var(--neutral-dark);
     z-index: 5;
 }
 
-.work-content {
-    position: relative;
-    z-index: 10;
+.work-carousel-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: clamp(1rem, 3vh, 3rem);
+    overflow: hidden;
 }
 
-.work-content h2 {
-    font-size: 3.5rem;
-    margin-bottom: 1.875rem;
-    border-bottom: 0.125rem solid var(--primary-brown);
-    padding-bottom: 0.9375rem;
+.work-carousel-viewport {
+    width: 100%;
+    overflow: hidden;
+}
+
+.work-carousel-track {
+    display: flex;
+    gap: 2rem;
+    padding: 0 5vw;
+    width: max-content;
+    will-change: transform;
+}
+
+.work-carousel-card {
+    width: min(32vw, 22rem, 34vh);
+    aspect-ratio: 1;
+    flex-shrink: 0;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background-color: #000;
+    box-shadow: 0 1.25rem 2.5rem rgba(0, 0, 0, 0.35);
+}
+
+.work-carousel-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+
+.work-carousel-footer {
+    text-align: center;
+}
+
+.work-carousel-footer h2 {
+    font-size: clamp(1.25rem, min(7vw, 5.5vh), 5.5rem);
+    color: var(--neutral-light);
     text-transform: uppercase;
-    letter-spacing: 0.0625rem;
-    color: #333;
-}
-
-.work-list {
-    list-style: none;
-    margin-bottom: 1.875rem;
-    position: relative;
-    z-index: 10;
-}
-
-.work-list li {
-    font-size: 1.125rem;
-    padding: 0.5rem 0;
-    padding-left: 1.25rem;
-    position: relative;
-    color: #666;
-}
-
-.work-list li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--primary-brown);
-}
-
-.work-list li a {
-    color: var(--primary-brown);
-    text-decoration: none;
-    transition: opacity 0.3s ease;
-}
-
-.work-list li a:hover {
-    opacity: 0.7;
-    text-decoration: underline;
+    letter-spacing: 0.05em;
+    margin-bottom: clamp(0.5rem, 2vh, 1.5rem);
 }
 
 
@@ -561,9 +577,12 @@ canvas {
 
     .who-we-are-box h2,
     .text-content h2,
-    .work-content h2,
     .contact h2 {
         font-size: 2rem;
+    }
+
+    .work-carousel-card {
+        width: min(60vw, 34vh);
     }
 
     .hero h1 {
