@@ -113,9 +113,6 @@ export default function Expertise() {
       <main className="journey-main">
         <section className="journey-intro fade-in">
           <LineMotif variant="compass" />
-          <p className="intro-lead">
-            To truly understand what we do, you need to experience our flagship project.
-          </p>
           <h2>Fashion Face-Off</h2>
           <div className="intro-grid">
             <div className="intro-text">

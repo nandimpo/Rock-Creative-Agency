@@ -86,16 +86,6 @@ body {
   padding: 120px 10%;
 }
 
-.intro-lead {
-  font-size: clamp(1.4rem, 2vw + 0.5rem, 2rem);
-  color: var(--accent-ink);
-  line-height: 1.8;
-  margin-bottom: 2.5rem;
-  font-weight: 400;
-  letter-spacing: 0.3px;
-  text-align: center;
-}
-
 
 .intro-grid {
   display: grid;
