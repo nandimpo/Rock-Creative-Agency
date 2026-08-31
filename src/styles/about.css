@@ -20,49 +20,7 @@
 .about-page main {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(180deg, #2A3D2E 0%, #3F5A45 45%, #4F6B4A 100%);
-}
-
-.about-page main::before,
-.about-page main::after {
-    content: '';
-    position: absolute;
-    left: -10%;
-    width: 120%;
-    height: 160px;
-    background-repeat: repeat-x;
-    background-size: 1200px 160px;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.about-page main::before {
-    top: 0;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 160' preserveAspectRatio='none'><path d='M0,80 C200,20 400,140 600,80 C800,20 1000,140 1200,80 L1200,0 L0,0 Z' fill='rgba(255,255,255,0.05)'/></svg>");
-    animation: waveDrift 22s linear infinite;
-}
-
-.about-page main::after {
-    bottom: 0;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 160' preserveAspectRatio='none'><path d='M0,80 C200,140 400,20 600,80 C800,140 1000,20 1200,80 L1200,160 L0,160 Z' fill='rgba(0,0,0,0.12)'/></svg>");
-    animation: waveDrift 28s linear infinite reverse;
-}
-
-@keyframes waveDrift {
-    from { background-position-x: 0; }
-    to { background-position-x: -1200px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .about-page main::before,
-    .about-page main::after {
-        animation: none;
-    }
-}
-
-.about-page main > * {
-    position: relative;
-    z-index: 1;
+    background: var(--neutral-dark);
 }
 
 .about-page .mountain-section h1,
