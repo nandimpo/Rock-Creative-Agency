@@ -87,25 +87,6 @@ body {
 }
 
 
-.intro-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
-}
-
-.intro-text p {
-  font-size: 1rem;
-  line-height: 1.9;
-  color: #333;
-}
-
-.intro-image img {
-  width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
 
 
 .journey-flow {
@@ -355,7 +336,6 @@ body {
 
 
 @media (max-width: 1024px) {
-  .intro-grid { grid-template-columns: 1fr; }
   .expertise-page .mountain-section h1 { font-size: 3.5rem; }
 }
 

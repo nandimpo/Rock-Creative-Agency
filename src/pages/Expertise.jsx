@@ -114,18 +114,6 @@ export default function Expertise() {
         <section className="journey-intro fade-in">
           <LineMotif variant="compass" />
           <h2>Fashion Face-Off</h2>
-          <div className="intro-grid">
-            <div className="intro-text">
-              <p>
-                Our Fashion Face-Off showcases what we do best — producing an annual creative event that brings
-                together models, designers, make-up artists, and stylists. This two-day production celebrates
-                emerging African fashion and creative direction.
-              </p>
-            </div>
-            <div className="intro-image">
-              <img src="/Images/Method/Method.png" alt="Fashion Face-Off runway show" />
-            </div>
-          </div>
         </section>
 
         <section className="journey-stages" id="production">
