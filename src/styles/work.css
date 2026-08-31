@@ -110,14 +110,38 @@
   position: relative;
   width: 100%;
   overflow: hidden;
+  --work-progress: 0;
+  padding: 60px 0;
+}
+
+.portfolio-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: -20% -25%;
+  background: linear-gradient(
+    90deg,
+    #E2DCCC 0%,
+    #D9CBAE 16%,
+    #C7A072 32%,
+    #A5744E 48%,
+    #6E8A66 66%,
+    #3F5A45 82%,
+    #223526 100%
+  );
+  opacity: 0.5;
+  transform: translateX(calc(var(--work-progress) * -20%));
+  will-change: transform;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .portfolio-container {
+  position: relative;
+  z-index: 1;
   display: flex;
   gap: 30px;
   padding: 0 150px;
   overflow-x: auto;
-  scroll-behavior: smooth;
   scrollbar-width: none;
   padding-bottom: 40px;
 }

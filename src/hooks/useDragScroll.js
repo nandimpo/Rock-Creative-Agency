@@ -39,11 +39,21 @@ export function useDragScroll(containerRef) {
       container.scrollLeft = scrollLeft - walk;
     };
 
+    // Drives the parallax background band in work.css (--work-progress),
+    // fired for both wheel and drag scrolling since both mutate scrollLeft.
+    const wrapper = container.closest('.portfolio-wrapper');
+    const onScroll = () => {
+      const max = container.scrollWidth - container.clientWidth;
+      const progress = max > 0 ? container.scrollLeft / max : 0;
+      wrapper?.style.setProperty('--work-progress', progress);
+    };
+
     container.addEventListener('wheel', onWheel);
     container.addEventListener('mousedown', onMouseDown);
     container.addEventListener('mouseleave', onMouseLeave);
     container.addEventListener('mouseup', onMouseUp);
     container.addEventListener('mousemove', onMouseMove);
+    container.addEventListener('scroll', onScroll, { passive: true });
 
     return () => {
       container.removeEventListener('wheel', onWheel);
@@ -51,6 +61,7 @@ export function useDragScroll(containerRef) {
       container.removeEventListener('mouseleave', onMouseLeave);
       container.removeEventListener('mouseup', onMouseUp);
       container.removeEventListener('mousemove', onMouseMove);
+      container.removeEventListener('scroll', onScroll);
     };
   }, [containerRef]);
 }
