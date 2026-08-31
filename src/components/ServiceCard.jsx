@@ -14,7 +14,14 @@ export default function ServiceCard({ service, index, onDiscover }) {
         <span className="service-number">{service.number}</span>
         <h2 className="service-title">{service.title}</h2>
         <p className="service-description">{service.description}</p>
-        <button type="button" className="discover-btn" onClick={() => onDiscover(index)}>
+        <button
+          type="button"
+          className="discover-btn"
+          onClick={(e) => {
+            e.stopPropagation();
+            onDiscover(index);
+          }}
+        >
           DISCOVER MORE
         </button>
       </div>
