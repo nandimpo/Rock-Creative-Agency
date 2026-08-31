@@ -267,6 +267,7 @@ canvas {
 
 
 .work-carousel {
+    display: block;
     position: relative;
     background-color: var(--neutral-dark);
     z-index: 5;
