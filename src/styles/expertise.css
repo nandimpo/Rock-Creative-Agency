@@ -7,6 +7,8 @@
   --neutral-light: #E2DCCC;
   --accent-ink: rgba(0, 0, 0, 0.6);
   --glass: rgba(255, 255, 255, 0.06);
+  --accent-green: #4F6B4A;
+  --accent-green-deep: #223526;
 }
 
 body {
@@ -65,10 +67,21 @@ body {
 }
 
 
+.journey-main {
+  background: linear-gradient(
+    to bottom,
+    #E2DCCC 0%,
+    #E2DCCC 22%,
+    #C7CBAA 42%,
+    #8CA37F 60%,
+    #4F6B4A 78%,
+    #223526 100%
+  );
+}
+
 .journey-intro {
   position: relative;
   overflow: hidden;
-  background: var(--neutral-light);
   text-align: center;
   padding: 120px 10%;
 }
@@ -125,16 +138,15 @@ body {
 
 .journey-stages {
   position: relative;
-  background: linear-gradient(to bottom, #E2DCCC 0%, #D8C5A3 30%, #C7A072 70%, #A5744E 100%);
   padding: 140px 10%;
-  color: var(--neutral-dark);
+  color: var(--neutral-light);
   overflow: hidden;
 }
 
 .earth-layer {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 100%, rgba(242, 210, 117, 0.2), transparent 70%);
+  background: radial-gradient(circle at 50% 100%, rgba(242, 210, 117, 0.18), transparent 70%);
   animation: pulseEarth 10s ease-in-out infinite alternate;
   z-index: 0;
 }
@@ -177,13 +189,15 @@ body {
 .section-heading h2 {
   font-family: "Conso", serif;
   font-size: clamp(2rem, 4vw, 2.8rem);
-  color: var(--primary-brown);
+  color: var(--neutral-light);
+  text-shadow: 0 2px 16px rgba(20, 30, 20, 0.55);
   margin-bottom: 10px;
 }
 
 .section-heading p {
   font-size: 1.1rem;
-  color: var(--accent-ink);
+  color: rgba(226, 220, 204, 0.9);
+  text-shadow: 0 2px 12px rgba(20, 30, 20, 0.4);
   max-width: 700px;
   margin: 0 auto;
 }
@@ -234,7 +248,6 @@ body {
 
 .journey-support {
   position: relative;
-  background: linear-gradient(to top, #E2DCCC 0%, #DCC8A9 40%, #F2D275 95%);
   padding: 160px 10%;
   overflow: hidden;
 }
@@ -249,13 +262,15 @@ body {
 .support-heading h2 {
   font-family: "Conso", serif;
   font-size: clamp(2rem, 4vw, 2.8rem);
-  color: var(--primary-brown);
+  color: var(--neutral-light);
+  text-shadow: 0 2px 16px rgba(20, 30, 20, 0.55);
   margin-bottom: 15px;
 }
 
 .support-heading p {
   font-size: 1.1rem;
-  color: var(--accent-ink);
+  color: rgba(226, 220, 204, 0.9);
+  text-shadow: 0 2px 12px rgba(20, 30, 20, 0.4);
   max-width: 700px;
   margin: 0 auto;
 }
@@ -273,13 +288,13 @@ body {
 
 .vine-path {
   fill: none;
-  stroke: #A5744E;
+  stroke: var(--secondary-yellow);
   stroke-width: 2.5;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-dasharray: 800;
   stroke-dashoffset: 800;
-  filter: drop-shadow(0 0 8px rgba(165, 116, 78, 0.4));
+  filter: drop-shadow(0 0 8px rgba(242, 210, 117, 0.45));
 }
 
 
@@ -298,6 +313,17 @@ body {
   box-shadow: 0 10px 30px rgba(17, 26, 24, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.4);
   transition: all 0.4s ease;
+}
+
+.support-grid article h3 {
+  color: var(--accent-green-deep);
+  font-family: "Conso", serif;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+.support-grid article p {
+  color: #333;
 }
 
 .support-grid article:hover {
