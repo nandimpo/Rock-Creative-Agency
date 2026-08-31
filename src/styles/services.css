@@ -190,8 +190,8 @@
   right: 0;
   width: 420px;
   height: 100%;
-  background: var(--neutral-light);
-  color: var(--neutral-dark);
+  background: var(--neutral-dark);
+  color: var(--neutral-light);
   box-shadow: -6px 0 25px rgba(0, 0, 0, 0.25);
   z-index: 9999;
   transform: translateX(100%);
@@ -211,14 +211,14 @@
 .aside-content h2 {
   font-family: "Conso", serif;
   font-size: 36px;
-  color: var(--primary-brown);
+  color: var(--secondary-yellow);
   margin-bottom: 20px;
 }
 
 .aside-content p {
   font-size: 15px;
   line-height: 1.7;
-  color: var(--neutral-dark);
+  color: var(--neutral-light);
 }
 
 .close-aside {
@@ -228,14 +228,14 @@
   background: transparent;
   border: none;
   font-size: 32px;
-  color: var(--neutral-dark);
+  color: var(--neutral-light);
   cursor: pointer;
   transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .close-aside:hover {
   transform: scale(1.2);
-  color: var(--primary-brown);
+  color: var(--secondary-yellow);
 }
 
 
