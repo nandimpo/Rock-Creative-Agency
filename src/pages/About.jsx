@@ -11,9 +11,9 @@ import '../styles/about.css';
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
-// Ports Javascript/about.js. Team scroll reveal, per-character heading split, and
-// canvas particle burst are specific to the About page and scoped via gsap.context
-// for cleanup on unmount. The hero is a static intro video with no entrance animation.
+// Ports Javascript/about.js. Team scroll reveal and per-character heading split are
+// specific to the About page and scoped via gsap.context for cleanup on unmount.
+// The hero is a static intro video with no entrance animation.
 export default function About() {
   const rootRef = useRef(null);
 
@@ -27,74 +27,6 @@ export default function About() {
         letterSpacing: '0.5px',
         ease: 'power2.out',
       });
-
-      // Canvas particle burst on team section reveal — appended to document.body in
-      // the original, kept there here too so it isn't clipped by any section overflow,
-      // but tracked in `extraNodes` so it's removed manually since it lives outside `rootRef`.
-      const canvas = document.createElement('canvas');
-      const canvasCtx = canvas.getContext('2d');
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      Object.assign(canvas.style, { position: 'fixed', top: '0', left: '0', zIndex: '9999', pointerEvents: 'none' });
-      document.body.appendChild(canvas);
-
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const particles = [];
-      const particleCount = prefersReducedMotion ? 30 : 60;
-      let animationId;
-
-      class Particle {
-        constructor() {
-          this.x = Math.random() * canvas.width;
-          this.y = Math.random() * canvas.height;
-          this.vx = (Math.random() - 0.5) * 4;
-          this.vy = (Math.random() - 0.5) * 4;
-          this.size = Math.random() * 3 + 1;
-          this.life = 1;
-          this.decay = Math.random() * 0.02 + 0.01;
-          this.color = Math.random() > 0.5 ? '#A5744E' : '#F2D275';
-        }
-        update() {
-          this.x += this.vx;
-          this.y += this.vy;
-          this.life -= this.decay;
-          this.vy += 0.12;
-        }
-        draw(c) {
-          c.globalAlpha = this.life;
-          c.fillStyle = this.color;
-          c.beginPath();
-          c.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          c.fill();
-          c.globalAlpha = 1;
-        }
-      }
-
-      function animate() {
-        canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let i = particles.length - 1; i >= 0; i--) {
-          particles[i].update();
-          particles[i].draw(canvasCtx);
-          if (particles[i].life <= 0) particles.splice(i, 1);
-        }
-        if (particles.length > 0) animationId = requestAnimationFrame(animate);
-        else cancelAnimationFrame(animationId);
-      }
-
-      ScrollTrigger.create({
-        trigger: '.team-section',
-        start: 'top 55%',
-        onEnter: () => {
-          for (let i = 0; i < particleCount; i++) particles.push(new Particle());
-          animate();
-        },
-      });
-
-      const onResize = () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      };
-      window.addEventListener('resize', onResize, { passive: true });
 
       gsap.to('.team-member', {
         scrollTrigger: { trigger: '.team-section', start: 'top 65%', end: 'top 25%', scrub: 1.2 },
@@ -197,10 +129,7 @@ export default function About() {
       window.addEventListener('resize', onWindowResize, { passive: true });
 
       return () => {
-        window.removeEventListener('resize', onResize);
         window.removeEventListener('resize', onWindowResize);
-        cancelAnimationFrame(animationId);
-        canvas.remove();
         memberListeners.forEach(({ member, onEnter, onLeave }) => {
           member.removeEventListener('mouseenter', onEnter);
           member.removeEventListener('mouseleave', onLeave);
